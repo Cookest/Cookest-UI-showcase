@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "@cookest/ui/src/styles.css";
 
+/* Tell Tailwind 4 to scan the component library source for utility classes */
+@source "../../../ui-components/src";
+
 @theme inline {
   --color-background: var(--ck-bg);
   --color-foreground: var(--ck-text);
