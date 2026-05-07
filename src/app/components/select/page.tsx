@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Select } from "@cookest/ui";
 import { PageHeader, Playground, PropsTable } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 const cuisineOptions = [
   { value: "italian", label: "Italian" },
@@ -142,6 +143,7 @@ export default function SelectPage() {
             { name: "error", type: "string", description: "Error message displayed below the select." },
           ]}
         />
+        <RelatedComponents component="select" />
       </div>
     </div>
   );
