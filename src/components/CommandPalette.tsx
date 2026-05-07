@@ -37,6 +37,7 @@ const searchItems: SearchItem[] = [
   { name: "Settings Panel", path: "/examples/settings-panel", category: "Example", icon: <Settings size={16} />, keywords: ["preferences", "config", "profile", "account"] },
   { name: "Dashboard", path: "/examples/dashboard", category: "Example", icon: <BarChart3 size={16} />, keywords: ["analytics", "stats", "overview", "metrics"] },
   { name: "Meal Planner", path: "/examples/meal-planner", category: "Example", icon: <CalendarDays size={16} />, keywords: ["calendar", "schedule", "weekly", "plan"] },
+  { name: "Design Principles", path: "/design-principles", category: "Reference", icon: <BookOpen size={16} />, keywords: ["philosophy", "guidelines", "spacing", "typography", "color", "principles"] },
   { name: "Examples", path: "/examples", category: "Guide", icon: <Sparkles size={16} />, keywords: ["demo", "showcase", "real-world", "patterns"] },
 ];
 
