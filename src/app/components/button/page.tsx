@@ -282,6 +282,102 @@ const [size, setSize] = useState("md");
           ]}
         />
         <RelatedComponents component="button" />
+
+        {/* ── Best Practices ── */}
+        <section className="mt-12">
+          <h2 className="text-xl font-bold mb-6" style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}>
+            Best Practices
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Do's */}
+            <div className="rounded-2xl border p-6" style={{ borderColor: "rgba(122,154,101,0.3)", background: "rgba(122,154,101,0.05)" }}>
+              <h3 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "var(--ck-primary)" }}>
+                ✅ Do
+              </h3>
+              <ul className="space-y-2 list-none p-0 m-0">
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use primary for the main CTA
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use descriptive labels
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Show loading state during async operations
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use iconLeft for actions like Save/Delete
+                </li>
+              </ul>
+            </div>
+            {/* Don'ts */}
+            <div className="rounded-2xl border p-6" style={{ borderColor: "rgba(229,62,62,0.3)", background: "rgba(229,62,62,0.05)" }}>
+              <h3 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "var(--ck-error, #e53e3e)" }}>
+                ❌ Don&apos;t
+              </h3>
+              <ul className="space-y-2 list-none p-0 m-0">
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Put multiple primary buttons next to each other
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use vague labels like &quot;Click Here&quot;
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Disable without explanation
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use ghost variant for important actions
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Accessibility ── */}
+        <section className="mt-12">
+          <h2 className="text-xl font-bold mb-6" style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}>
+            Accessibility
+          </h2>
+          <div className="rounded-2xl border overflow-hidden" style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}>
+            <table className="w-full text-sm">
+              <thead>
+                <tr style={{ background: "var(--ck-bg)" }}>
+                  <th className="text-left px-5 py-3 font-semibold border-b" style={{ borderColor: "var(--ck-border)", color: "var(--ck-heading)" }}>Feature</th>
+                  <th className="text-left px-5 py-3 font-semibold border-b" style={{ borderColor: "var(--ck-border)", color: "var(--ck-heading)" }}>Support</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>Keyboard</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Space/Enter to activate</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>Focus visible outline</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Visible focus ring on keyboard navigation</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>aria-label</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Required for icon-only buttons</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>aria-disabled</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Communicated to assistive technologies</td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>role=&quot;button&quot;</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Implicit on native button element</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
   );
