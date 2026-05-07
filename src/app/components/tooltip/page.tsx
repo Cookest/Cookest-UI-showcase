@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Tooltip, Button, Badge } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 const positions = ["top", "bottom", "left", "right"] as const;
 
@@ -129,6 +130,7 @@ export default function TooltipPage() {
             },
           ]}
         />
+        <RelatedComponents component="tooltip" />
       </div>
     </div>
   );
