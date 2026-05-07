@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Badge } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 const badgeVariants = ["default", "success", "warning", "error", "info"] as const;
 const badgeSizes = ["sm", "md", "lg"] as const;
@@ -281,6 +282,7 @@ const [removable, setRemovable] = useState(false);
             },
           ]}
         />
+        <RelatedComponents component="badge" />
       </div>
     </div>
   );
