@@ -26,6 +26,7 @@ import {
   BarChart3,
   Leaf,
   Palette,
+  BookOpen,
 } from "lucide-react";
 
 const components = [
@@ -56,8 +57,12 @@ export function Sidebar() {
   const { theme, toggle } = useTheme();
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-[280px] border-r flex flex-col"
-      style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}>
+    <aside
+      className="fixed top-0 left-0 h-screen w-[280px] border-r flex flex-col"
+      style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
+      role="navigation"
+      aria-label="Main navigation"
+    >
       {/* Logo */}
       <div className="p-6 border-b" style={{ borderColor: "var(--ck-border)" }}>
         <Link href="/" className="flex items-center gap-3 no-underline">
@@ -85,6 +90,12 @@ export function Sidebar() {
             icon={Home}
             active={pathname === "/"}
           />
+          <NavItem
+            href="/getting-started"
+            label="Getting Started"
+            icon={BookOpen}
+            active={pathname === "/getting-started"}
+          />
         </div>
 
         <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider"
@@ -103,7 +114,13 @@ export function Sidebar() {
 
         <div className="px-3 py-2 mt-4 text-xs font-semibold uppercase tracking-wider"
           style={{ color: "var(--ck-text-muted)" }}>
-          Examples
+          <Link
+            href="/examples"
+            className="no-underline uppercase tracking-wider"
+            style={{ color: pathname === "/examples" ? "var(--ck-primary)" : "var(--ck-text-muted)" }}
+          >
+            Examples
+          </Link>
         </div>
         {examples.map((e) => (
           <NavItem
