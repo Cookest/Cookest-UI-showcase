@@ -20,6 +20,12 @@ import {
   SeparatorHorizontal,
   Home,
   Layers,
+  Utensils,
+  ChefHat,
+  Settings,
+  BarChart3,
+  Leaf,
+  Palette,
 } from "lucide-react";
 
 const components = [
@@ -35,6 +41,14 @@ const components = [
   { name: "Skeleton", href: "/components/skeleton", icon: Loader },
   { name: "Alert", href: "/components/alert", icon: AlertTriangle },
   { name: "Divider", href: "/components/divider", icon: SeparatorHorizontal },
+];
+
+const examples = [
+  { name: "Recipe Card", href: "/examples/recipe-card", icon: Utensils },
+  { name: "Login Form", href: "/examples/login-form", icon: ChefHat },
+  { name: "Settings Panel", href: "/examples/settings-panel", icon: Settings },
+  { name: "Dashboard", href: "/examples/dashboard", icon: BarChart3 },
+  { name: "Meal Planner", href: "/examples/meal-planner", icon: Leaf },
 ];
 
 export function Sidebar() {
@@ -86,6 +100,31 @@ export function Sidebar() {
             active={pathname === c.href}
           />
         ))}
+
+        <div className="px-3 py-2 mt-4 text-xs font-semibold uppercase tracking-wider"
+          style={{ color: "var(--ck-text-muted)" }}>
+          Examples
+        </div>
+        {examples.map((e) => (
+          <NavItem
+            key={e.href}
+            href={e.href}
+            label={e.name}
+            icon={e.icon}
+            active={pathname === e.href}
+          />
+        ))}
+
+        <div className="px-3 py-2 mt-4 text-xs font-semibold uppercase tracking-wider"
+          style={{ color: "var(--ck-text-muted)" }}>
+          Reference
+        </div>
+        <NavItem
+          href="/tokens"
+          label="Design Tokens"
+          icon={Palette}
+          active={pathname === "/tokens"}
+        />
       </nav>
 
       {/* Footer */}
