@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Alert } from "@cookest/ui";
 import { PageHeader, Playground, PropsTable } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 export default function AlertPage() {
   const [visible, setVisible] = useState(true);
@@ -118,6 +119,7 @@ export default function AlertPage() {
             { name: "children", type: "ReactNode", description: "The alert body content." },
           ]}
         />
+        <RelatedComponents component="alert" />
       </div>
     </div>
   );
