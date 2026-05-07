@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Avatar, AvatarGroup } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
 
@@ -192,6 +193,7 @@ export default function AvatarPage() {
             },
           ]}
         />
+        <RelatedComponents component="avatar" />
       </div>
     </div>
   );
