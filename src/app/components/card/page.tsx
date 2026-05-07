@@ -2,6 +2,7 @@
 
 import { Card, CardHeader, CardBody, CardFooter, Button, Badge } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 const cardVariants = ["default", "interactive", "outlined"] as const;
 
@@ -181,6 +182,7 @@ export default function CardPage() {
             },
           ]}
         />
+        <RelatedComponents component="card" />
       </div>
     </div>
   );
