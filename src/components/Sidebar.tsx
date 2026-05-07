@@ -33,6 +33,10 @@ import {
   ChevronDown,
   ExternalLink,
   Sparkles,
+  History,
+  ShoppingBag,
+  MessageCircle,
+  Wand2,
 } from "lucide-react";
 
 const components = [
@@ -56,6 +60,9 @@ const examples = [
   { name: "Settings Panel", href: "/examples/settings-panel", icon: Settings },
   { name: "Dashboard", href: "/examples/dashboard", icon: BarChart3 },
   { name: "Meal Planner", href: "/examples/meal-planner", icon: Leaf },
+  { name: "Product Page", href: "/examples/product-page", icon: ShoppingBag },
+  { name: "Social Feed", href: "/examples/social-feed", icon: MessageCircle },
+  { name: "Onboarding Wizard", href: "/examples/onboarding-wizard", icon: Wand2 },
 ];
 
 export function Sidebar() {
@@ -192,6 +199,7 @@ export function Sidebar() {
             <>
               <NavItem href="/tokens" label="Design Tokens" icon={Palette} active={pathname === "/tokens"} />
               <NavItem href="/design-principles" label="Design Principles" icon={BookOpen} active={pathname === "/design-principles"} />
+              <NavItem href="/changelog" label="Changelog" icon={History} active={pathname === "/changelog"} />
             </>
           )}
         </nav>
