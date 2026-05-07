@@ -13,6 +13,7 @@ export default function ButtonPage() {
     useState<(typeof variants)[number]>("primary");
   const [activeSize, setActiveSize] = useState<(typeof sizes)[number]>("md");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   return (
     <div>
@@ -181,6 +182,29 @@ const [size, setSize] = useState("md");
                   {isLoading ? "On" : "Off"}
                 </button>
               </div>
+
+              {/* Disabled toggle */}
+              <div className="flex flex-col gap-2">
+                <span
+                  className="text-xs font-semibold"
+                  style={{ color: "var(--ck-text-muted)" }}
+                >
+                  Disabled
+                </span>
+                <button
+                  onClick={() => setIsDisabled((d) => !d)}
+                  className="px-3 py-1 text-xs rounded-lg cursor-pointer border"
+                  style={{
+                    borderColor: "var(--ck-border)",
+                    background: isDisabled
+                      ? "var(--ck-primary)"
+                      : "var(--ck-surface)",
+                    color: isDisabled ? "#fff" : "var(--ck-text)",
+                  }}
+                >
+                  {isDisabled ? "On" : "Off"}
+                </button>
+              </div>
             </div>
 
             {/* Preview */}
@@ -195,6 +219,7 @@ const [size, setSize] = useState("md");
                 variant={activeVariant}
                 size={activeSize}
                 loading={isLoading}
+                disabled={isDisabled}
               >
                 Click Me
               </Button>
