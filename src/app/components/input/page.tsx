@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Input } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { Search, Mail } from "lucide-react";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 const inputSizes = ["sm", "md", "lg"] as const;
 
@@ -239,6 +240,7 @@ const [isDisabled, setIsDisabled] = useState(false);
             },
           ]}
         />
+        <RelatedComponents component="input" />
       </div>
     </div>
   );
