@@ -14,6 +14,8 @@ import {
   Divider,
 } from "@cookest/ui";
 import { Copy, Check, ArrowRight, Terminal, Package, Paintbrush, Layers } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
+import { PackageManagerTabs } from "@/components/PackageManagerTabs";
 
 function CodeBlock({ code, language = "bash" }: { code: string; language?: string }) {
   const [copied, setCopied] = useState(false);
@@ -93,6 +95,8 @@ export default function GettingStartedPage() {
 
   return (
     <div className="max-w-4xl">
+      <Breadcrumb />
+
       {/* Header */}
       <div className="mb-12">
         <div
@@ -103,7 +107,7 @@ export default function GettingStartedPage() {
         </div>
         <h1
           className="text-4xl font-bold mb-3"
-          style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+          style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
         >
           Getting Started
         </h1>
@@ -131,11 +135,7 @@ export default function GettingStartedPage() {
           <p className="text-sm mb-4" style={{ color: "var(--ck-text)" }}>
             Install <code className="px-1.5 py-0.5 rounded text-xs" style={{ background: "rgba(122,154,101,0.1)", color: "var(--ck-primary)" }}>@cookest/ui</code> using your preferred package manager:
           </p>
-          <div className="flex flex-col gap-3">
-            <CodeBlock code="bun add @cookest/ui" language="bash" />
-            <CodeBlock code="npm install @cookest/ui" language="bash" />
-            <CodeBlock code="yarn add @cookest/ui" language="bash" />
-          </div>
+          <PackageManagerTabs />
         </StepCard>
 
         <StepCard step={2} title="Import the styles" icon={Paintbrush}>
@@ -216,7 +216,7 @@ export function RecipeCard() {
                 </div>
                 <h3
                   className="text-lg font-bold mb-2 m-0"
-                  style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+                  style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
                 >
                   Pasta Primavera
                 </h3>
