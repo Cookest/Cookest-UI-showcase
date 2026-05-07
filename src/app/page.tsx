@@ -1,65 +1,112 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  RectangleHorizontal,
+  Type,
+  SquareStack,
+  Tag,
+  CircleUser,
+  PanelTop,
+  MessageSquare,
+  ToggleRight,
+  ListFilter,
+  Loader,
+  AlertTriangle,
+  SeparatorHorizontal,
+} from "lucide-react";
+
+const components = [
+  { name: "Button", href: "/components/button", icon: RectangleHorizontal, desc: "Triggers actions with variants, sizes, loading, and icons" },
+  { name: "Input", href: "/components/input", icon: Type, desc: "Text fields with labels, validation, and icon support" },
+  { name: "Card", href: "/components/card", icon: SquareStack, desc: "Content containers with header, body, and footer slots" },
+  { name: "Badge", href: "/components/badge", icon: Tag, desc: "Status labels with dot indicators and removable tags" },
+  { name: "Avatar", href: "/components/avatar", icon: CircleUser, desc: "User images with initials fallback and group layout" },
+  { name: "Modal", href: "/components/modal", icon: PanelTop, desc: "Dialog overlays with focus trap and animations" },
+  { name: "Tooltip", href: "/components/tooltip", icon: MessageSquare, desc: "Contextual hints with directional positioning" },
+  { name: "Toggle", href: "/components/toggle", icon: ToggleRight, desc: "Switch controls with animated thumb and labels" },
+  { name: "Select", href: "/components/select", icon: ListFilter, desc: "Dropdown selection with search and keyboard nav" },
+  { name: "Skeleton", href: "/components/skeleton", icon: Loader, desc: "Animated loading placeholders for any content" },
+  { name: "Alert", href: "/components/alert", icon: AlertTriangle, desc: "Status messages — info, success, warning, error" },
+  { name: "Divider", href: "/components/divider", icon: SeparatorHorizontal, desc: "Visual separators with optional labels" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div>
+      {/* Hero */}
+      <div className="mb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
+          style={{ background: "rgba(122,154,101,0.1)", color: "var(--ck-primary)" }}>
+          <span className="w-2 h-2 rounded-full" style={{ background: "var(--ck-primary)" }} />
+          v1.0.0 — React + Flutter
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <h1 className="text-5xl font-bold mb-4 leading-tight"
+          style={{ color: "var(--ck-heading)", fontFamily: "Playfair Display, serif" }}>
+          Cookest UI
+        </h1>
+        <p className="text-lg max-w-2xl leading-relaxed"
+          style={{ color: "var(--ck-text-muted)" }}>
+          A cross-platform design system with 12 components shared between
+          React and Flutter. Built from shared design tokens for pixel-perfect
+          visual parity.
+        </p>
+        <div className="flex gap-3 mt-8">
+          <code className="px-4 py-2.5 rounded-xl text-sm"
+            style={{ background: "var(--ck-surface)", border: "1px solid var(--ck-border)", color: "var(--ck-text)" }}>
+            bun add @cookest/ui
+          </code>
         </div>
-      </main>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-4 gap-4 mb-16">
+        {[
+          { label: "Components", value: "12" },
+          { label: "Platforms", value: "2" },
+          { label: "Tests", value: "63" },
+          { label: "Tokens", value: "80+" },
+        ].map((stat) => (
+          <div key={stat.label} className="rounded-xl p-5 border text-center"
+            style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}>
+            <div className="text-2xl font-bold" style={{ color: "var(--ck-primary)" }}>
+              {stat.value}
+            </div>
+            <div className="text-xs mt-1" style={{ color: "var(--ck-text-muted)" }}>
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Component Grid */}
+      <h2 className="text-xl font-semibold mb-6" style={{ color: "var(--ck-heading)" }}>
+        Components
+      </h2>
+      <div className="grid grid-cols-2 gap-4">
+        {components.map((c) => (
+          <Link
+            key={c.href}
+            href={c.href}
+            className="group rounded-xl p-5 border no-underline transition-all hover:shadow-md"
+            style={{
+              borderColor: "var(--ck-border)",
+              background: "var(--ck-surface)",
+            }}
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ background: "rgba(122,154,101,0.1)" }}>
+                <c.icon size={16} style={{ color: "var(--ck-primary)" }} />
+              </div>
+              <span className="font-semibold text-sm" style={{ color: "var(--ck-heading)" }}>
+                {c.name}
+              </span>
+            </div>
+            <p className="text-xs leading-relaxed m-0" style={{ color: "var(--ck-text-muted)" }}>
+              {c.desc}
+            </p>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
