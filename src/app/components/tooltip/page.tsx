@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Tooltip, Button, Badge } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const positions = ["top", "bottom", "left", "right"] as const;
 
@@ -13,6 +14,7 @@ export default function TooltipPage() {
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Tooltip"
         description="Tooltips display brief helper text when users hover or focus an element."

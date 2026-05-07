@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Select } from "@cookest/ui";
 import { PageHeader, Playground, PropsTable } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const cuisineOptions = [
   { value: "italian", label: "Italian" },
@@ -34,6 +35,7 @@ export default function SelectPage() {
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Select"
         description="A dropdown selection component with optional search, labels, and error states."

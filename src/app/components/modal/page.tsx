@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Modal, Button } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function ModalPage() {
   const [basicOpen, setBasicOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function ModalPage() {
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Modal"
         description="Modals display content in a layer above the page, requiring user interaction."

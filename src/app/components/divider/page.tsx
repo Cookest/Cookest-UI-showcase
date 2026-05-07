@@ -3,10 +3,12 @@
 import { Divider } from "@cookest/ui";
 import { PageHeader, Playground, PropsTable } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function DividerPage() {
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Divider"
         description="A visual separator for content sections, available in horizontal and vertical orientations."

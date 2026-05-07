@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Avatar, AvatarGroup } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
 
@@ -13,6 +14,7 @@ export default function AvatarPage() {
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Avatar"
         description="Avatars represent users or entities with images or initials fallback."

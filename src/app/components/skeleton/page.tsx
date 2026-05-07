@@ -4,12 +4,14 @@ import { useState } from "react";
 import { Skeleton, SkeletonCard } from "@cookest/ui";
 import { PageHeader, Playground, PropsTable } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function SkeletonPage() {
   const [loading, setLoading] = useState(true);
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Skeleton"
         description="Placeholder loading indicators for content that is still being fetched."

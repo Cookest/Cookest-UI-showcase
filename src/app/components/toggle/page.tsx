@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Toggle } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const toggleSizes = ["sm", "md", "lg"] as const;
 
@@ -24,6 +25,7 @@ export default function TogglePage() {
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Toggle"
         description="Toggles allow users to switch between two states, typically on and off."

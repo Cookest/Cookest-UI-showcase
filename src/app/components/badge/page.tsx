@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Badge } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const badgeVariants = ["default", "success", "warning", "error", "info"] as const;
 const badgeSizes = ["sm", "md", "lg"] as const;
@@ -20,6 +21,7 @@ export default function BadgePage() {
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Badge"
         description="Badges display status labels, tags, and counts with color variants and optional features."

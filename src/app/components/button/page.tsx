@@ -5,6 +5,7 @@ import { Button } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { Download, ArrowRight, Mail } from "lucide-react";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const variants = ["primary", "secondary", "ghost", "danger"] as const;
 const sizes = ["sm", "md", "lg"] as const;
@@ -18,6 +19,7 @@ export default function ButtonPage() {
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Button"
         description="Buttons trigger actions. They support multiple variants, sizes, loading states, and icons."

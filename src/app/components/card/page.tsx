@@ -3,12 +3,14 @@
 import { Card, CardHeader, CardBody, CardFooter, Button, Badge } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const cardVariants = ["default", "interactive", "outlined"] as const;
 
 export default function CardPage() {
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Card"
         description="Cards are content containers with optional header, body, and footer slots."

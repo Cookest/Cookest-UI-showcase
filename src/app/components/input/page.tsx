@@ -5,6 +5,7 @@ import { Input } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { Search, Mail } from "lucide-react";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const inputSizes = ["sm", "md", "lg"] as const;
 
@@ -15,6 +16,7 @@ export default function InputPage() {
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Input"
         description="Text inputs with labels, validation states, helper text, and icon support."

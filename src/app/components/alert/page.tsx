@@ -4,12 +4,14 @@ import { useState } from "react";
 import { Alert } from "@cookest/ui";
 import { PageHeader, Playground, PropsTable } from "@/components/Playground";
 import { RelatedComponents } from "@/components/RelatedComponents";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function AlertPage() {
   const [visible, setVisible] = useState(true);
 
   return (
     <div>
+      <Breadcrumb />
       <PageHeader
         title="Alert"
         description="Contextual feedback messages for user actions and system status."
