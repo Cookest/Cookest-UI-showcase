@@ -2,16 +2,8 @@
 
 import Link from "next/link";
 import {
-  Card,
-  CardBody,
   Badge,
   Button,
-  Avatar,
-  Toggle,
-  Input,
-  Select,
-  Skeleton,
-  SkeletonCard,
 } from "@cookest/ui";
 import {
   ArrowRight,
@@ -20,9 +12,6 @@ import {
   Settings,
   BarChart3,
   Leaf,
-  Clock,
-  Users,
-  Star,
 } from "lucide-react";
 
 const examples = [
