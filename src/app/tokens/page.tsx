@@ -213,6 +213,184 @@ function CopyableValue({
 
 /* ── Page ───────────────────────────────────────────────────── */
 
+/* ── Contrast Checker ──────────────────────────────────────── */
+
+function hexToRgb(hex: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) }
+    : { r: 0, g: 0, b: 0 };
+}
+
+function relativeLuminance(hex: string) {
+  const { r, g, b } = hexToRgb(hex);
+  const [rs, gs, bs] = [r / 255, g / 255, b / 255].map((c) =>
+    c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
+  );
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+}
+
+function contrastRatio(hex1: string, hex2: string) {
+  const l1 = relativeLuminance(hex1);
+  const l2 = relativeLuminance(hex2);
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function wcagLevel(ratio: number) {
+  if (ratio >= 7) return { label: "AAA", color: "#22c55e" };
+  if (ratio >= 4.5) return { label: "AA", color: "#7a9a65" };
+  if (ratio >= 3) return { label: "AA Large", color: "#dd6b20" };
+  return { label: "Fail", color: "#e53e3e" };
+}
+
+const presetPairs = [
+  { fg: "#1c3a2a", bg: "#f5f5f0", label: "Heading on Background" },
+  { fg: "#3d5040", bg: "#ffffff", label: "Text on Surface" },
+  { fg: "#ffffff", bg: "#7a9a65", label: "White on Primary" },
+  { fg: "#7a8e74", bg: "#f5f5f0", label: "Muted on Background" },
+  { fg: "#e53e3e", bg: "#ffffff", label: "Error on Surface" },
+];
+
+function ContrastChecker() {
+  const [fg, setFg] = useState("#1c3a2a");
+  const [bg, setBg] = useState("#f5f5f0");
+
+  const ratio = contrastRatio(fg, bg);
+  const level = wcagLevel(ratio);
+
+  return (
+    <div className="space-y-6">
+      <p className="text-sm m-0" style={{ color: "var(--ck-text-muted)" }}>
+        Check color contrast ratios for WCAG 2.1 compliance. Minimum 4.5:1 for normal text (AA), 3:1 for large text.
+      </p>
+
+      {/* Custom inputs */}
+      <div className="flex flex-wrap gap-6">
+        <div className="flex items-center gap-3">
+          <label className="text-xs font-medium" style={{ color: "var(--ck-text-muted)" }}>
+            Foreground
+          </label>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border" style={{ borderColor: "var(--ck-border)" }}>
+            <input
+              type="color"
+              value={fg}
+              onChange={(e) => setFg(e.target.value)}
+              className="w-6 h-6 rounded border-0 cursor-pointer"
+              style={{ padding: 0 }}
+            />
+            <input
+              type="text"
+              value={fg}
+              onChange={(e) => setFg(e.target.value)}
+              className="w-20 text-xs font-mono border-0 bg-transparent outline-none"
+              style={{ color: "var(--ck-text)" }}
+            />
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <label className="text-xs font-medium" style={{ color: "var(--ck-text-muted)" }}>
+            Background
+          </label>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border" style={{ borderColor: "var(--ck-border)" }}>
+            <input
+              type="color"
+              value={bg}
+              onChange={(e) => setBg(e.target.value)}
+              className="w-6 h-6 rounded border-0 cursor-pointer"
+              style={{ padding: 0 }}
+            />
+            <input
+              type="text"
+              value={bg}
+              onChange={(e) => setBg(e.target.value)}
+              className="w-20 text-xs font-mono border-0 bg-transparent outline-none"
+              style={{ color: "var(--ck-text)" }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Preview + result */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div
+          className="rounded-xl p-8 flex flex-col items-center justify-center gap-2"
+          style={{ background: bg }}
+        >
+          <span className="text-2xl font-bold" style={{ color: fg }}>
+            Sample Text
+          </span>
+          <span className="text-sm" style={{ color: fg }}>
+            The quick brown fox jumps over the lazy dog.
+          </span>
+          <span className="text-xs" style={{ color: fg }}>
+            Small text at 12px size
+          </span>
+        </div>
+        <div
+          className="rounded-xl border p-6 flex flex-col items-center justify-center"
+          style={{ borderColor: "var(--ck-border)", background: "var(--ck-bg)" }}
+        >
+          <div className="text-4xl font-bold mb-1" style={{ color: level.color }}>
+            {ratio.toFixed(2)}:1
+          </div>
+          <div
+            className="px-3 py-1 rounded-full text-xs font-semibold"
+            style={{ background: level.color + "20", color: level.color }}
+          >
+            WCAG {level.label}
+          </div>
+          <p className="text-xs mt-3 text-center" style={{ color: "var(--ck-text-muted)" }}>
+            {ratio >= 4.5
+              ? "Passes for all text sizes"
+              : ratio >= 3
+              ? "Passes only for large text (18px+ or 14px bold)"
+              : "Does not meet WCAG minimum requirements"}
+          </p>
+        </div>
+      </div>
+
+      {/* Preset pairs */}
+      <div>
+        <h4 className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "var(--ck-text-muted)" }}>
+          Cookest Token Pairs
+        </h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          {presetPairs.map((pair) => {
+            const r = contrastRatio(pair.fg, pair.bg);
+            const l = wcagLevel(r);
+            return (
+              <button
+                key={pair.label}
+                onClick={() => { setFg(pair.fg); setBg(pair.bg); }}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg border text-left cursor-pointer transition-colors"
+                style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
+              >
+                <div className="flex items-center gap-1">
+                  <div className="w-4 h-4 rounded" style={{ background: pair.fg }} />
+                  <div className="w-4 h-4 rounded" style={{ background: pair.bg }} />
+                </div>
+                <div className="flex-1">
+                  <div className="text-xs font-medium" style={{ color: "var(--ck-text)" }}>
+                    {pair.label}
+                  </div>
+                </div>
+                <span
+                  className="text-[10px] font-semibold px-1.5 py-0.5 rounded"
+                  style={{ background: l.color + "20", color: l.color }}
+                >
+                  {r.toFixed(1)} {l.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function TokensPage() {
   const { copiedKey, copy } = useClipboard();
 
@@ -721,6 +899,22 @@ export default function TokensPage() {
                 </div>
               ))}
             </div>
+          </CardBody>
+        </Card>
+      </section>
+
+      {/* ── Color Contrast Checker ────────────────────────────── */}
+      <section>
+        <h2
+          className="text-xl font-bold mb-4 flex items-center gap-2"
+          style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
+        >
+          <Square size={20} style={{ color: "var(--ck-primary)" }} />
+          Contrast Checker
+        </h2>
+        <Card>
+          <CardBody>
+            <ContrastChecker />
           </CardBody>
         </Card>
       </section>
