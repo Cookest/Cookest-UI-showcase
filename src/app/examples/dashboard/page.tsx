@@ -23,6 +23,7 @@ import {
   Calendar,
   ChefHat,
 } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const statCards = [
   { label: "Total Recipes", value: "1,247", change: "+12.5%", variant: "success" as const, icon: ChefHat },
@@ -83,6 +84,8 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen p-6 md:p-10" style={{ background: "var(--ck-bg)" }}>
       <div className="max-w-7xl mx-auto flex flex-col gap-8">
+        <Breadcrumb />
+
         {/* Dismissible Alert */}
         {alertVisible && (
           <Alert
@@ -100,7 +103,7 @@ export default function DashboardPage() {
           <div>
             <h1
               className="text-3xl font-bold"
-              style={{ color: "var(--ck-heading)", fontFamily: "serif" }}
+              style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
             >
               Dashboard
             </h1>

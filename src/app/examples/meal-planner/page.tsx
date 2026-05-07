@@ -28,6 +28,7 @@ import {
   Droplets,
   Clock,
 } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 // --- Data Types ---
 
@@ -121,11 +122,13 @@ export default function MealPlannerPage() {
   // --- Render ---
   return (
     <div className="p-6" style={{ background: "var(--ck-bg)", minHeight: "100vh" }}>
+      <Breadcrumb />
+
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1
           className="text-3xl font-bold"
-          style={{ color: "var(--ck-heading)", fontFamily: "serif" }}
+          style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
         >
           Meal Planner
         </h1>
@@ -250,7 +253,7 @@ export default function MealPlannerPage() {
           <div className="mt-6">
             <h2
               className="text-lg font-semibold mb-3"
-              style={{ color: "var(--ck-heading)", fontFamily: "serif" }}
+              style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
             >
               Daily Averages
             </h2>

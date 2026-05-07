@@ -26,6 +26,7 @@ import {
   Printer,
   ChefHat,
 } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const ingredients = [
   { id: 1, name: "Spaghetti", amount: "400g" },
@@ -124,6 +125,8 @@ export default function RecipeCardPage() {
 
   return (
     <div className="flex flex-col gap-8 pb-28">
+      <Breadcrumb />
+
       {/* Success Alert */}
       {addedToPlan && (
         <div className="fixed top-6 right-6 z-50" style={{ maxWidth: 380 }}>
@@ -163,7 +166,7 @@ export default function RecipeCardPage() {
         <h1
           className="leading-tight"
           style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
+            fontFamily: "var(--font-serif)",
             fontSize: "2.75rem",
             fontWeight: 700,
             color: "var(--ck-heading)",

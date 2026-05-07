@@ -16,6 +16,7 @@ import {
   MessageCircle,
   Sparkles,
 } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 const examples = [
   {
@@ -137,6 +138,8 @@ function ExamplePreview({ example }: { example: (typeof examples)[number] }) {
 export default function ExamplesIndexPage() {
   return (
     <div className="max-w-4xl">
+      <Breadcrumb />
+
       {/* Header */}
       <div className="mb-10">
         <div
@@ -147,7 +150,7 @@ export default function ExamplesIndexPage() {
         </div>
         <h1
           className="text-4xl font-bold mb-3"
-          style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+          style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
         >
           Examples
         </h1>

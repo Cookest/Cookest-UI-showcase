@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "@cookest/ui";
 import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 type Tab = "login" | "signup";
 
@@ -100,10 +101,12 @@ export default function LoginFormPage() {
   };
 
   return (
-    <div
-      className="flex items-center justify-center py-12 px-4"
-      style={{ minHeight: "calc(100vh - 64px)" }}
-    >
+    <div>
+      <Breadcrumb />
+      <div
+        className="flex items-center justify-center py-12 px-4"
+        style={{ minHeight: "calc(100vh - 64px)" }}
+      >
       <div className="w-full" style={{ maxWidth: 440 }}>
         {/* Logo Area */}
         <div className="flex flex-col items-center gap-3 mb-8">
@@ -114,7 +117,7 @@ export default function LoginFormPage() {
               height: 56,
               background: "var(--ck-primary)",
               color: "#fff",
-              fontFamily: "'Playfair Display', Georgia, serif",
+              fontFamily: "var(--font-serif)",
               fontSize: "1.5rem",
               fontWeight: 700,
             }}
@@ -124,7 +127,7 @@ export default function LoginFormPage() {
           <div className="flex flex-col items-center gap-1">
             <h1
               style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
+                fontFamily: "var(--font-serif)",
                 fontSize: "1.5rem",
                 fontWeight: 700,
                 color: "var(--ck-heading)",
@@ -396,6 +399,7 @@ export default function LoginFormPage() {
             </div>
           </CardBody>
         </Card>
+      </div>
       </div>
     </div>
   );
