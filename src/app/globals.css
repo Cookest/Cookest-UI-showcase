@@ -52,3 +52,26 @@ code {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ── Responsive ── */
+
+/* Sidebar collapse on small screens */
+@media (max-width: 768px) {
+  aside[role="navigation"] {
+    transform: translateX(-100%);
+    z-index: 50;
+    transition: transform 0.3s ease;
+  }
+
+  main {
+    margin-left: 0 !important;
+    padding: 1.5rem !important;
+  }
+}
+
+/* Smaller grids on narrow viewports */
+@media (max-width: 1024px) {
+  main {
+    max-width: 100% !important;
+  }
+}
