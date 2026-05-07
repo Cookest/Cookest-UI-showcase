@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Skeleton, SkeletonCard } from "@cookest/ui";
 import { PageHeader, Playground, PropsTable } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 export default function SkeletonPage() {
   const [loading, setLoading] = useState(true);
@@ -165,6 +166,7 @@ export default function SkeletonPage() {
             ]}
           />
         </div>
+        <RelatedComponents component="skeleton" />
       </div>
     </div>
   );
