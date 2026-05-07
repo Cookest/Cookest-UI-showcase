@@ -10,7 +10,7 @@ import {
   Tooltip,
   Button,
 } from "@cookest/ui";
-import { Copy, Check, Palette, Type, Square, Circle, Layers, Sun, Moon } from "lucide-react";
+import { Copy, Check, Palette, Type, Square, Circle, Layers, Sun, Moon, Zap, Move } from "lucide-react";
 
 /* ── Token Data ────────────────────────────────────────────── */
 
@@ -88,6 +88,23 @@ const shadowValues = [
   { name: "lg", value: "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)" },
 ];
 
+const transitionValues = [
+  { name: "fast", value: "150ms cubic-bezier(0.4, 0, 0.2, 1)", description: "Micro-interactions: toggles, checkboxes" },
+  { name: "normal", value: "250ms cubic-bezier(0.4, 0, 0.2, 1)", description: "Standard transitions: hover, focus" },
+  { name: "slow", value: "350ms cubic-bezier(0.4, 0, 0.2, 1)", description: "Larger animations: modals, panels" },
+  { name: "bounce", value: "500ms cubic-bezier(0.34, 1.56, 0.64, 1)", description: "Playful bounce: notifications, badges" },
+];
+
+const zIndexValues = [
+  { name: "base", value: 0, usage: "Default stacking" },
+  { name: "dropdown", value: 10, usage: "Select menus, popups" },
+  { name: "sticky", value: 20, usage: "Sticky headers, nav" },
+  { name: "overlay", value: 30, usage: "Backdrop overlays" },
+  { name: "modal", value: 40, usage: "Modal dialogs" },
+  { name: "popover", value: 50, usage: "Popovers, tooltips" },
+  { name: "tooltip", value: 60, usage: "Tooltip layer (top)" },
+];
+
 /* ── Helpers ────────────────────────────────────────────────── */
 
 function useClipboard(timeout = 1500) {
@@ -157,6 +174,40 @@ function Swatch({
         </span>
       </button>
     </Tooltip>
+  );
+}
+
+/* ── Copyable Token Value ───────────────────────────────────── */
+
+function CopyableValue({
+  label,
+  value,
+  copiedKey,
+  onCopy,
+}: {
+  label: string;
+  value: string;
+  copiedKey: string | null;
+  onCopy: (text: string, key: string) => void;
+}) {
+  const copyKey = `val-${label}-${value}`;
+  const isCopied = copiedKey === copyKey;
+
+  return (
+    <button
+      onClick={() => onCopy(value, copyKey)}
+      className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs cursor-pointer border"
+      style={{
+        borderColor: isCopied ? "var(--ck-primary)" : "var(--ck-border)",
+        background: isCopied ? "rgba(122,154,101,0.1)" : "var(--ck-surface)",
+        color: isCopied ? "var(--ck-primary)" : "var(--ck-text-muted)",
+        fontFamily: "'JetBrains Mono', monospace",
+      }}
+      aria-label={`Copy ${value}`}
+    >
+      {isCopied ? <Check size={10} /> : <Copy size={10} />}
+      {value}
+    </button>
   );
 }
 
@@ -524,32 +575,154 @@ export default function TokensPage() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {shadowValues.map((s) => (
-            <Card key={s.name} variant="default" padding="md">
-              <CardBody>
-                <div
-                  className="flex flex-col items-center gap-4"
-                  style={{ boxShadow: s.value, borderRadius: 8, padding: 24 }}
-                >
-                  <span
-                    className="text-lg font-semibold"
-                    style={{ color: "var(--ck-heading)" }}
+            <button
+              key={s.name}
+              onClick={() => copy(s.value, `shadow-${s.name}`)}
+              style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}
+              aria-label={`Copy shadow ${s.name} value`}
+            >
+              <Card variant="default" padding="md">
+                <CardBody>
+                  <div
+                    className="flex flex-col items-center gap-4"
+                    style={{ boxShadow: s.value, borderRadius: 8, padding: 24 }}
                   >
-                    Shadow {s.name.toUpperCase()}
-                  </span>
-                  <code
-                    className="text-xs break-all text-center"
-                    style={{
-                      color: "var(--ck-text-muted)",
-                      fontFamily: "'JetBrains Mono', monospace",
-                    }}
-                  >
-                    {s.value}
-                  </code>
-                </div>
-              </CardBody>
-            </Card>
+                    <span
+                      className="text-lg font-semibold"
+                      style={{ color: "var(--ck-heading)" }}
+                    >
+                      Shadow {s.name.toUpperCase()}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {copiedKey === `shadow-${s.name}` ? (
+                        <Check size={12} style={{ color: "var(--ck-primary)" }} />
+                      ) : (
+                        <Copy size={12} style={{ color: "var(--ck-text-muted)" }} />
+                      )}
+                      <code
+                        className="text-xs break-all text-center"
+                        style={{
+                          color: "var(--ck-text-muted)",
+                          fontFamily: "'JetBrains Mono', monospace",
+                        }}
+                      >
+                        {s.value}
+                      </code>
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            </button>
           ))}
         </div>
+      </section>
+
+      {/* ── Transitions & Animations ────────────────────────── */}
+      <section className="flex flex-col gap-8">
+        <Divider label="Transitions & Animations" />
+
+        <Card variant="outlined" padding="lg">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Zap size={16} style={{ color: "var(--ck-primary)" }} />
+              <span className="font-semibold" style={{ color: "var(--ck-heading)" }}>
+                Transition Timing
+              </span>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <div className="flex flex-col gap-5">
+              {transitionValues.map((t) => (
+                <div
+                  key={t.name}
+                  className="flex items-center gap-4 group"
+                >
+                  <div style={{ minWidth: 80 }}>
+                    <Badge variant="default" size="sm">{t.name}</Badge>
+                  </div>
+
+                  {/* Animation demo */}
+                  <div
+                    className="flex-1 relative h-8 rounded-lg overflow-hidden"
+                    style={{ background: "var(--ck-bg)", border: "1px solid var(--ck-border)" }}
+                  >
+                    <div
+                      className="absolute top-1 left-1 bottom-1 w-8 rounded-md group-hover:left-[calc(100%-2.25rem)]"
+                      style={{
+                        background: "var(--ck-primary)",
+                        transition: `left ${t.value}`,
+                      }}
+                    />
+                  </div>
+
+                  <CopyableValue
+                    label={t.name}
+                    value={t.value}
+                    copiedKey={copiedKey}
+                    onCopy={copy}
+                  />
+                </div>
+              ))}
+              <p className="text-xs m-0 mt-2" style={{ color: "var(--ck-text-muted)" }}>
+                Hover each row to see the transition in action.
+              </p>
+            </div>
+          </CardBody>
+        </Card>
+      </section>
+
+      {/* ── Z-Index ─────────────────────────────────────────── */}
+      <section className="flex flex-col gap-8">
+        <Divider label="Z-Index" />
+
+        <Card variant="outlined" padding="lg">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Move size={16} style={{ color: "var(--ck-primary)" }} />
+              <span className="font-semibold" style={{ color: "var(--ck-heading)" }}>
+                Stacking Order
+              </span>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <div className="flex flex-col gap-3">
+              {zIndexValues.map((z) => (
+                <div
+                  key={z.name}
+                  className="flex items-center gap-4"
+                >
+                  <div style={{ minWidth: 80 }}>
+                    <Badge variant="default" size="sm">{z.name}</Badge>
+                  </div>
+
+                  {/* Visual bar */}
+                  <div className="flex-1 relative h-6 rounded-md overflow-hidden"
+                    style={{ background: "var(--ck-bg)" }}
+                  >
+                    <div
+                      className="absolute top-0 left-0 bottom-0 rounded-md flex items-center justify-end pr-2"
+                      style={{
+                        width: `${Math.max(8, (z.value / 60) * 100)}%`,
+                        background: `rgba(122,154,101,${0.15 + (z.value / 60) * 0.6})`,
+                      }}
+                    >
+                      <span
+                        className="text-xs font-mono font-semibold"
+                        style={{ color: "var(--ck-primary)" }}
+                      >
+                        {z.value}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className="text-xs shrink-0" style={{ color: "var(--ck-text-muted)", minWidth: 140 }}>
+                    {z.usage}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </CardBody>
+        </Card>
       </section>
 
       {/* ── Copy Feedback Bar ───────────────────────────────── */}
