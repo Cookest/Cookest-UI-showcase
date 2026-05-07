@@ -1,26 +1,47 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "@cookest/ui/src/styles.css";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-background: var(--ck-bg);
+  --color-foreground: var(--ck-text);
+  --color-primary: var(--ck-primary);
+  --color-surface: var(--ck-surface);
+  --color-border: var(--ck-border);
+  --color-muted: var(--ck-text-muted);
+  --color-heading: var(--ck-heading);
+  --color-card: var(--ck-bg-card);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ck-bg);
+  color: var(--ck-text);
+  font-family: var(--font-sans);
+}
+
+/* Smooth transitions for dark mode */
+*, *::before, *::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--ck-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ck-text-muted); }
+
+/* Code blocks */
+pre {
+  background: var(--ck-surface) !important;
+  border: 1px solid var(--ck-border);
+  border-radius: 12px;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+code {
+  font-family: var(--font-mono);
 }
