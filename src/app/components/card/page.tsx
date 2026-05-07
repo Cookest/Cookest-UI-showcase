@@ -185,6 +185,94 @@ export default function CardPage() {
           ]}
         />
         <RelatedComponents component="card" />
+
+        {/* ── Best Practices ── */}
+        <section className="mt-12">
+          <h2 className="text-xl font-bold mb-6" style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}>
+            Best Practices
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Do's */}
+            <div className="rounded-2xl border p-6" style={{ borderColor: "rgba(122,154,101,0.3)", background: "rgba(122,154,101,0.05)" }}>
+              <h3 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "var(--ck-primary)" }}>
+                ✅ Do
+              </h3>
+              <ul className="space-y-2 list-none p-0 m-0">
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use CardHeader/Body/Footer for consistent structure
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Keep card content scannable
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use shadow variants for interactive cards
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Limit cards to one primary action
+                </li>
+              </ul>
+            </div>
+            {/* Don'ts */}
+            <div className="rounded-2xl border p-6" style={{ borderColor: "rgba(229,62,62,0.3)", background: "rgba(229,62,62,0.05)" }}>
+              <h3 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "var(--ck-error, #e53e3e)" }}>
+                ❌ Don&apos;t
+              </h3>
+              <ul className="space-y-2 list-none p-0 m-0">
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Nest cards more than one level deep
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Overload cards with too many actions
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use cards for simple text content
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Mix card sizes in the same grid
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Accessibility ── */}
+        <section className="mt-12">
+          <h2 className="text-xl font-bold mb-6" style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}>
+            Accessibility
+          </h2>
+          <div className="rounded-2xl border overflow-hidden" style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}>
+            <table className="w-full text-sm">
+              <thead>
+                <tr style={{ background: "var(--ck-bg)" }}>
+                  <th className="text-left px-5 py-3 font-semibold border-b" style={{ borderColor: "var(--ck-border)", color: "var(--ck-heading)" }}>Feature</th>
+                  <th className="text-left px-5 py-3 font-semibold border-b" style={{ borderColor: "var(--ck-border)", color: "var(--ck-heading)" }}>Support</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>Semantic HTML</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Use article element when appropriate</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>Focus management</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Keyboard-navigable for interactive cards</td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>aria-label</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Descriptive labels for card actions</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
   );
