@@ -38,6 +38,10 @@ const searchItems: SearchItem[] = [
   { name: "Dashboard", path: "/examples/dashboard", category: "Example", icon: <BarChart3 size={16} />, keywords: ["analytics", "stats", "overview", "metrics"] },
   { name: "Meal Planner", path: "/examples/meal-planner", category: "Example", icon: <CalendarDays size={16} />, keywords: ["calendar", "schedule", "weekly", "plan"] },
   { name: "Design Principles", path: "/design-principles", category: "Reference", icon: <BookOpen size={16} />, keywords: ["philosophy", "guidelines", "spacing", "typography", "color", "principles"] },
+  { name: "Changelog", path: "/changelog", category: "Reference", icon: <Sparkles size={16} />, keywords: ["version", "release", "update", "history", "changes"] },
+  { name: "Product Page", path: "/examples/product-page", category: "Example", icon: <Lock size={16} />, keywords: ["ecommerce", "shop", "product", "cart", "buy"] },
+  { name: "Social Feed", path: "/examples/social-feed", category: "Example", icon: <Lock size={16} />, keywords: ["social", "feed", "post", "comment", "like"] },
+  { name: "Onboarding Wizard", path: "/examples/onboarding-wizard", category: "Example", icon: <Lock size={16} />, keywords: ["wizard", "steps", "onboard", "signup", "flow"] },
   { name: "Examples", path: "/examples", category: "Guide", icon: <Sparkles size={16} />, keywords: ["demo", "showcase", "real-world", "patterns"] },
 ];
 
