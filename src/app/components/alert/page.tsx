@@ -122,6 +122,98 @@ export default function AlertPage() {
           ]}
         />
         <RelatedComponents component="alert" />
+
+        {/* ── Best Practices ── */}
+        <section className="mt-12">
+          <h2 className="text-xl font-bold mb-6" style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}>
+            Best Practices
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Do's */}
+            <div className="rounded-2xl border p-6" style={{ borderColor: "rgba(122,154,101,0.3)", background: "rgba(122,154,101,0.05)" }}>
+              <h3 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "var(--ck-primary)" }}>
+                ✅ Do
+              </h3>
+              <ul className="space-y-2 list-none p-0 m-0">
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use appropriate variants (success/warning/error/info)
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Keep messages concise
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Provide actionable guidance in error alerts
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Place alerts near the relevant context
+                </li>
+              </ul>
+            </div>
+            {/* Don'ts */}
+            <div className="rounded-2xl border p-6" style={{ borderColor: "rgba(229,62,62,0.3)", background: "rgba(229,62,62,0.05)" }}>
+              <h3 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "var(--ck-error, #e53e3e)" }}>
+                ❌ Don&apos;t
+              </h3>
+              <ul className="space-y-2 list-none p-0 m-0">
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use alerts for permanent content
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Stack more than 3 alerts
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Use error variant for warnings
+                </li>
+                <li className="text-sm flex items-start gap-2" style={{ color: "var(--ck-text)" }}>
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--ck-primary)" }} />
+                  Dismiss important alerts automatically
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Accessibility ── */}
+        <section className="mt-12">
+          <h2 className="text-xl font-bold mb-6" style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}>
+            Accessibility
+          </h2>
+          <div className="rounded-2xl border overflow-hidden" style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}>
+            <table className="w-full text-sm">
+              <thead>
+                <tr style={{ background: "var(--ck-bg)" }}>
+                  <th className="text-left px-5 py-3 font-semibold border-b" style={{ borderColor: "var(--ck-border)", color: "var(--ck-heading)" }}>Feature</th>
+                  <th className="text-left px-5 py-3 font-semibold border-b" style={{ borderColor: "var(--ck-border)", color: "var(--ck-heading)" }}>Support</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>role=&quot;alert&quot;</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Applied for important messages</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>aria-live=&quot;polite&quot; / &quot;assertive&quot;</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Controls announcement priority for screen readers</td>
+                </tr>
+                <tr style={{ borderBottom: "1px solid var(--ck-border)" }}>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>Screen reader announcement</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Alert content is announced when it appears</td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text)" }}>Not auto-dismissed for errors</td>
+                  <td className="px-5 py-3" style={{ color: "var(--ck-text-muted)" }}>Error alerts persist until user action</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
   );
