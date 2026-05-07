@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Toggle } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 const toggleSizes = ["sm", "md", "lg"] as const;
 
@@ -221,6 +222,7 @@ export default function TogglePage() {
             },
           ]}
         />
+        <RelatedComponents component="toggle" />
       </div>
     </div>
   );
