@@ -15,7 +15,6 @@ import {
   Alert,
   Divider,
   Skeleton,
-  SkeletonCard,
   Tooltip,
   Select,
 } from "@cookest/ui";
@@ -24,7 +23,6 @@ import {
   Utensils,
   Clock,
   Users,
-  Search,
   Star,
   Heart,
   ChefHat,
@@ -32,7 +30,8 @@ import {
   Flame,
   Layers,
   Palette,
-  BookOpen,
+  Copy,
+  Check,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -113,6 +112,13 @@ function ExampleCard({
 
 export default function Home() {
   const [demoToggle, setDemoToggle] = useState(true);
+  const [installCopied, setInstallCopied] = useState(false);
+
+  const handleCopyInstall = () => {
+    navigator.clipboard.writeText("bun add @cookest/ui");
+    setInstallCopied(true);
+    setTimeout(() => setInstallCopied(false), 2000);
+  };
 
   return (
     <div className="max-w-4xl">
@@ -138,12 +144,24 @@ export default function Home() {
           visual parity across platforms.
         </p>
         <div className="flex items-center gap-4 flex-wrap">
-          <code
-            className="px-4 py-2.5 rounded-xl text-sm"
-            style={{ background: "var(--ck-surface)", border: "1px solid var(--ck-border)", color: "var(--ck-text)" }}
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm"
+            style={{ background: "var(--ck-surface)", border: "1px solid var(--ck-border)" }}
           >
-            bun add @cookest/ui
-          </code>
+            <code style={{ color: "var(--ck-text)" }}>bun add @cookest/ui</code>
+            <button
+              onClick={handleCopyInstall}
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs cursor-pointer border-0 transition-colors"
+              style={{
+                background: installCopied ? "rgba(122,154,101,0.15)" : "transparent",
+                color: installCopied ? "var(--ck-primary)" : "var(--ck-text-muted)",
+              }}
+              aria-label={installCopied ? "Copied to clipboard" : "Copy install command"}
+            >
+              {installCopied ? <Check size={14} /> : <Copy size={14} />}
+              {installCopied ? "Copied!" : "Copy"}
+            </button>
+          </div>
           <Link
             href="/components/button"
             className="no-underline inline-flex items-center gap-2 text-sm font-medium"
