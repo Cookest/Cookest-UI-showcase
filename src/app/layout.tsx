@@ -3,6 +3,7 @@ import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CommandPalette } from "@/components/CommandPalette";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -51,7 +52,12 @@ export default function RootLayout({
           </a>
           <div className="flex min-h-screen">
             <Sidebar />
-            <main id="main-content" className="flex-1 ml-[280px] p-8 max-w-6xl">{children}</main>
+            <div className="flex-1 ml-[280px] flex flex-col min-h-screen">
+              <main id="main-content" className="flex-1 p-8 max-w-6xl">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </div>
         </ThemeProvider>
       </body>
