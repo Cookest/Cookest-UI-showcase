@@ -201,7 +201,7 @@ export default function ProductPage() {
 
             <h1
               className="text-3xl font-bold mb-2 m-0"
-              style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+              style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
             >
               Professional Chef&apos;s Knife Set
             </h1>
@@ -456,7 +456,7 @@ export default function ProductPage() {
       <AnimateIn delay={0.25}>
         <h2
           className="text-xl font-bold mb-5"
-          style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+          style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
         >
           You Might Also Like
         </h2>
@@ -500,7 +500,7 @@ export default function ProductPage() {
           <div>
             <h2
               className="text-xl font-bold m-0 mb-1"
-              style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+              style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
             >
               Customer Reviews
             </h2>

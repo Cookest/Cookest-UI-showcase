@@ -233,7 +233,7 @@ export default function SocialFeedPage() {
         <div className="mb-8">
           <h1
             className="text-3xl font-bold mb-2 m-0"
-            style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+            style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
           >
             Community Feed
           </h1>

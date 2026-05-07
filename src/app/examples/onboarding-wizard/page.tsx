@@ -141,7 +141,7 @@ export default function OnboardingWizardPage() {
         <div className="mb-8 text-center">
           <h1
             className="text-3xl font-bold mb-2 m-0"
-            style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+            style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
           >
             Welcome to Cookest
           </h1>
@@ -226,7 +226,7 @@ export default function OnboardingWizardPage() {
                   </div>
                   <h2
                     className="text-xl font-bold m-0 mb-2"
-                    style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+                    style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
                   >
                     Let&apos;s get to know you
                   </h2>
@@ -289,7 +289,7 @@ export default function OnboardingWizardPage() {
                   </div>
                   <h2
                     className="text-xl font-bold m-0 mb-2"
-                    style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+                    style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
                   >
                     Dietary Preferences
                   </h2>
@@ -368,7 +368,7 @@ export default function OnboardingWizardPage() {
                   </div>
                   <h2
                     className="text-xl font-bold m-0 mb-2"
-                    style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+                    style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
                   >
                     Your Cooking Level
                   </h2>
@@ -467,7 +467,7 @@ export default function OnboardingWizardPage() {
                   </div>
                   <h2
                     className="text-2xl font-bold m-0 mb-2"
-                    style={{ color: "var(--ck-heading)", fontFamily: "'Playfair Display', serif" }}
+                    style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
                   >
                     All Set, {formData.name || "Chef"}! 🎉
                   </h2>

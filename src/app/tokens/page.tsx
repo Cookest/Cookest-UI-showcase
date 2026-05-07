@@ -11,6 +11,7 @@ import {
   Button,
 } from "@cookest/ui";
 import { Copy, Check, Palette, Type, Square, Circle, Layers, Sun, Moon, Zap, Move } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 /* ── Token Data ────────────────────────────────────────────── */
 
@@ -398,13 +399,14 @@ export default function TokensPage() {
     <div className="flex flex-col gap-12 max-w-4xl">
       {/* ── Header ──────────────────────────────────────────── */}
       <header className="flex flex-col gap-3">
+        <Breadcrumb />
         <div className="flex items-center gap-3">
           <Palette size={28} style={{ color: "var(--ck-primary)" }} />
           <h1
             className="text-4xl font-bold"
             style={{
               color: "var(--ck-heading)",
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "var(--font-serif)",
             }}
           >
             Design Tokens
