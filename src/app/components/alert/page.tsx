@@ -84,6 +84,7 @@ export default function AlertPage() {
                     background: "var(--ck-primary)",
                     color: "#fff",
                   }}
+                  aria-label="Show dismissed alert again"
                 >
                   Show Alert Again
                 </button>

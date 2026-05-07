@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 interface PlaygroundProps {
   title: string;
@@ -45,6 +45,7 @@ export function Playground({ title, description, children, code }: PlaygroundPro
               color: showCode ? "var(--ck-primary)" : "var(--ck-text-muted)",
               background: showCode ? "rgba(122,154,101,0.1)" : "transparent",
             }}
+            aria-label={showCode ? "Show preview" : "Show code"}
           >
             {showCode ? "Preview" : "Code"}
           </button>
@@ -55,6 +56,7 @@ export function Playground({ title, description, children, code }: PlaygroundPro
               color: "var(--ck-text-muted)",
               background: "transparent",
             }}
+            aria-label={copied ? "Copied to clipboard" : "Copy code to clipboard"}
           >
             {copied ? "Copied!" : "Copy"}
           </button>

@@ -90,6 +90,7 @@ export default function SkeletonPage() {
                 background: "var(--ck-primary)",
                 color: "#fff",
               }}
+              aria-label={loading ? "Show loaded content" : "Show skeleton loading state"}
             >
               {loading ? "Show Content" : "Show Skeleton"}
             </button>
