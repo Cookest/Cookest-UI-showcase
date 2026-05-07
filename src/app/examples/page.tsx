@@ -12,6 +12,9 @@ import {
   Settings,
   BarChart3,
   Leaf,
+  ShoppingBag,
+  MessageCircle,
+  Sparkles,
 } from "lucide-react";
 
 const examples = [
@@ -54,6 +57,30 @@ const examples = [
     href: "/examples/meal-planner",
     icon: Leaf,
     tags: ["Card", "Modal", "Select", "Badge", "Skeleton", "Alert"],
+  },
+  {
+    title: "Product Page",
+    description:
+      "E-commerce product detail page with color/size selectors, quantity picker, reviews, and related products.",
+    href: "/examples/product-page",
+    icon: ShoppingBag,
+    tags: ["Card", "Badge", "Button", "Tooltip", "Avatar", "Divider"],
+  },
+  {
+    title: "Social Feed",
+    description:
+      "Social media feed for food sharing with posts, comments, likes, follow suggestions, and trending topics.",
+    href: "/examples/social-feed",
+    icon: MessageCircle,
+    tags: ["Card", "Avatar", "AvatarGroup", "Badge", "Input", "Tooltip"],
+  },
+  {
+    title: "Onboarding Wizard",
+    description:
+      "Multi-step onboarding flow with name input, dietary toggles, skill level selection, and summary.",
+    href: "/examples/onboarding-wizard",
+    icon: Sparkles,
+    tags: ["Card", "Input", "Toggle", "Badge", "Button", "Alert"],
   },
 ];
 
