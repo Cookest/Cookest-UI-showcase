@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
 import { Download, ArrowRight, Mail } from "lucide-react";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 const variants = ["primary", "secondary", "ghost", "danger"] as const;
 const sizes = ["sm", "md", "lg"] as const;
@@ -278,6 +279,7 @@ const [size, setSize] = useState("md");
             },
           ]}
         />
+        <RelatedComponents component="button" />
       </div>
     </div>
   );
