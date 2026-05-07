@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Modal, Button } from "@cookest/ui";
 import { Playground, PropsTable, PageHeader } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 export default function ModalPage() {
   const [basicOpen, setBasicOpen] = useState(false);
@@ -230,6 +231,7 @@ export default function ModalPage() {
             },
           ]}
         />
+        <RelatedComponents component="modal" />
       </div>
     </div>
   );
