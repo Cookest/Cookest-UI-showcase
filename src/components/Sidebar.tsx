@@ -191,6 +191,7 @@ export function Sidebar() {
           {sectionsOpen.reference && (
             <>
               <NavItem href="/tokens" label="Design Tokens" icon={Palette} active={pathname === "/tokens"} />
+              <NavItem href="/design-principles" label="Design Principles" icon={BookOpen} active={pathname === "/design-principles"} />
             </>
           )}
         </nav>
