@@ -2,6 +2,7 @@
 
 import { Divider } from "@cookest/ui";
 import { PageHeader, Playground, PropsTable } from "@/components/Playground";
+import { RelatedComponents } from "@/components/RelatedComponents";
 
 export default function DividerPage() {
   return (
@@ -103,6 +104,7 @@ export default function DividerPage() {
             { name: "className", type: "string", description: "Additional CSS class name." },
           ]}
         />
+        <RelatedComponents component="divider" />
       </div>
     </div>
   );
