@@ -842,15 +842,33 @@ function PropControl({ def, value, onChange }: {
       <span style={labelStyle}>{def.label}</span>
 
       {def.type === "select" && (
-        <select
-          value={String(value)}
-          onChange={(e) => onChange(e.target.value)}
-          style={{ ...inputBase, cursor: "pointer" }}
-        >
-          {def.options?.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", marginTop: "2px" }}>
+          {def.options?.map((opt) => {
+            const isActive = String(value) === opt;
+            return (
+              <button
+                key={opt}
+                onClick={() => onChange(opt)}
+                style={{
+                  padding: "4px 11px",
+                  borderRadius: "6px",
+                  fontSize: "12px",
+                  fontFamily: "inherit",
+                  fontWeight: isActive ? 600 : 400,
+                  cursor: "pointer",
+                  border: "1px solid",
+                  borderColor: isActive ? "var(--ck-primary)" : "var(--ck-border)",
+                  background: isActive ? "var(--ck-primary)" : "var(--ck-bg)",
+                  color: isActive ? "#fff" : "var(--ck-text-muted)",
+                  transition: "all 0.15s ease",
+                  outline: "none",
+                }}
+              >
+                {opt}
+              </button>
+            );
+          })}
+        </div>
       )}
 
       {def.type === "boolean" && (
@@ -1275,26 +1293,34 @@ function CodeSandbox() {
           borderRadius: "12px",
           padding: "8px 12px",
         }}>
-          <select
-            value={selectedComp}
-            onChange={(e) => handlePresetChange(e.target.value)}
-            style={{
-              flex: 1,
-              padding: "5px 8px",
-              background: "var(--ck-bg)",
-              color: "var(--ck-text)",
-              border: "1px solid var(--ck-border)",
-              borderRadius: "7px",
-              fontSize: "13px",
-              cursor: "pointer",
-              outline: "none",
-              fontFamily: "inherit",
-            }}
-          >
-            {presetNames.map((name) => (
-              <option key={name} value={name}>{name}</option>
-            ))}
-          </select>
+          {/* Preset picker — custom pill row */}
+          <div style={{ flex: 1, display: "flex", flexWrap: "wrap", gap: "4px" }}>
+            {presetNames.map((name) => {
+              const isActive = name === selectedComp;
+              return (
+                <button
+                  key={name}
+                  onClick={() => handlePresetChange(name)}
+                  style={{
+                    padding: "3px 10px",
+                    borderRadius: "6px",
+                    fontSize: "11px",
+                    fontFamily: "inherit",
+                    fontWeight: isActive ? 600 : 400,
+                    cursor: "pointer",
+                    border: "1px solid",
+                    borderColor: isActive ? "var(--ck-primary)" : "rgba(255,255,255,0.1)",
+                    background: isActive ? "var(--ck-primary)" : "transparent",
+                    color: isActive ? "#fff" : "rgba(214,222,235,0.55)",
+                    transition: "all 0.15s",
+                    outline: "none",
+                  }}
+                >
+                  {name}
+                </button>
+              );
+            })}
+          </div>
           <button
             onClick={() => setCode(SANDBOX_PRESETS[selectedComp])}
             title="Reset to preset"

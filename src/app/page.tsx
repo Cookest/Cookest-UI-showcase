@@ -147,147 +147,175 @@ export default function Home() {
   return (
     <div className="max-w-5xl">
       {/* ──────────────────────────────────────────────
-          SECTION 1 — HERO
+          SECTION 1 — HERO (2-column split)
           ────────────────────────────────────────────── */}
-      <section className="relative pt-4 pb-28">
-        {/* Radial glow behind hero */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -top-24 overflow-hidden"
-        >
+      <section className="relative pt-4 pb-16">
+        {/* Radial glow */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -top-24 overflow-hidden">
           <div
-            className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full opacity-30 blur-[120px]"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(122,154,101,0.35) 0%, transparent 70%)",
-            }}
+            className="absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full opacity-25 blur-[130px]"
+            style={{ background: "radial-gradient(circle, rgba(122,154,101,0.4) 0%, transparent 70%)" }}
           />
         </div>
 
-        <div className="relative z-10">
-          {/* Announcement banner */}
-          <AnimateIn direction="down" delay={0}>
-            <Link
-              href="/getting-started"
-              className="no-underline inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-medium mb-8 transition-all duration-200 hover:shadow-md"
-              style={{
-                background: "rgba(122,154,101,0.1)",
-                color: "var(--ck-primary)",
-                border: "1px solid rgba(122,154,101,0.2)",
-              }}
-            >
-              <motion.span
-                animate={{ scale: [1, 1.15, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="inline-block w-2 h-2 rounded-full"
-                style={{ background: "var(--ck-primary)" }}
-              />
-              New: 12 components, 2 platforms, 1 design system
-              <ArrowRight size={12} />
-            </Link>
-          </AnimateIn>
-
-          {/* Headline */}
-          <AnimateIn direction="up" delay={0.1}>
-            <h1
-              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-[1.1] tracking-tight"
-              style={{
-                color: "var(--ck-heading)",
-                fontFamily: "var(--font-serif)",
-              }}
-            >
-              A component library
-              <br />
-              with{" "}
-              <span className="gradient-text">flavor.</span>
-            </h1>
-          </AnimateIn>
-
-          {/* Subtitle */}
-          <AnimateIn direction="up" delay={0.2}>
-            <p
-              className="text-lg max-w-xl leading-relaxed mb-8"
-              style={{ color: "var(--ck-text-muted)" }}
-            >
-              Production-ready React &amp; Flutter components for modern food
-              &amp; cooking applications.
-            </p>
-          </AnimateIn>
-
-          {/* Stats row */}
-          <AnimateIn direction="up" delay={0.25}>
-            <div
-              className="flex items-center gap-3 mb-8 text-sm"
-              style={{ color: "var(--ck-text-muted)" }}
-            >
-              <span className="font-semibold" style={{ color: "var(--ck-heading)" }}>
-                19
-              </span>{" "}
-              Components
-              <span style={{ color: "var(--ck-border)" }}>·</span>
-              <span className="font-semibold" style={{ color: "var(--ck-heading)" }}>
-                2
-              </span>{" "}
-              Platforms
-              <span style={{ color: "var(--ck-border)" }}>·</span>
-              <span className="font-semibold" style={{ color: "var(--ck-heading)" }}>
-                80+
-              </span>{" "}
-              Tokens
-              <span style={{ color: "var(--ck-border)" }}>·</span>
-              <span className="font-semibold" style={{ color: "var(--ck-heading)" }}>
-                MIT
-              </span>{" "}
-              License
-            </div>
-          </AnimateIn>
-
-          {/* Package manager tabs */}
-          <AnimateIn direction="up" delay={0.3}>
-            <div className="max-w-md mb-8">
-              <PackageManagerTabs />
-            </div>
-          </AnimateIn>
-
-          {/* CTA buttons */}
-          <AnimateIn direction="up" delay={0.35}>
-            <div className="flex items-center gap-4 flex-wrap mb-6">
-              <Link href="/getting-started" className="no-underline">
-                <Button variant="primary" size="md" iconRight={<ArrowRight size={16} />}>
-                  Get Started
-                </Button>
-              </Link>
-              <Link href="/components/button" className="no-underline">
-                <Button variant="secondary" size="md">
-                  Browse Components
-                </Button>
-              </Link>
-            </div>
-          </AnimateIn>
-
-          {/* Keyboard shortcut hint */}
-          <AnimateIn direction="up" delay={0.4}>
-            <div
-              className="inline-flex items-center gap-2 text-xs"
-              style={{ color: "var(--ck-text-muted)" }}
-            >
-              <span>Press</span>
-              <kbd
-                className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[11px] font-medium border"
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 items-center min-h-[520px]">
+          {/* ── Left col: text ── */}
+          <div>
+            <AnimateIn direction="down" delay={0}>
+              <Link
+                href="/getting-started"
+                className="no-underline inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-medium mb-8 transition-all duration-200 hover:shadow-md"
                 style={{
-                  borderColor: "var(--ck-border)",
-                  background: "var(--ck-surface)",
-                  color: "var(--ck-text-muted)",
+                  background: "rgba(122,154,101,0.1)",
+                  color: "var(--ck-primary)",
+                  border: "1px solid rgba(122,154,101,0.2)",
                 }}
               >
-                <Command size={10} />K
-              </kbd>
-              <span>to search</span>
-            </div>
-          </AnimateIn>
+                <motion.span
+                  animate={{ scale: [1, 1.15, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="inline-block w-2 h-2 rounded-full"
+                  style={{ background: "var(--ck-primary)" }}
+                />
+                19 components · 2 platforms · 1 design system
+                <ArrowRight size={12} />
+              </Link>
+            </AnimateIn>
+
+            <AnimateIn direction="up" delay={0.1}>
+              <h1
+                className="text-4xl sm:text-5xl md:text-[3.6rem] font-bold mb-5 leading-[1.08] tracking-tight"
+                style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}
+              >
+                A component library
+                <br />
+                with{" "}
+                <span className="gradient-text">flavor.</span>
+              </h1>
+            </AnimateIn>
+
+            <AnimateIn direction="up" delay={0.18}>
+              <p className="text-base leading-relaxed mb-7 max-w-lg" style={{ color: "var(--ck-text-muted)" }}>
+                Production-ready React components for modern food &amp; cooking applications.
+                Built with design tokens, dark mode, and accessibility baked in.
+              </p>
+            </AnimateIn>
+
+            <AnimateIn direction="up" delay={0.25}>
+              <div className="max-w-sm mb-6">
+                <PackageManagerTabs />
+              </div>
+            </AnimateIn>
+
+            <AnimateIn direction="up" delay={0.32}>
+              <div className="flex items-center gap-3 flex-wrap mb-5">
+                <Link href="/getting-started" className="no-underline">
+                  <Button variant="primary" size="md" iconRight={<ArrowRight size={16} />}>
+                    Get Started
+                  </Button>
+                </Link>
+                <Link href="/components/button" className="no-underline">
+                  <Button variant="secondary" size="md">
+                    Browse Components
+                  </Button>
+                </Link>
+              </div>
+            </AnimateIn>
+
+            <AnimateIn direction="up" delay={0.38}>
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2 text-xs" style={{ color: "var(--ck-text-muted)" }}>
+                  <kbd
+                    className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[11px] font-medium border"
+                    style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)", color: "var(--ck-text-muted)" }}
+                  >
+                    <Command size={10} />K
+                  </kbd>
+                  <span>to search</span>
+                </div>
+                {[
+                  { n: "19", label: "Components" },
+                  { n: "80+", label: "Tokens" },
+                  { n: "MIT", label: "License" },
+                ].map(({ n, label }) => (
+                  <div key={label} className="flex items-center gap-1 text-xs" style={{ color: "var(--ck-text-muted)" }}>
+                    <span className="font-bold text-sm" style={{ color: "var(--ck-heading)" }}>{n}</span>
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </AnimateIn>
+          </div>
+
+          {/* ── Right col: live component preview stack ── */}
+          <div className="hidden lg:flex flex-col gap-3 relative">
+            <AnimateIn direction="left" delay={0.2} variant="blur">
+              {/* Card 1 — Recipe card */}
+              <div
+                className="rounded-2xl border p-4"
+                style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2.5">
+                    <Avatar src="https://i.pravatar.cc/32?u=chef-hero" alt="Chef" size="sm" />
+                    <div>
+                      <div className="text-xs font-semibold" style={{ color: "var(--ck-heading)" }}>Chef Laurent</div>
+                      <div className="text-[10px]" style={{ color: "var(--ck-text-muted)" }}>French Cuisine</div>
+                    </div>
+                  </div>
+                  <Badge variant="warning" size="sm">
+                    <Star size={9} className="inline mr-0.5 -mt-px" />4.9
+                  </Badge>
+                </div>
+                <div className="text-sm font-bold mb-1" style={{ color: "var(--ck-heading)", fontFamily: "var(--font-serif)" }}>
+                  Herb-Crusted Salmon
+                </div>
+                <div className="flex gap-1.5 mb-3">
+                  <Badge size="sm" variant="default"><Clock size={9} className="inline mr-0.5 -mt-px" />35 min</Badge>
+                  <Badge size="sm" variant="success">Easy</Badge>
+                </div>
+                <Button variant="primary" size="sm" fullWidth iconRight={<ArrowRight size={13} />}>
+                  Start Cooking
+                </Button>
+              </div>
+            </AnimateIn>
+
+            <AnimateIn direction="left" delay={0.32} variant="blur">
+              {/* Card 2 — Input + Toggle inline */}
+              <div
+                className="rounded-2xl border p-4"
+                style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
+              >
+                <div className="text-xs font-semibold mb-3" style={{ color: "var(--ck-heading)" }}>Preferences</div>
+                <Input placeholder="Search recipes…" inputSize="sm" />
+                <div className="mt-3 flex items-center justify-between">
+                  <Toggle checked={demoToggle} onChange={(e) => setDemoToggle(e.target.checked)} label="Dark mode" />
+                  <div className="flex gap-1.5">
+                    <Skeleton variant="circular" width={24} />
+                    <Skeleton variant="circular" width={24} />
+                  </div>
+                </div>
+              </div>
+            </AnimateIn>
+
+            <AnimateIn direction="left" delay={0.44} variant="blur">
+              {/* Card 3 — Badges + Alert */}
+              <div
+                className="rounded-2xl border p-4"
+                style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
+              >
+                <Alert variant="success" title="Recipe saved!">
+                  Your changes have been published.
+                </Alert>
+                <div className="flex gap-1.5 mt-3 flex-wrap">
+                  {["Vegan", "Gluten-free", "Quick", "Popular"].map((t) => (
+                    <Badge key={t} size="sm" variant="default">{t}</Badge>
+                  ))}
+                </div>
+              </div>
+            </AnimateIn>
+          </div>
         </div>
-
-
       </section>
 
       <BezierDivider opacity={0.8} speed={1.2} className="-mb-4" />
