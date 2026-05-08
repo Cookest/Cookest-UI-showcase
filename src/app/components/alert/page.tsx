@@ -112,12 +112,29 @@ export default function AlertPage() {
           </div>
         </Playground>
 
+        <Playground
+          title="Sizes"
+          description="Three sizes for different density contexts."
+          code={`<Alert variant="info" size="sm">Compact — ideal for inline context.</Alert>
+<Alert variant="success" size="md" title="Default">Standard medium size.</Alert>
+<Alert variant="warning" size="lg" title="Large Alert">More padding for prominent messages.</Alert>`}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%" }}>
+            <Alert variant="info" size="sm">Compact — ideal for inline context.</Alert>
+            <Alert variant="success" size="md" title="Saved">Standard medium size alert.</Alert>
+            <Alert variant="warning" size="lg" title="Attention">More padding for prominent messages.</Alert>
+          </div>
+        </Playground>
+
         <PropsTable
           props={[
             { name: "variant", type: '"info" | "success" | "warning" | "error"', default: '"info"', description: "The visual style of the alert." },
+            { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Controls padding and icon size." },
             { name: "title", type: "string", description: "Optional title displayed above the alert body." },
             { name: "dismissible", type: "boolean", default: "false", description: "Whether the alert can be dismissed." },
             { name: "onDismiss", type: "() => void", description: "Callback fired when the dismiss button is clicked." },
+            { name: "icon", type: "ReactNode", description: "Override the default variant icon." },
+            { name: "visible", type: "boolean", default: "true", description: "Controls visibility with AnimatePresence exit animation." },
             { name: "children", type: "ReactNode", description: "The alert body content." },
           ]}
         />
