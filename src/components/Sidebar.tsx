@@ -49,6 +49,10 @@ import {
   CreditCard,
   User,
   ShoppingCart,
+  TerminalSquare,
+  UtensilsCrossed,
+  LayoutGrid,
+  BookText,
 } from "lucide-react";
 
 const components = [
@@ -86,6 +90,10 @@ const examples = [
   { name: "Pricing Plans", href: "/examples/pricing", icon: CreditCard },
   { name: "User Profile", href: "/examples/user-profile", icon: User },
   { name: "Order Checkout", href: "/examples/checkout", icon: ShoppingCart },
+  { name: "Terminal CLI", href: "/examples/terminal", icon: TerminalSquare },
+  { name: "Kitchen Display", href: "/examples/kds", icon: UtensilsCrossed },
+  { name: "Bento Kitchen", href: "/examples/bento-kitchen", icon: LayoutGrid },
+  { name: "Editorial", href: "/examples/editorial", icon: BookText },
 ];
 
 export function Sidebar({ uiVersion }: { uiVersion?: string }) {

@@ -19,6 +19,8 @@ import {
   BadgeDollarSign,
   UserCircle,
   ShoppingCart,
+  TerminalSquare,
+  UtensilsCrossed,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
@@ -118,6 +120,22 @@ const examples = [
     href: "/examples/checkout",
     icon: ShoppingCart,
     tags: ["Input", "Select", "Toggle", "Progress", "Card", "Button"],
+  },
+  {
+    title: "Terminal CLI",
+    description:
+      "A dark terminal interface for browsing recipes via CLI commands. Shows how components adapt to a radically non-standard aesthetic.",
+    href: "/examples/terminal",
+    icon: TerminalSquare,
+    tags: ["Badge", "Divider", "Input"],
+  },
+  {
+    title: "Kitchen Display",
+    description:
+      "Brutalist KDS order board with 4 stage columns, live elapsed timers, allergy badges, and one-click order progression.",
+    href: "/examples/kds",
+    icon: UtensilsCrossed,
+    tags: ["Badge", "Button", "Divider"],
   },
 ];
 

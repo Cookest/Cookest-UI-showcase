@@ -37,6 +37,8 @@ const labelMap: Record<string, string> = {
   tabs: "Tabs",
   accordion: "Accordion",
   textarea: "Textarea",
+  terminal: "Terminal CLI",
+  kds: "Kitchen Display",
 };
 
 export function Breadcrumb() {
