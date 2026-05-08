@@ -54,7 +54,6 @@ import {
   LayoutGrid,
   BookText,
   Layers,
-  BookOpen,
   Activity,
 } from "lucide-react";
 
