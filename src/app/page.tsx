@@ -190,7 +190,7 @@ export default function Home() {
           {/* Headline */}
           <AnimateIn direction="up" delay={0.1}>
             <h1
-              className="text-6xl font-bold mb-6 leading-[1.1] tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-[1.1] tracking-tight"
               style={{
                 color: "var(--ck-heading)",
                 fontFamily: "var(--font-serif)",
@@ -505,7 +505,7 @@ export default function Home() {
         </AnimateIn>
 
         <StaggerContainer
-          className="grid grid-cols-3 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5"
           staggerDelay={0.06}
         >
           {/* Button */}
@@ -730,7 +730,7 @@ export default function Home() {
           </div>
         </AnimateIn>
 
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               icon: Sparkles,
@@ -808,7 +808,7 @@ export default function Home() {
           </div>
         </AnimateIn>
 
-        <StaggerContainer className="grid grid-cols-3 gap-5" staggerDelay={0.06}>
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" staggerDelay={0.06}>
           <StaggerItem>
             <ExampleCard
               title="Recipe Card"

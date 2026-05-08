@@ -121,7 +121,7 @@ export default function MealPlannerPage() {
 
   // --- Render ---
   return (
-    <div className="p-6" style={{ background: "var(--ck-bg)", minHeight: "100vh" }}>
+    <div style={{ background: "var(--ck-bg)", minHeight: "100vh" }}>
       <Breadcrumb />
 
       {/* Header */}
@@ -161,29 +161,17 @@ export default function MealPlannerPage() {
       )}
 
       {/* Main layout: grid + sidebar */}
-      <div className="flex gap-6">
+      <div className="flex flex-col lg:flex-row gap-6">
         {/* 7-day grid */}
         <div className="flex-1 min-w-0">
           {loading ? (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(7, 1fr)",
-                gap: "12px",
-              }}
-            >
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
               {DAYS.map((d) => (
                 <SkeletonCard key={d} />
               ))}
             </div>
           ) : (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(7, 1fr)",
-                gap: "12px",
-              }}
-            >
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
               {DAYS.map((day, di) => (
                 <Card key={day} variant="outlined" padding="sm">
                   <CardHeader>
@@ -258,13 +246,13 @@ export default function MealPlannerPage() {
               Daily Averages
             </h2>
             {loading ? (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[1, 2, 3, 4].map((i) => (
                   <SkeletonCard key={i} />
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <NutritionCard
                   icon={<Flame size={20} />}
                   value="2,150"
@@ -299,7 +287,7 @@ export default function MealPlannerPage() {
         </div>
 
         {/* Shopping list sidebar */}
-        <div style={{ width: 280, flexShrink: 0 }}>
+        <div className="w-full lg:w-[280px] lg:shrink-0">
           {loading ? (
             <SkeletonCard />
           ) : (

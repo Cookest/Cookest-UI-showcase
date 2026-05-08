@@ -104,10 +104,9 @@ export default function LoginFormPage() {
     <div>
       <Breadcrumb />
       <div
-        className="flex items-center justify-center py-12 px-4"
-        style={{ minHeight: "calc(100vh - 64px)" }}
+        className="flex items-center justify-center py-12 px-4 min-h-screen"
       >
-      <div className="w-full" style={{ maxWidth: 440 }}>
+      <div className="w-full max-w-[440px]">
         {/* Logo Area */}
         <div className="flex flex-col items-center gap-3 mb-8">
           <div

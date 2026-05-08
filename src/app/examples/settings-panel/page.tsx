@@ -198,7 +198,7 @@ export default function SettingsPanelPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input
                 label="Full Name"
                 value={name}
@@ -324,7 +324,7 @@ export default function SettingsPanelPage() {
         </CardHeader>
         <CardBody>
           <div className="flex flex-col gap-5">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Select
                 label="Language"
                 options={languageOptions}
@@ -340,7 +340,7 @@ export default function SettingsPanelPage() {
                 searchable
               />
             </div>
-            <div className="grid grid-cols-2 gap-4 items-end">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
               <Select
                 label="Measurement Units"
                 options={unitOptions}
@@ -550,7 +550,7 @@ export default function SettingsPanelPage() {
 
       {/* Save Bar */}
       <div
-        className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-4 px-6 py-4 z-40"
+        className="fixed bottom-0 left-0 md:left-[280px] right-0 flex items-center justify-center gap-4 px-6 py-4 z-40"
         style={{
           background: "var(--ck-bg)",
           borderTop: "1px solid var(--ck-border)",

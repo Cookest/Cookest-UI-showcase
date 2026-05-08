@@ -344,7 +344,7 @@ export default function ProductPage() {
 
             {/* Trust badges */}
             <div
-              className="grid grid-cols-3 gap-3 p-4 rounded-xl"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl"
               style={{ background: "var(--ck-surface)", border: "1px solid var(--ck-border)" }}
             >
               {[

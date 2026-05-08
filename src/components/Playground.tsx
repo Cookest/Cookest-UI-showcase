@@ -164,7 +164,7 @@ interface PropsTableProps {
 
 export function PropsTable({ props }: PropsTableProps) {
   return (
-    <div className="rounded-2xl border overflow-hidden mt-8"
+    <div className="rounded-2xl border overflow-x-auto mt-8"
       style={{ borderColor: "var(--ck-border)" }}>
       <table className="w-full text-sm border-collapse">
         <thead>

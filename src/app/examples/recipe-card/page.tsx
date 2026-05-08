@@ -357,7 +357,7 @@ export default function RecipeCardPage() {
           <p style={{ fontSize: "0.8rem", color: "var(--ck-text-muted)" }}>Per serving</p>
         </CardHeader>
         <CardBody>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {nutrition.map((n) => (
               <div
                 key={n.label}
@@ -423,7 +423,7 @@ export default function RecipeCardPage() {
 
       {/* Floating Bottom Bar */}
       <div
-        className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-4 px-6 py-4 z-40"
+        className="fixed bottom-0 left-0 md:left-[280px] right-0 flex items-center justify-center gap-4 px-6 py-4 z-40"
         style={{
           background: "var(--ck-bg)",
           borderTop: "1px solid var(--ck-border)",
