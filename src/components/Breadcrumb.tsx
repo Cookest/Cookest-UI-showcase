@@ -39,6 +39,8 @@ const labelMap: Record<string, string> = {
   textarea: "Textarea",
   terminal: "Terminal CLI",
   kds: "Kitchen Display",
+  "bento-kitchen": "Bento Kitchen",
+  editorial: "Editorial",
 };
 
 export function Breadcrumb() {
