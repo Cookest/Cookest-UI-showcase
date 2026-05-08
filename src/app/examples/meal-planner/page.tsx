@@ -121,7 +121,7 @@ export default function MealPlannerPage() {
 
   // --- Render ---
   return (
-    <div style={{ background: "var(--ck-bg)", minHeight: "100vh" }}>
+    <div>
       <Breadcrumb />
 
       {/* Header */}
