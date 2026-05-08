@@ -8,6 +8,7 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
 import { Grain } from "@/components/Grain";
+import { ThemeCustomizer } from "@/components/ThemeCustomizer";
 
 export const metadata: Metadata = {
   title: {
@@ -60,6 +61,7 @@ export default function RootLayout({
             </div>
           </div>
           <BackToTop />
+          <ThemeCustomizer />
         </ThemeProvider>
       </body>
     </html>

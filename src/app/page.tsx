@@ -24,7 +24,6 @@ import {
   StaggerItem,
 } from "@/components/AnimateIn";
 import { PackageManagerTabs } from "@/components/PackageManagerTabs";
-import { BezierDivider } from "@/components/BezierDivider";
 import {
   ArrowRight,
   Utensils,
@@ -318,7 +317,7 @@ export default function Home() {
         </div>
       </section>
 
-      <BezierDivider opacity={0.8} speed={1.2} className="-mb-4" />
+      <div aria-hidden className="h-px w-full mb-16" style={{ background: "linear-gradient(90deg, transparent, var(--ck-border) 25%, var(--ck-border) 75%, transparent)" }} />
 
       {/* ──────────────────────────────────────────────
           SECTION 2 — LIVE COMPONENT SHOWCASE
@@ -486,7 +485,7 @@ export default function Home() {
         </AnimateIn>
       </section>
 
-      <BezierDivider flip opacity={0.6} speed={1.5} className="-mb-4" />
+      <div aria-hidden className="h-px w-full mb-16" style={{ background: "linear-gradient(90deg, transparent, var(--ck-border) 25%, var(--ck-border) 75%, transparent)" }} />
 
       {/* ──────────────────────────────────────────────
           SECTION 3 — COMPONENT GRID
@@ -819,7 +818,7 @@ export default function Home() {
         </div>
       </section>
 
-      <BezierDivider opacity={0.5} height={56} speed={2} className="-mb-4" />
+      <div aria-hidden className="h-px w-full mb-16" style={{ background: "linear-gradient(90deg, transparent, var(--ck-border) 25%, var(--ck-border) 75%, transparent)" }} />
 
       {/* ──────────────────────────────────────────────
           SECTION 5 — EXAMPLES
@@ -882,6 +881,38 @@ export default function Home() {
               description="Weekly meal planning with badges, skeleton loading, and more."
               href="/examples/meal-planner"
               icon={CalendarDays}
+            />
+          </StaggerItem>
+          <StaggerItem>
+            <ExampleCard
+              title="Notification Center"
+              description="Inbox with read/unread states, tabs, and avatar-led notification rows."
+              href="/examples/notification-center"
+              icon={Command}
+            />
+          </StaggerItem>
+          <StaggerItem>
+            <ExampleCard
+              title="Pricing Plans"
+              description="Three-tier pricing with monthly/annual toggle and highlighted featured card."
+              href="/examples/pricing"
+              icon={Sparkles}
+            />
+          </StaggerItem>
+          <StaggerItem>
+            <ExampleCard
+              title="User Profile"
+              description="Chef profile with stats, recipe grid, tabs, and progress completion bar."
+              href="/examples/user-profile"
+              icon={Users}
+            />
+          </StaggerItem>
+          <StaggerItem>
+            <ExampleCard
+              title="Order Checkout"
+              description="Multi-section checkout form with order summary and dynamic totals."
+              href="/examples/checkout"
+              icon={ArrowRight}
             />
           </StaggerItem>
         </StaggerContainer>

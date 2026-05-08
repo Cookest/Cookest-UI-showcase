@@ -45,6 +45,10 @@ import {
   RefreshCw,
   FlaskConical,
   CheckSquare,
+  Bell,
+  CreditCard,
+  User,
+  ShoppingCart,
 } from "lucide-react";
 
 const components = [
@@ -78,6 +82,10 @@ const examples = [
   { name: "Product Page", href: "/examples/product-page", icon: ShoppingBag },
   { name: "Social Feed", href: "/examples/social-feed", icon: MessageCircle },
   { name: "Onboarding Wizard", href: "/examples/onboarding-wizard", icon: Wand2 },
+  { name: "Notification Center", href: "/examples/notification-center", icon: Bell },
+  { name: "Pricing Plans", href: "/examples/pricing", icon: CreditCard },
+  { name: "User Profile", href: "/examples/user-profile", icon: User },
+  { name: "Order Checkout", href: "/examples/checkout", icon: ShoppingCart },
 ];
 
 export function Sidebar({ uiVersion }: { uiVersion?: string }) {

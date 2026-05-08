@@ -15,6 +15,10 @@ import {
   ShoppingBag,
   MessageCircle,
   Sparkles,
+  Bell,
+  BadgeDollarSign,
+  UserCircle,
+  ShoppingCart,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
@@ -82,6 +86,38 @@ const examples = [
     href: "/examples/onboarding-wizard",
     icon: Sparkles,
     tags: ["Card", "Input", "Toggle", "Badge", "Button", "Alert"],
+  },
+  {
+    title: "Notification Center",
+    description:
+      "Notification inbox with read/unread state, tabs for All, Unread, and Mentions, and a mark-all-read action.",
+    href: "/examples/notification-center",
+    icon: Bell,
+    tags: ["Card", "Badge", "Avatar", "Tabs", "Divider", "Button"],
+  },
+  {
+    title: "Pricing Plans",
+    description:
+      "Three-tier pricing cards with monthly/annual toggle, feature lists, and a highlighted 'Most Popular' plan.",
+    href: "/examples/pricing",
+    icon: BadgeDollarSign,
+    tags: ["Card", "Badge", "Button", "Divider", "Toggle"],
+  },
+  {
+    title: "User Profile",
+    description:
+      "Chef profile page with avatar, stats bar, profile completion progress, follow action, and tabbed recipe grid.",
+    href: "/examples/user-profile",
+    icon: UserCircle,
+    tags: ["Avatar", "Badge", "Tabs", "Skeleton", "Progress", "Card"],
+  },
+  {
+    title: "Order Checkout",
+    description:
+      "Multi-section checkout form with contact, delivery, add-ons, payment fields, and a live order summary sidebar.",
+    href: "/examples/checkout",
+    icon: ShoppingCart,
+    tags: ["Input", "Select", "Toggle", "Progress", "Card", "Button"],
   },
 ];
 
