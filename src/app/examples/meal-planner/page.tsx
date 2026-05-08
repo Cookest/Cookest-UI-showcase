@@ -173,7 +173,7 @@ export default function MealPlannerPage() {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
               {DAYS.map((day, di) => (
-                <Card key={day} variant="outlined" padding="sm">
+                <Card key={day} variant="outlined" padding="sm" className="min-w-0 overflow-hidden">
                   <CardHeader>
                     <div>
                       <div className="text-sm font-semibold" style={{ color: "var(--ck-heading)" }}>
@@ -198,11 +198,11 @@ export default function MealPlannerPage() {
                             </div>
                             {meal ? (
                               <div
-                                className="p-2 rounded-md"
+                                className="p-2 rounded-md overflow-hidden"
                                 style={{ background: "var(--ck-bg-card)", border: "1px solid var(--ck-border)" }}
                               >
                                 <div
-                                  className="text-xs font-semibold mb-1"
+                                  className="text-xs font-semibold mb-1 truncate"
                                   style={{ color: "var(--ck-text)" }}
                                 >
                                   {meal.name}
