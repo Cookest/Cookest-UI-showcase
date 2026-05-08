@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { Sidebar } from "@/components/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CommandPalette } from "@/components/CommandPalette";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
+import { Grain } from "@/components/Grain";
 
 export const metadata: Metadata = {
   title: {
@@ -12,11 +15,11 @@ export const metadata: Metadata = {
     template: "%s — Cookest UI",
   },
   description:
-    "Production-ready React & Flutter components for modern food & cooking applications. 12 components, design tokens, and real-world examples.",
-  keywords: ["ui", "components", "react", "flutter", "design-system", "cookest", "food"],
+    "Production-ready React components for modern food & cooking applications. 19 components, design tokens, and real-world examples.",
+  keywords: ["ui", "components", "react", "design-system", "cookest", "food"],
   openGraph: {
     title: "Cookest UI — Design System",
-    description: "Production-ready cross-platform components with flavor.",
+    description: "Production-ready components with a distinct culinary identity.",
     type: "website",
     siteName: "Cookest UI",
   },
@@ -28,21 +31,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
       <body className="antialiased">
         <ThemeProvider>
+          <Grain />
           <CommandPalette />
           <a
             href="#main-content"
@@ -52,9 +48,12 @@ export default function RootLayout({
             Skip to content
           </a>
           <div className="flex min-h-screen">
-            <Sidebar />
+            <Sidebar uiVersion={process.env.NEXT_PUBLIC_UI_VERSION} />
             <div className="flex-1 ml-0 md:ml-[280px] flex flex-col min-h-screen">
-              <main id="main-content" className="flex-1 p-4 md:p-8 max-w-6xl">
+              <main
+                id="main-content"
+                className="flex-1 p-4 md:p-8 max-w-6xl mx-auto w-full"
+              >
                 {children}
               </main>
               <Footer />

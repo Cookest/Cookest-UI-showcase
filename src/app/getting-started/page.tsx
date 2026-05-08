@@ -254,7 +254,7 @@ export function RecipeCard() {
           {[
             {
               title: "Browse Components",
-              description: "Explore all 12 components with interactive playgrounds.",
+              description: "Explore all 19 components with interactive playgrounds.",
               href: "/components/button",
             },
             {

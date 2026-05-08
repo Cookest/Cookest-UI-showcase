@@ -27,12 +27,12 @@ export function Playground({ title, description, children, code, language = "tsx
 
   return (
     <div
-      className="rounded-2xl border overflow-hidden transition-shadow duration-300 hover:shadow-lg"
+      className="rounded-2xl border transition-shadow duration-300 hover:shadow-lg"
       style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
     >
       {/* Header */}
       <div
-        className="px-5 py-3 border-b flex items-center justify-between"
+        className="px-5 py-3 border-b flex items-center justify-between rounded-t-2xl overflow-hidden"
         style={{ borderColor: "var(--ck-border)" }}
       >
         <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ export function Playground({ title, description, children, code, language = "tsx
 
       {/* Code with syntax highlighting */}
       {showCode && (
-        <div className="relative">
+        <div className="relative rounded-b-2xl overflow-hidden">
           <div
             className="absolute top-3 right-3 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider"
             style={{ background: "rgba(122,154,101,0.15)", color: "var(--ck-primary)" }}

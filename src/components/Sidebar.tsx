@@ -44,12 +44,14 @@ import {
   BarChart2,
   RefreshCw,
   FlaskConical,
+  CheckSquare,
 } from "lucide-react";
 
 const components = [
   { name: "Button", href: "/components/button", icon: RectangleHorizontal },
   { name: "Input", href: "/components/input", icon: Type },
   { name: "Card", href: "/components/card", icon: SquareStack },
+  { name: "Checkbox", href: "/components/checkbox", icon: CheckSquare },
   { name: "Badge", href: "/components/badge", icon: Tag },
   { name: "Avatar", href: "/components/avatar", icon: CircleUser },
   { name: "Modal", href: "/components/modal", icon: PanelTop },
@@ -78,7 +80,7 @@ const examples = [
   { name: "Onboarding Wizard", href: "/examples/onboarding-wizard", icon: Wand2 },
 ];
 
-export function Sidebar() {
+export function Sidebar({ uiVersion }: { uiVersion?: string }) {
   const pathname = usePathname();
   const { theme, toggle } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -151,7 +153,7 @@ export function Sidebar() {
                 Cookest UI
               </div>
               <div className="text-[10px] font-medium" style={{ color: "var(--ck-text-muted)" }}>
-                v1.0.0 · Design System
+                v{uiVersion ?? "0.1.2"} · Design System
               </div>
             </div>
           </Link>

@@ -100,6 +100,11 @@ const componentRelations: Record<string, RelatedComponent[]> = {
     { name: "Button", href: "/components/button", description: "Embed spinners inside button loading states" },
     { name: "Progress", href: "/components/progress", description: "Use when completion percentage is known" },
   ],
+  checkbox: [
+    { name: "Toggle", href: "/components/toggle", description: "Binary on/off switch for instant-apply settings" },
+    { name: "Select", href: "/components/select", description: "Single or multi-select from a dropdown list" },
+    { name: "Input", href: "/components/input", description: "Pair with inputs inside form groups" },
+  ],
 };
 
 export function RelatedComponents({ component }: { component: string }) {

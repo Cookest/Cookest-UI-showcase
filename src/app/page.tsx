@@ -22,7 +22,6 @@ import {
   AnimateIn,
   StaggerContainer,
   StaggerItem,
-  FloatingElement,
 } from "@/components/AnimateIn";
 import { PackageManagerTabs } from "@/components/PackageManagerTabs";
 import { BezierDivider } from "@/components/BezierDivider";
@@ -180,9 +179,9 @@ export default function Home() {
               <motion.span
                 animate={{ scale: [1, 1.15, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-              >
-                🍳
-              </motion.span>
+                className="inline-block w-2 h-2 rounded-full"
+                style={{ background: "var(--ck-primary)" }}
+              />
               New: 12 components, 2 platforms, 1 design system
               <ArrowRight size={12} />
             </Link>
@@ -222,7 +221,7 @@ export default function Home() {
               style={{ color: "var(--ck-text-muted)" }}
             >
               <span className="font-semibold" style={{ color: "var(--ck-heading)" }}>
-                12
+                19
               </span>{" "}
               Components
               <span style={{ color: "var(--ck-border)" }}>·</span>
@@ -288,33 +287,7 @@ export default function Home() {
           </AnimateIn>
         </div>
 
-        {/* Floating decorative orbs */}
-        <FloatingElement
-          className="absolute right-8 top-12 pointer-events-none opacity-20"
-          amplitude={10}
-          duration={5}
-        >
-          <div
-            className="w-16 h-16 rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, var(--ck-primary), transparent)",
-            }}
-          />
-        </FloatingElement>
-        <FloatingElement
-          className="absolute right-32 bottom-16 pointer-events-none opacity-15"
-          amplitude={6}
-          duration={7}
-        >
-          <div
-            className="w-10 h-10 rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, var(--ck-primary), transparent)",
-            }}
-          />
-        </FloatingElement>
+
       </section>
 
       <BezierDivider opacity={0.8} speed={1.2} className="-mb-4" />
@@ -503,7 +476,7 @@ export default function Home() {
               className="text-sm max-w-lg mx-auto"
               style={{ color: "var(--ck-text-muted)" }}
             >
-              12 production-ready components rendered in real time. Click any
+              19 production-ready components rendered in real time. Click any
               card to explore docs, props, and examples.
             </p>
           </div>
@@ -650,9 +623,9 @@ export default function Home() {
                 <Select
                   placeholder="Choose cuisine..."
                   options={[
-                    { value: "italian", label: "🇮🇹 Italian" },
-                    { value: "japanese", label: "🇯🇵 Japanese" },
-                    { value: "mexican", label: "🇲🇽 Mexican" },
+                    { value: "italian", label: "Italian" },
+                    { value: "japanese", label: "Japanese" },
+                    { value: "mexican", label: "Mexican" },
                   ]}
                   value=""
                   onChange={() => {}}
@@ -710,6 +683,36 @@ export default function Home() {
               </div>
             </PreviewCard>
           </StaggerItem>
+
+          {/* Checkbox */}
+          <StaggerItem>
+            <PreviewCard title="Checkbox" href="/components/checkbox">
+              <div className="flex flex-col gap-2.5">
+                {[
+                  { label: "Fresh herbs", checked: true },
+                  { label: "Olive oil", checked: true },
+                  { label: "Sea salt", checked: false },
+                ].map(({ label, checked }) => (
+                  <label key={label} className="flex items-center gap-2.5 cursor-pointer">
+                    <span
+                      className="w-4 h-4 rounded flex items-center justify-center border flex-shrink-0"
+                      style={{
+                        borderColor: checked ? "var(--ck-primary)" : "var(--ck-border)",
+                        background: checked ? "var(--ck-primary)" : "transparent",
+                      }}
+                    >
+                      {checked && (
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                          <path d="M1 3.5L4 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </span>
+                    <span className="text-xs" style={{ color: checked ? "var(--ck-text)" : "var(--ck-text-muted)" }}>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </PreviewCard>
+          </StaggerItem>
         </StaggerContainer>
       </section>
 
@@ -742,21 +745,18 @@ export default function Home() {
               title: "Design Tokens",
               description:
                 "80+ carefully crafted CSS variables for colors, typography, spacing, and more.",
-              emoji: "🎨",
             },
             {
               icon: Smartphone,
               title: "Cross-Platform",
               description:
                 "Build once, deploy everywhere. React for web, Flutter for mobile.",
-              emoji: "📱",
             },
             {
               icon: Accessibility,
               title: "Accessible",
               description:
                 "WCAG 2.1 compliant. Keyboard navigable. Screen reader friendly.",
-              emoji: "♿",
             },
           ].map((feature, i) => (
             <AnimateIn key={feature.title} direction="up" delay={i * 0.1}>
@@ -768,10 +768,10 @@ export default function Home() {
                 }}
               >
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 text-xl"
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
                   style={{ background: "rgba(122,154,101,0.1)" }}
                 >
-                  {feature.emoji}
+                  <feature.icon size={22} style={{ color: "var(--ck-primary)" }} />
                 </div>
                 <h3
                   className="text-base font-bold mb-2"

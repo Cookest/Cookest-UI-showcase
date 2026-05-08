@@ -17,30 +17,23 @@ import {
   CardBody,
   CardFooter,
   Badge,
-  Avatar,
-  AvatarGroup,
   Toggle,
-  Alert,
-  Divider,
-  Skeleton,
-  SkeletonCard,
   Tooltip,
   Select,
   Tabs,
-  Accordion,
   Textarea,
   Slider,
   Progress,
   Spinner,
-  Modal,
 } from "@cookest/ui";
-import { Copy, Check, RefreshCcw, Code2, Layers, Settings2 } from "lucide-react";
+import { Grain } from "@/components/Grain";
+import { Copy, Check, RefreshCcw, Code2, Settings2, Play } from "lucide-react";
 
 // ═══════════════════════════════════════════════════════════════════════
 // Types
 // ═══════════════════════════════════════════════════════════════════════
 
-type PlaygroundMode = "props" | "sandbox" | "stories";
+type PlaygroundMode = "props" | "sandbox";
 type PropControlType = "select" | "boolean" | "string" | "number";
 
 interface PropDef {
@@ -48,6 +41,9 @@ interface PropDef {
   options?: string[];
   default: string | boolean | number;
   label: string;
+  min?: number;
+  max?: number;
+  step?: number;
 }
 
 interface ExtraState {
@@ -59,17 +55,6 @@ interface ComponentConfig {
   name: string;
   props: Record<string, PropDef>;
   render: (props: Record<string, any>, extra?: ExtraState) => ReactNode;
-}
-
-interface StoryDef {
-  label: string;
-  description: string;
-  render: () => ReactNode;
-}
-
-interface ComponentStories {
-  name: string;
-  stories: StoryDef[];
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -96,17 +81,18 @@ class ErrorBoundary extends Component<EBProps, EBState> {
     if (this.state.error) {
       return (
         <div style={{
-          padding: "12px 14px",
-          background: "rgba(239,68,68,0.08)",
-          border: "1px solid rgba(239,68,68,0.3)",
-          borderRadius: "8px",
-          color: "#ef4444",
-          fontFamily: "monospace",
+          padding: "14px 16px",
+          background: "rgba(239,68,68,0.07)",
+          border: "1px solid rgba(239,68,68,0.2)",
+          borderRadius: "10px",
+          color: "#f87171",
+          fontFamily: "var(--font-mono), monospace",
           fontSize: "12px",
-          lineHeight: 1.5,
+          lineHeight: 1.6,
           wordBreak: "break-word",
         }}>
-          <strong>Runtime error:</strong> {this.state.error}
+          <div style={{ fontWeight: 700, marginBottom: "6px" }}>⚠ Runtime Error</div>
+          {this.state.error}
         </div>
       );
     }
@@ -153,79 +139,112 @@ function useCopyToClipboard() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// Story helper components (stateful, defined before story data)
+// Demo wrappers — stateful helpers for prop editor interactive components
 // ═══════════════════════════════════════════════════════════════════════
 
-function ButtonLoadingDemo() {
-  const [loading, setLoading] = useState(false);
+function SelectPropDemo({ label, placeholder, disabled, searchable }: {
+  label: string; placeholder: string; disabled: boolean; searchable: boolean;
+}) {
+  const [value, setValue] = useState("");
   return (
-    <Button
-      variant="primary"
-      loading={loading}
-      onClick={() => {
-        setLoading(true);
-        setTimeout(() => setLoading(false), 2000);
-      }}
-    >
-      {loading ? "Loading…" : "Click to load"}
-    </Button>
-  );
-}
-
-function ToggleSizeDemo({ size }: { size: "sm" | "md" | "lg" }) {
-  const [checked, setChecked] = useState(false);
-  return (
-    <Toggle
-      toggleSize={size}
-      checked={checked}
-      onChange={(e) => setChecked(e.target.checked)}
-      label={`${size} toggle`}
-    />
-  );
-}
-
-function ToggleDescriptionDemo() {
-  const [notifs, setNotifs] = useState(true);
-  const [dark, setDark] = useState(false);
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-      <Toggle
-        checked={notifs}
-        onChange={(e) => setNotifs(e.target.checked)}
-        label="Notifications"
-        description="Receive push notifications for new messages"
-      />
-      <Toggle
-        checked={dark}
-        onChange={(e) => setDark(e.target.checked)}
-        label="Dark mode"
-        description="Switch the interface to dark theme"
+    <div style={{ width: "100%", maxWidth: "280px" }}>
+      <Select
+        label={label || undefined}
+        placeholder={placeholder}
+        value={value}
+        onChange={setValue}
+        disabled={disabled}
+        searchable={searchable}
+        options={[
+          { value: "italian", label: "Italian" },
+          { value: "french", label: "French" },
+          { value: "japanese", label: "Japanese" },
+          { value: "mexican", label: "Mexican" },
+          { value: "thai", label: "Thai" },
+        ]}
       />
     </div>
   );
 }
 
-function AlertDismissDemo() {
-  const [visible, setVisible] = useState(true);
+function SliderPropDemo({ min, max, step, label, showValue, disabled, size, color, defaultValue }: any) {
+  const [value, setValue] = useState(Number(defaultValue ?? 50));
+  useEffect(() => { setValue(Number(defaultValue ?? 50)); }, [defaultValue]);
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
-      <Alert variant="info" title="Information">Your recipe has been saved as a draft.</Alert>
-      <Alert variant="success" title="Success">Recipe published successfully!</Alert>
-      <Alert variant="warning" title="Warning">Some ingredients may be out of stock.</Alert>
-      <Alert
-        variant="error"
-        title="Error"
-        dismissible
-        visible={visible}
-        onDismiss={() => setVisible(false)}
-      >
-        Failed to upload image. Please try again.
-      </Alert>
-      {!visible && (
-        <Button variant="secondary" onClick={() => setVisible(true)}>
-          Restore error alert
-        </Button>
-      )}
+    <div style={{ width: "100%", maxWidth: "300px" }}>
+      <Slider
+        min={Number(min)} max={Number(max)} step={Number(step) || 1}
+        value={value} onChange={setValue}
+        label={label || undefined}
+        showValue={showValue}
+        disabled={disabled}
+        size={size}
+        color={color}
+      />
+    </div>
+  );
+}
+
+function TextareaPropDemo({ label, placeholder, disabled, inputSize, helperText, maxLength, showCount, resize }: any) {
+  const [value, setValue] = useState("");
+  return (
+    <div style={{ width: "100%", maxWidth: "300px" }}>
+      <Textarea
+        label={label || undefined}
+        placeholder={placeholder || undefined}
+        disabled={disabled}
+        inputSize={inputSize}
+        helperText={helperText || undefined}
+        maxLength={Number(maxLength) > 0 ? Number(maxLength) : undefined}
+        showCount={showCount}
+        resize={resize}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        rows={4}
+        fullWidth
+      />
+    </div>
+  );
+}
+
+function TabsPropDemo({ variant, size, fullWidth }: any) {
+  return (
+    <div style={{ width: "100%", maxWidth: "420px" }}>
+      <Tabs
+        variant={variant}
+        size={size}
+        fullWidth={fullWidth}
+        defaultTab="ingredients"
+        items={[
+          {
+            id: "ingredients",
+            label: "Ingredients",
+            content: (
+              <div style={{ padding: "10px 0", fontSize: "13px", color: "var(--ck-text)", lineHeight: 1.8 }}>
+                400g spaghetti · 200g guanciale · 4 eggs · 100g Pecorino Romano
+              </div>
+            ),
+          },
+          {
+            id: "method",
+            label: "Method",
+            content: (
+              <div style={{ padding: "10px 0", fontSize: "13px", color: "var(--ck-text)", lineHeight: 1.7 }}>
+                Boil pasta al dente. Fry guanciale crispy. Whisk eggs with cheese. Combine off-heat.
+              </div>
+            ),
+          },
+          {
+            id: "tips",
+            label: "Tips",
+            content: (
+              <div style={{ padding: "10px 0", fontSize: "13px", color: "var(--ck-text)", lineHeight: 1.7 }}>
+                Never heat the pan when adding egg mixture — it will scramble. Reserve pasta water.
+              </div>
+            ),
+          },
+        ]}
+      />
     </div>
   );
 }
@@ -238,12 +257,12 @@ const COMPONENT_CONFIGS: ComponentConfig[] = [
   {
     name: "Button",
     props: {
-      variant: { type: "select", options: ["primary", "secondary", "ghost", "danger"], default: "primary", label: "variant" },
-      size:    { type: "select", options: ["sm", "md", "lg"], default: "md", label: "size" },
+      variant:   { type: "select",  options: ["primary", "secondary", "ghost", "danger"], default: "primary", label: "variant" },
+      size:      { type: "select",  options: ["sm", "md", "lg"], default: "md", label: "size" },
       disabled:  { type: "boolean", default: false, label: "disabled" },
       loading:   { type: "boolean", default: false, label: "loading" },
-      fullWidth:  { type: "boolean", default: false, label: "fullWidth" },
-      children:  { type: "string",  default: "Click me", label: "children (text)" },
+      fullWidth: { type: "boolean", default: false, label: "fullWidth" },
+      children:  { type: "string",  default: "Click me", label: "children" },
     },
     render: (p) => (
       <Button variant={p.variant} size={p.size} disabled={p.disabled} loading={p.loading} fullWidth={p.fullWidth}>
@@ -252,14 +271,141 @@ const COMPONENT_CONFIGS: ComponentConfig[] = [
     ),
   },
   {
+    name: "Badge",
+    props: {
+      variant:  { type: "select",  options: ["default", "success", "warning", "error", "info"], default: "default", label: "variant" },
+      size:     { type: "select",  options: ["sm", "md", "lg"], default: "md", label: "size" },
+      dot:      { type: "boolean", default: false, label: "dot" },
+      children: { type: "string",  default: "New", label: "children" },
+    },
+    render: (p) => (
+      <Badge variant={p.variant} size={p.size} dot={p.dot}>
+        {String(p.children || "New")}
+      </Badge>
+    ),
+  },
+  {
+    name: "Card",
+    props: {
+      variant: { type: "select", options: ["default", "interactive", "outlined"], default: "default", label: "variant" },
+      padding: { type: "select", options: ["none", "sm", "md", "lg"], default: "md", label: "padding" },
+    },
+    render: (p) => (
+      <Card variant={p.variant} padding={p.padding} style={{ width: "100%", maxWidth: "280px" } as any}>
+        <CardHeader>Pasta Carbonara</CardHeader>
+        <CardBody>A rich Roman pasta with eggs, Pecorino, and guanciale — no cream needed.</CardBody>
+        <CardFooter>
+          <div style={{ display: "flex", gap: "6px" }}>
+            <Badge variant="success" size="sm">Published</Badge>
+            <Badge variant="info" size="sm">Italian</Badge>
+          </div>
+        </CardFooter>
+      </Card>
+    ),
+  },
+  {
+    name: "Select",
+    props: {
+      label:       { type: "string",  default: "Cuisine", label: "label" },
+      placeholder: { type: "string",  default: "Choose cuisine…", label: "placeholder" },
+      disabled:    { type: "boolean", default: false, label: "disabled" },
+      searchable:  { type: "boolean", default: false, label: "searchable" },
+    },
+    render: (p) => (
+      <SelectPropDemo
+        label={p.label}
+        placeholder={p.placeholder}
+        disabled={p.disabled}
+        searchable={p.searchable}
+      />
+    ),
+  },
+  {
+    name: "Slider",
+    props: {
+      defaultValue: { type: "number", default: 50,  label: "value",  min: 0,   max: 100 },
+      min:          { type: "number", default: 0,   label: "min" },
+      max:          { type: "number", default: 100, label: "max" },
+      step:         { type: "number", default: 1,   label: "step" },
+      size:         { type: "select", options: ["sm", "md", "lg"],                          default: "md",     label: "size" },
+      color:        { type: "select", options: ["primary", "success", "warning", "error"], default: "primary", label: "color" },
+      label:        { type: "string",  default: "Serving size", label: "label" },
+      showValue:    { type: "boolean", default: true,  label: "showValue" },
+      disabled:     { type: "boolean", default: false, label: "disabled" },
+    },
+    render: (p) => <SliderPropDemo {...p} />,
+  },
+  {
+    name: "Tabs",
+    props: {
+      variant:   { type: "select",  options: ["underline", "pills", "boxed"], default: "underline", label: "variant" },
+      size:      { type: "select",  options: ["sm", "md", "lg"],              default: "md",        label: "size" },
+      fullWidth: { type: "boolean", default: false, label: "fullWidth" },
+    },
+    render: (p) => <TabsPropDemo {...p} />,
+  },
+  {
+    name: "Toggle",
+    props: {
+      checked:     { type: "boolean", default: false,                    label: "checked" },
+      label:       { type: "string",  default: "Enable notifications",   label: "label" },
+      description: { type: "string",  default: "Get notified about updates", label: "description" },
+      disabled:    { type: "boolean", default: false,                    label: "disabled" },
+      toggleSize:  { type: "select",  options: ["sm", "md", "lg"],       default: "md", label: "toggleSize" },
+    },
+    render: (p, extra) => (
+      <Toggle
+        checked={extra?.toggleChecked ?? Boolean(p.checked)}
+        onChange={(e) => extra?.setToggleChecked(e.target.checked)}
+        label={p.label || undefined}
+        description={p.description || undefined}
+        disabled={p.disabled}
+        toggleSize={p.toggleSize}
+      />
+    ),
+  },
+  {
+    name: "Progress",
+    props: {
+      value:    { type: "number",  default: 65,        label: "value",     min: 0, max: 100 },
+      size:     { type: "select",  options: ["xs", "sm", "md", "lg"],                       default: "md",     label: "size" },
+      color:    { type: "select",  options: ["primary", "success", "warning", "error"],     default: "primary", label: "color" },
+      label:    { type: "string",  default: "Recipe completion", label: "label" },
+      showValue:{ type: "boolean", default: true,  label: "showValue" },
+      striped:  { type: "boolean", default: false, label: "striped" },
+      animated: { type: "boolean", default: false, label: "animated" },
+    },
+    render: (p) => (
+      <div style={{ width: "100%", maxWidth: "300px" }}>
+        <Progress
+          value={Number(p.value)}
+          size={p.size}
+          color={p.color}
+          label={p.label || undefined}
+          showValue={p.showValue}
+          striped={p.striped}
+          animated={p.animated}
+        />
+      </div>
+    ),
+  },
+  {
+    name: "Spinner",
+    props: {
+      size:  { type: "select", options: ["xs", "sm", "md", "lg", "xl"],   default: "md",     label: "size" },
+      color: { type: "select", options: ["primary", "white", "current"],  default: "primary", label: "color" },
+    },
+    render: (p) => <Spinner size={p.size} color={p.color} />,
+  },
+  {
     name: "Input",
     props: {
-      inputSize:  { type: "select", options: ["sm", "md", "lg"], default: "md", label: "inputSize" },
-      disabled:   { type: "boolean", default: false, label: "disabled" },
-      error:      { type: "string",  default: "", label: "error" },
-      label:      { type: "string",  default: "Email address", label: "label" },
-      placeholder:{ type: "string",  default: "Enter email…", label: "placeholder" },
-      helperText: { type: "string",  default: "", label: "helperText" },
+      inputSize:   { type: "select",  options: ["sm", "md", "lg"], default: "md", label: "inputSize" },
+      label:       { type: "string",  default: "Email address",   label: "label" },
+      placeholder: { type: "string",  default: "Enter email…",    label: "placeholder" },
+      helperText:  { type: "string",  default: "",                label: "helperText" },
+      error:       { type: "string",  default: "",                label: "error" },
+      disabled:    { type: "boolean", default: false,             label: "disabled" },
     },
     render: (p) => (
       <div style={{ width: "100%", maxWidth: "300px" }}>
@@ -276,106 +422,41 @@ const COMPONENT_CONFIGS: ComponentConfig[] = [
     ),
   },
   {
-    name: "Badge",
+    name: "Textarea",
     props: {
-      variant:  { type: "select", options: ["default", "success", "warning", "error", "info"], default: "default", label: "variant" },
-      size:     { type: "select", options: ["sm", "md", "lg"], default: "md", label: "size" },
-      dot:      { type: "boolean", default: false, label: "dot" },
-      children: { type: "string",  default: "New", label: "children (text)" },
+      inputSize:  { type: "select",  options: ["sm", "md", "lg"],                          default: "md",      label: "inputSize" },
+      label:      { type: "string",  default: "Recipe description",                        label: "label" },
+      placeholder:{ type: "string",  default: "Describe your recipe…",                    label: "placeholder" },
+      helperText: { type: "string",  default: "",                                          label: "helperText" },
+      maxLength:  { type: "number",  default: 0,                                           label: "maxLength (0=none)" },
+      showCount:  { type: "boolean", default: false,                                       label: "showCount" },
+      disabled:   { type: "boolean", default: false,                                       label: "disabled" },
+      resize:     { type: "select",  options: ["none", "vertical", "horizontal", "both"],  default: "vertical", label: "resize" },
     },
     render: (p) => (
-      <Badge variant={p.variant} size={p.size} dot={p.dot}>
-        {String(p.children || "New")}
-      </Badge>
-    ),
-  },
-  {
-    name: "Avatar",
-    props: {
-      size: { type: "select", options: ["xs", "sm", "md", "lg", "xl"], default: "md", label: "size" },
-      alt:  { type: "string",  default: "JD", label: "alt (initials)" },
-    },
-    render: (p) => <Avatar size={p.size} alt={String(p.alt || "JD")} />,
-  },
-  {
-    name: "Alert",
-    props: {
-      variant:     { type: "select", options: ["info", "success", "warning", "error"], default: "info", label: "variant" },
-      title:       { type: "string",  default: "Heads up!", label: "title" },
-      children:    { type: "string",  default: "This is an alert message.", label: "children (text)" },
-      dismissible: { type: "boolean", default: false, label: "dismissible" },
-    },
-    render: (p) => (
-      <div style={{ width: "100%" }}>
-        <Alert variant={p.variant} title={p.title || undefined} dismissible={p.dismissible}>
-          {String(p.children || "This is an alert message.")}
-        </Alert>
-      </div>
-    ),
-  },
-  {
-    name: "Toggle",
-    props: {
-      checked:     { type: "boolean", default: false, label: "checked" },
-      label:       { type: "string",  default: "Enable notifications", label: "label" },
-      description: { type: "string",  default: "Get notified about updates", label: "description" },
-      disabled:    { type: "boolean", default: false, label: "disabled" },
-      toggleSize:  { type: "select",  options: ["sm", "md", "lg"], default: "md", label: "toggleSize" },
-    },
-    render: (p, extra) => (
-      <Toggle
-        checked={extra?.toggleChecked ?? Boolean(p.checked)}
-        onChange={(e) => extra?.setToggleChecked(e.target.checked)}
-        label={p.label || undefined}
-        description={p.description || undefined}
+      <TextareaPropDemo
+        label={p.label}
+        placeholder={p.placeholder}
         disabled={p.disabled}
-        toggleSize={p.toggleSize}
+        inputSize={p.inputSize}
+        helperText={p.helperText}
+        maxLength={p.maxLength}
+        showCount={p.showCount}
+        resize={p.resize}
       />
     ),
   },
   {
-    name: "Divider",
+    name: "Tooltip",
     props: {
-      orientation: { type: "select", options: ["horizontal", "vertical"], default: "horizontal", label: "orientation" },
-      label:       { type: "string",  default: "", label: "label" },
+      content:  { type: "string", default: "This is a tooltip!", label: "content" },
+      position: { type: "select", options: ["top", "bottom", "left", "right"], default: "top", label: "position" },
     },
     render: (p) => (
-      <div style={{
-        width: "100%",
-        height: p.orientation === "vertical" ? "80px" : "auto",
-        display: "flex",
-        alignItems: "center",
-      }}>
-        <Divider orientation={p.orientation} label={p.label || undefined} />
-      </div>
+      <Tooltip content={String(p.content || "This is a tooltip!")} position={p.position}>
+        <Button variant="secondary">Hover me</Button>
+      </Tooltip>
     ),
-  },
-  {
-    name: "Skeleton",
-    props: {
-      variant: { type: "select", options: ["text", "circular", "rectangular"], default: "text", label: "variant" },
-      width:   { type: "string",  default: "100%", label: "width" },
-      height:  { type: "string",  default: "16px", label: "height" },
-      lines:   { type: "number",  default: 1, label: "lines" },
-    },
-    render: (p) => (
-      <div style={{ width: "100%" }}>
-        <Skeleton
-          variant={p.variant}
-          width={p.width || undefined}
-          height={p.height || undefined}
-          lines={Number(p.lines) || 1}
-        />
-      </div>
-    ),
-  },
-  {
-    name: "Spinner",
-    props: {
-      size:  { type: "select", options: ["xs", "sm", "md", "lg", "xl"], default: "md", label: "size" },
-      color: { type: "select", options: ["primary", "white", "current"], default: "primary", label: "color" },
-    },
-    render: (p) => <Spinner size={p.size} color={p.color} />,
   },
 ];
 
@@ -400,32 +481,11 @@ const SANDBOX_PRESETS: Record<string, string> = {
         loading={loading}
         onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 2000); }}
       >
-        {loading ? "Loading…" : "Simulate Load"}
+        {loading ? "Loading\u2026" : "Simulate Load"}
       </Button>
       <Button variant="secondary" onClick={() => setCount(c => c + 1)}>
         Clicked {count} {count === 1 ? "time" : "times"}
       </Button>
-    </div>
-  );
-}`,
-
-  Input: `function Demo() {
-  const [email, setEmail] = useState("");
-  const [touched, setTouched] = useState(false);
-  const isValid = email.includes("@") && email.includes(".");
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "320px" }}>
-      <Input
-        label="Email address"
-        placeholder="you@example.com"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        onBlur={() => setTouched(true)}
-        error={touched && !isValid && email.length > 0 ? "Please enter a valid email" : undefined}
-        helperText={isValid ? "✓ Looks good!" : "Enter your email address"}
-        fullWidth
-      />
-      <Input label="Disabled field" placeholder="Cannot edit this" disabled fullWidth />
     </div>
   );
 }`,
@@ -442,9 +502,9 @@ const SANDBOX_PRESETS: Record<string, string> = {
         <Badge variant="info">Info</Badge>
       </div>
       <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-        <Button variant="ghost" onClick={() => setCount(c => Math.max(0, c - 1))}>−</Button>
+        <Button variant="ghost" size="sm" onClick={() => setCount(c => Math.max(0, c - 1))}>\u2212</Button>
         <Badge variant="info" size="lg">{count} notifications</Badge>
-        <Button variant="ghost" onClick={() => setCount(c => c + 1)}>+</Button>
+        <Button variant="ghost" size="sm" onClick={() => setCount(c => c + 1)}>+</Button>
       </div>
       <div style={{ display: "flex", gap: "8px" }}>
         <Badge dot variant="success">Online</Badge>
@@ -455,48 +515,140 @@ const SANDBOX_PRESETS: Record<string, string> = {
   );
 }`,
 
-  Avatar: `function Demo() {
+  Card: `function Demo() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px", alignItems: "center" }}>
-      <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-        <Avatar size="xs" alt="XS" />
-        <Avatar size="sm" alt="SM" />
-        <Avatar size="md" alt="MD" />
-        <Avatar size="lg" alt="LG" />
-        <Avatar size="xl" alt="XL" />
-      </div>
-      <AvatarGroup max={3}>
-        <Avatar alt="Alice" />
-        <Avatar alt="Bob" />
-        <Avatar alt="Carol" />
-        <Avatar alt="Dave" />
-        <Avatar alt="Eve" />
-      </AvatarGroup>
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "320px" }}>
+      <Card variant="default">
+        <CardHeader>Pasta Carbonara</CardHeader>
+        <CardBody>A rich Roman pasta with eggs, Pecorino, and guanciale \u2014 no cream needed.</CardBody>
+        <CardFooter>
+          <div style={{ display: "flex", gap: "6px" }}>
+            <Badge variant="success" size="sm">Published</Badge>
+            <Badge variant="info" size="sm">Italian</Badge>
+          </div>
+        </CardFooter>
+      </Card>
+      <Card variant="outlined">
+        <CardHeader>Tonkotsu Ramen</CardHeader>
+        <CardBody>Rich pork broth simmered 12 hours for a creamy, deeply flavored base.</CardBody>
+      </Card>
     </div>
   );
 }`,
 
-  Alert: `function Demo() {
-  const [visible, setVisible] = useState(true);
+  Select: `function Demo() {
+  const [cuisine, setCuisine] = useState("");
+  const [difficulty, setDifficulty] = useState("medium");
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%" }}>
-      <Alert variant="info" title="Information">Your recipe has been saved as a draft.</Alert>
-      <Alert variant="success" title="Success">Recipe published successfully!</Alert>
-      <Alert variant="warning" title="Warning">Some ingredients may be out of stock.</Alert>
-      <Alert
-        variant="error"
-        title="Error"
-        dismissible
-        visible={visible}
-        onDismiss={() => setVisible(false)}
-      >
-        Failed to upload image. Please try again.
-      </Alert>
-      {!visible && (
-        <Button variant="secondary" onClick={() => setVisible(true)}>
-          Restore alert
-        </Button>
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "300px" }}>
+      <Select
+        label="Cuisine"
+        placeholder="Choose a cuisine\u2026"
+        value={cuisine}
+        onChange={setCuisine}
+        searchable
+        options={[
+          { value: "italian", label: "Italian" },
+          { value: "french", label: "French" },
+          { value: "japanese", label: "Japanese" },
+          { value: "mexican", label: "Mexican" },
+          { value: "thai", label: "Thai" },
+          { value: "indian", label: "Indian" },
+        ]}
+      />
+      <Select
+        label="Difficulty"
+        value={difficulty}
+        onChange={setDifficulty}
+        options={[
+          { value: "easy", label: "Easy" },
+          { value: "medium", label: "Medium" },
+          { value: "hard", label: "Hard" },
+          { value: "expert", label: "Expert", disabled: true },
+        ]}
+      />
+      {cuisine && (
+        <p style={{ fontSize: "13px", color: "var(--ck-text-muted)", margin: 0 }}>
+          Showing {cuisine} recipes \u00b7 {difficulty} difficulty
+        </p>
       )}
+    </div>
+  );
+}`,
+
+  Slider: `function Demo() {
+  const [servings, setServings] = useState(4);
+  const [temp, setTemp] = useState(180);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "28px", width: "100%", maxWidth: "340px" }}>
+      <Slider
+        label="Serving size"
+        value={servings}
+        onChange={setServings}
+        min={1} max={12} step={1}
+        showValue
+      />
+      <Slider
+        label="Oven temperature (\u00b0C)"
+        value={temp}
+        onChange={setTemp}
+        min={100} max={260} step={10}
+        showValue
+        color="warning"
+      />
+      <p style={{ fontSize: "13px", color: "var(--ck-text-muted)", margin: 0 }}>
+        Cooking for <strong style={{ color: "var(--ck-text)" }}>{servings}</strong> people
+        at <strong style={{ color: "var(--ck-text)" }}>{temp}\u00b0C</strong>
+      </p>
+    </div>
+  );
+}`,
+
+  Tabs: `function Demo() {
+  return (
+    <div style={{ width: "100%", maxWidth: "440px" }}>
+      <Tabs
+        variant="pills"
+        defaultTab="ingredients"
+        items={[
+          {
+            id: "ingredients",
+            label: "Ingredients",
+            content: (
+              <ul style={{ padding: "12px 0 12px 18px", fontSize: "14px", color: "var(--ck-text)", lineHeight: 1.8, margin: 0 }}>
+                <li>400g spaghetti</li>
+                <li>200g guanciale or pancetta</li>
+                <li>4 large eggs (2 whole + 2 yolks)</li>
+                <li>100g Pecorino Romano</li>
+                <li>Black pepper to taste</li>
+              </ul>
+            ),
+          },
+          {
+            id: "method",
+            label: "Method",
+            content: (
+              <p style={{ padding: "12px 0", fontSize: "14px", color: "var(--ck-text)", lineHeight: 1.7, margin: 0 }}>
+                Cook pasta al dente. Fry guanciale until crispy. Whisk eggs with cheese.
+                Drain pasta reserving water, toss with guanciale off heat, add egg mixture,
+                loosen with pasta water to achieve a silky sauce.
+              </p>
+            ),
+          },
+          {
+            id: "tips",
+            label: "Tips",
+            badge: "3",
+            content: (
+              <ol style={{ padding: "12px 0 12px 18px", fontSize: "14px", color: "var(--ck-text)", lineHeight: 1.8, margin: 0 }}>
+                <li>Never add cream \u2014 it\u2019s not traditional.</li>
+                <li>Remove pan from heat before adding eggs.</li>
+                <li>Reserve pasta water for the perfect consistency.</li>
+              </ol>
+            ),
+          },
+        ]}
+      />
     </div>
   );
 }`,
@@ -532,28 +684,18 @@ const SANDBOX_PRESETS: Record<string, string> = {
   );
 }`,
 
-  Skeleton: `function Demo() {
-  const [loaded, setLoaded] = useState(false);
+  Progress: `function Demo() {
+  const [value, setValue] = useState(65);
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%" }}>
-      <Button variant="secondary" onClick={() => setLoaded(l => !l)}>
-        {loaded ? "Show Skeleton" : "Show Content"}
-      </Button>
-      {loaded ? (
-        <Card>
-          <CardHeader><strong>Pasta al Pomodoro</strong></CardHeader>
-          <CardBody>A classic Italian pasta with fresh tomatoes and basil.</CardBody>
-          <CardFooter>
-            <Badge variant="success">Published</Badge>
-          </CardFooter>
-        </Card>
-      ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          <Skeleton variant="text" height="22px" width="55%" />
-          <Skeleton variant="text" lines={3} />
-          <Skeleton variant="rectangular" height="100px" />
-        </div>
-      )}
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px", width: "100%", maxWidth: "360px" }}>
+      <Progress value={value} label="Recipe completion" showValue />
+      <Progress value={80} color="success" label="Ingredients ready" showValue size="sm" />
+      <Progress value={40} color="warning" label="Steps completed" showValue animated striped />
+      <Progress value={95} color="error" label="Storage almost full" showValue size="xs" />
+      <div style={{ display: "flex", gap: "8px", justifyContent: "center" }}>
+        <Button variant="secondary" size="sm" onClick={() => setValue(v => Math.max(0, v - 10))}>-10%</Button>
+        <Button variant="primary"   size="sm" onClick={() => setValue(v => Math.min(100, v + 10))}>+10%</Button>
+      </div>
     </div>
   );
 }`,
@@ -568,363 +710,136 @@ const SANDBOX_PRESETS: Record<string, string> = {
         <Spinner size="lg" />
         <Spinner size="xl" />
       </div>
-      <Spinner size="lg" label="Loading recipes…" />
+      <Spinner size="lg" label="Loading recipes\u2026" />
+    </div>
+  );
+}`,
+
+  Input: `function Demo() {
+  const [email, setEmail] = useState("");
+  const [touched, setTouched] = useState(false);
+  const isValid = email.includes("@") && email.includes(".");
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "320px" }}>
+      <Input
+        label="Email address"
+        placeholder="you@example.com"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        onBlur={() => setTouched(true)}
+        error={touched && !isValid && email.length > 0 ? "Please enter a valid email" : undefined}
+        helperText={isValid ? "\u2713 Looks good!" : "Enter your email address"}
+        fullWidth
+      />
+      <Input label="Disabled field" placeholder="Cannot edit this" disabled fullWidth />
+    </div>
+  );
+}`,
+
+  Textarea: `function Demo() {
+  const [recipe, setRecipe] = useState("");
+  const limit = 200;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "340px" }}>
+      <Textarea
+        label="Recipe description"
+        placeholder="Describe your recipe\u2026"
+        value={recipe}
+        onChange={e => setRecipe(e.target.value)}
+        maxLength={limit}
+        showCount
+        error={recipe.length > limit ? "Description too long" : undefined}
+        rows={4}
+        fullWidth
+      />
+      <Textarea
+        label="Notes (auto-resize)"
+        placeholder="Jot down cooking notes\u2026"
+        autoResize
+        rows={3}
+        fullWidth
+      />
+    </div>
+  );
+}`,
+
+  Tooltip: `function Demo() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "32px", alignItems: "center", padding: "20px 0" }}>
+      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
+        <Tooltip content="Top tooltip" position="top">
+          <Button variant="secondary" size="sm">Top</Button>
+        </Tooltip>
+        <Tooltip content="Right tooltip" position="right">
+          <Button variant="secondary" size="sm">Right</Button>
+        </Tooltip>
+        <Tooltip content="Bottom tooltip" position="bottom">
+          <Button variant="secondary" size="sm">Bottom</Button>
+        </Tooltip>
+        <Tooltip content="Left tooltip" position="left">
+          <Button variant="secondary" size="sm">Left</Button>
+        </Tooltip>
+      </div>
+      <Tooltip content="Save your recipe changes" position="top">
+        <Button variant="primary">Save Recipe</Button>
+      </Tooltip>
     </div>
   );
 }`,
 };
 
-// ═══════════════════════════════════════════════════════════════════════
-// All Stories
-// ═══════════════════════════════════════════════════════════════════════
-
-const ALL_STORIES: ComponentStories[] = [
-  {
-    name: "Button",
-    stories: [
-      {
-        label: "Variants",
-        description: "Four visual variants for different emphasis levels.",
-        render: () => (
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="danger">Danger</Button>
-          </div>
-        ),
-      },
-      {
-        label: "Sizes",
-        description: "Three sizes: sm, md, and lg.",
-        render: () => (
-          <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-            <Button size="sm">Small</Button>
-            <Button size="md">Medium</Button>
-            <Button size="lg">Large</Button>
-          </div>
-        ),
-      },
-      {
-        label: "States",
-        description: "Normal, disabled, and interactive loading states.",
-        render: () => (
-          <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-            <Button variant="primary">Normal</Button>
-            <Button variant="primary" disabled>Disabled</Button>
-            <ButtonLoadingDemo />
-          </div>
-        ),
-      },
-      {
-        label: "Full Width",
-        description: "Button spanning the full container width.",
-        render: () => (
-          <div style={{ width: "100%" }}>
-            <Button variant="primary" fullWidth>Full Width Button</Button>
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    name: "Input",
-    stories: [
-      {
-        label: "Default",
-        description: "Basic input with label and placeholder.",
-        render: () => (
-          <div style={{ width: "100%", maxWidth: "280px" }}>
-            <Input label="Email address" placeholder="you@example.com" fullWidth />
-          </div>
-        ),
-      },
-      {
-        label: "With Error",
-        description: "Input with inline validation error.",
-        render: () => (
-          <div style={{ width: "100%", maxWidth: "280px" }}>
-            <Input
-              label="Email"
-              placeholder="Invalid email"
-              defaultValue="notanemail"
-              error="Please enter a valid email address"
-              fullWidth
-            />
-          </div>
-        ),
-      },
-      {
-        label: "Disabled",
-        description: "Input in a non-interactive disabled state.",
-        render: () => (
-          <div style={{ width: "100%", maxWidth: "280px" }}>
-            <Input label="Username" placeholder="Cannot edit" disabled fullWidth />
-          </div>
-        ),
-      },
-      {
-        label: "Sizes",
-        description: "sm, md, and lg input sizes.",
-        render: () => (
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%", maxWidth: "280px" }}>
-            <Input inputSize="sm" label="Small" placeholder="Small input" fullWidth />
-            <Input inputSize="md" label="Medium" placeholder="Medium input" fullWidth />
-            <Input inputSize="lg" label="Large" placeholder="Large input" fullWidth />
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    name: "Badge",
-    stories: [
-      {
-        label: "Variants",
-        description: "Five color variants for semantic meaning.",
-        render: () => (
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-            <Badge variant="default">Default</Badge>
-            <Badge variant="success">Success</Badge>
-            <Badge variant="warning">Warning</Badge>
-            <Badge variant="error">Error</Badge>
-            <Badge variant="info">Info</Badge>
-          </div>
-        ),
-      },
-      {
-        label: "Sizes",
-        description: "Small, medium, and large sizes.",
-        render: () => (
-          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-            <Badge size="sm">Small</Badge>
-            <Badge size="md">Medium</Badge>
-            <Badge size="lg">Large</Badge>
-          </div>
-        ),
-      },
-      {
-        label: "With Dot",
-        description: "Status dot indicator variants.",
-        render: () => (
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-            <Badge dot variant="success">Online</Badge>
-            <Badge dot variant="warning">Away</Badge>
-            <Badge dot variant="error">Offline</Badge>
-            <Badge dot variant="info">Busy</Badge>
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    name: "Avatar",
-    stories: [
-      {
-        label: "Sizes",
-        description: "Five sizes from xs to xl.",
-        render: () => (
-          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-            <Avatar size="xs" alt="XS" />
-            <Avatar size="sm" alt="SM" />
-            <Avatar size="md" alt="MD" />
-            <Avatar size="lg" alt="LG" />
-            <Avatar size="xl" alt="XL" />
-          </div>
-        ),
-      },
-      {
-        label: "Groups",
-        description: "Overlapping avatar groups with overflow count.",
-        render: () => (
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <AvatarGroup max={3}>
-              <Avatar alt="Alice" />
-              <Avatar alt="Bob" />
-              <Avatar alt="Carol" />
-              <Avatar alt="Dave" />
-              <Avatar alt="Eve" />
-            </AvatarGroup>
-            <AvatarGroup max={4}>
-              <Avatar alt="Alice" />
-              <Avatar alt="Bob" />
-              <Avatar alt="Carol" />
-              <Avatar alt="Dave" />
-              <Avatar alt="Eve" />
-            </AvatarGroup>
-          </div>
-        ),
-      },
-      {
-        label: "Initials",
-        description: "Avatars generated from name initials.",
-        render: () => (
-          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-            <Avatar alt="John Doe" />
-            <Avatar alt="Alice Smith" />
-            <Avatar alt="Bob Jones" />
-            <Avatar alt="Carol White" />
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    name: "Alert",
-    stories: [
-      {
-        label: "Variants",
-        description: "All four alert variants with dismiss interaction.",
-        render: () => <AlertDismissDemo />,
-      },
-    ],
-  },
-  {
-    name: "Toggle",
-    stories: [
-      {
-        label: "Sizes",
-        description: "sm, md, and lg toggle sizes.",
-        render: () => (
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            <ToggleSizeDemo size="sm" />
-            <ToggleSizeDemo size="md" />
-            <ToggleSizeDemo size="lg" />
-          </div>
-        ),
-      },
-      {
-        label: "With Description",
-        description: "Toggles with descriptive helper text.",
-        render: () => <ToggleDescriptionDemo />,
-      },
-      {
-        label: "Disabled",
-        description: "Toggles in a non-interactive disabled state.",
-        render: () => (
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            <Toggle label="Disabled off" description="This toggle is off and locked" disabled />
-            <Toggle label="Disabled on" description="This toggle is on and locked" checked disabled />
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    name: "Skeleton",
-    stories: [
-      {
-        label: "Text",
-        description: "Text skeleton lines for content placeholders.",
-        render: () => (
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px", width: "100%" }}>
-            <Skeleton variant="text" width="70%" height="20px" />
-            <Skeleton variant="text" lines={3} />
-          </div>
-        ),
-      },
-      {
-        label: "Card Skeleton",
-        description: "Pre-built card-shaped loading placeholder.",
-        render: () => (
-          <div style={{ width: "100%" }}>
-            <SkeletonCard />
-          </div>
-        ),
-      },
-      {
-        label: "Avatar Skeleton",
-        description: "Circular skeletons for avatar placeholders.",
-        render: () => (
-          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-            <Skeleton variant="circular" width="32px" height="32px" />
-            <Skeleton variant="circular" width="40px" height="40px" />
-            <Skeleton variant="circular" width="48px" height="48px" />
-            <Skeleton variant="circular" width="64px" height="64px" />
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    name: "Spinner",
-    stories: [
-      {
-        label: "Sizes",
-        description: "Five spinner sizes from xs to xl.",
-        render: () => (
-          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-            <Spinner size="xs" />
-            <Spinner size="sm" />
-            <Spinner size="md" />
-            <Spinner size="lg" />
-            <Spinner size="xl" />
-          </div>
-        ),
-      },
-      {
-        label: "Colors",
-        description: "Primary, white (on dark), and current color.",
-        render: () => (
-          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-            <Spinner size="lg" color="primary" />
-            <div style={{ background: "#18181b", borderRadius: "8px", padding: "10px" }}>
-              <Spinner size="lg" color="white" />
-            </div>
-            <Spinner size="lg" color="current" />
-          </div>
-        ),
-      },
-      {
-        label: "With Label",
-        description: "Spinners with an accessible visible label.",
-        render: () => (
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" }}>
-            <Spinner size="lg" label="Loading recipes…" />
-            <Spinner size="md" label="Saving changes…" />
-          </div>
-        ),
-      },
-    ],
-  },
+// Scope keys and values for the sandbox new Function executor
+const SANDBOX_SCOPE_KEYS = [
+  "React", "useState", "useEffect", "useRef", "useCallback",
+  "Button", "Input", "Card", "CardHeader", "CardBody", "CardFooter",
+  "Badge", "Toggle", "Tooltip", "Select", "Tabs", "Textarea",
+  "Slider", "Progress", "Spinner",
 ];
 
+function buildScope() {
+  return {
+    React, useState, useEffect, useRef, useCallback,
+    Button, Input, Card, CardHeader, CardBody, CardFooter,
+    Badge, Toggle, Tooltip, Select, Tabs, Textarea,
+    Slider, Progress, Spinner,
+  };
+}
+
 // ═══════════════════════════════════════════════════════════════════════
-// PropControl
+// PropControl — individual prop editing widget
 // ═══════════════════════════════════════════════════════════════════════
 
-function PropControl({
-  def,
-  value,
-  onChange,
-}: {
+function PropControl({ def, value, onChange }: {
   def: PropDef;
   value: any;
   onChange: (v: any) => void;
 }) {
+  const labelStyle: React.CSSProperties = {
+    fontSize: "10px",
+    fontWeight: 700,
+    letterSpacing: "0.07em",
+    textTransform: "uppercase",
+    color: "var(--ck-text-muted)",
+    marginBottom: "5px",
+    display: "block",
+  };
+
   const inputBase: React.CSSProperties = {
     width: "100%",
     padding: "6px 10px",
     background: "var(--ck-bg)",
     color: "var(--ck-text)",
     border: "1px solid var(--ck-border)",
-    borderRadius: "6px",
+    borderRadius: "7px",
     fontSize: "13px",
     outline: "none",
     boxSizing: "border-box",
+    fontFamily: "inherit",
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-      <label style={{
-        fontSize: "10px",
-        fontWeight: 600,
-        color: "var(--ck-text-muted)",
-        textTransform: "uppercase",
-        letterSpacing: "0.06em",
-      }}>
-        {def.label}
-      </label>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <span style={labelStyle}>{def.label}</span>
 
       {def.type === "select" && (
         <select
@@ -939,17 +854,47 @@ function PropControl({
       )}
 
       {def.type === "boolean" && (
-        <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
-          <input
-            type="checkbox"
-            checked={Boolean(value)}
-            onChange={(e) => onChange(e.target.checked)}
-            style={{ width: "15px", height: "15px", cursor: "pointer", accentColor: "var(--ck-primary)" }}
-          />
-          <span style={{ fontSize: "12px", color: "var(--ck-text)" }}>
+        <button
+          role="switch"
+          aria-checked={Boolean(value)}
+          onClick={() => onChange(!Boolean(value))}
+          style={{
+            display: "inline-flex",
+            alignSelf: "flex-start",
+            alignItems: "center",
+            gap: "8px",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+          }}
+        >
+          <span style={{
+            display: "inline-flex",
+            width: "34px",
+            height: "19px",
+            borderRadius: "9999px",
+            background: Boolean(value) ? "var(--ck-primary)" : "var(--ck-border)",
+            position: "relative",
+            transition: "background 0.18s",
+            flexShrink: 0,
+          }}>
+            <span style={{
+              position: "absolute",
+              top: "2px",
+              left: Boolean(value) ? "17px" : "2px",
+              width: "15px",
+              height: "15px",
+              borderRadius: "50%",
+              background: "#fff",
+              transition: "left 0.18s",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.25)",
+            }} />
+          </span>
+          <span style={{ fontSize: "12px", color: Boolean(value) ? "var(--ck-text)" : "var(--ck-text-muted)" }}>
             {Boolean(value) ? "true" : "false"}
           </span>
-        </label>
+        </button>
       )}
 
       {def.type === "string" && (
@@ -962,12 +907,30 @@ function PropControl({
       )}
 
       {def.type === "number" && (
-        <input
-          type="number"
-          value={Number(value)}
-          onChange={(e) => onChange(Number(e.target.value))}
-          style={inputBase}
-        />
+        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <input
+              type="range"
+              min={def.min ?? 0}
+              max={def.max ?? 100}
+              step={def.step ?? 1}
+              value={Number(value)}
+              onChange={(e) => onChange(Number(e.target.value))}
+              style={{
+                flex: 1,
+                marginRight: "10px",
+                accentColor: "var(--ck-primary)",
+                cursor: "pointer",
+              }}
+            />
+            <input
+              type="number"
+              value={Number(value)}
+              onChange={(e) => onChange(Number(e.target.value))}
+              style={{ ...inputBase, width: "56px", textAlign: "center", padding: "4px 6px" }}
+            />
+          </div>
+        </div>
       )}
     </div>
   );
@@ -1013,7 +976,6 @@ function PropEditor() {
     setToggleChecked(false);
   };
 
-  // Sync toggle interactive state with the `checked` prop control
   useEffect(() => {
     if (config.name === "Toggle") {
       setToggleChecked(Boolean(currentProps.checked));
@@ -1021,74 +983,86 @@ function PropEditor() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentProps.checked, config.name]);
 
-  // Reset extra state when component changes
-  useEffect(() => {
-    setToggleChecked(false);
-  }, [selectedIdx]);
+  useEffect(() => { setToggleChecked(false); }, [selectedIdx]);
 
   const extra: ExtraState = { toggleChecked, setToggleChecked };
 
-  const panelStyle: React.CSSProperties = {
-    background: "var(--ck-surface)",
-    border: "1px solid var(--ck-border)",
-    borderRadius: "16px",
-    overflow: "hidden",
-  };
-
-  const panelHeaderStyle: React.CSSProperties = {
-    padding: "10px 16px",
-    borderBottom: "1px solid var(--ck-border)",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  };
-
-  const sectionLabelStyle: React.CSSProperties = {
-    fontSize: "10px",
-    fontWeight: 700,
-    color: "var(--ck-text-muted)",
-    textTransform: "uppercase",
-    letterSpacing: "0.07em",
-  };
-
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {/* ── Left: controls ── */}
-      <div style={{ ...panelStyle, display: "flex", flexDirection: "column" }}>
-        <div style={panelHeaderStyle}>
-          <span style={sectionLabelStyle}>Component</span>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "20px" }}
+         className="max-md:!grid-cols-1">
+      {/* ── Left: component selector + props ── */}
+      <div style={{
+        background: "var(--ck-surface)",
+        border: "1px solid var(--ck-border)",
+        borderRadius: "16px",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+      }}>
+        {/* Panel header */}
+        <div style={{
+          padding: "11px 16px",
+          borderBottom: "1px solid var(--ck-border)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
+          <span style={{
+            fontSize: "10px", fontWeight: 700, letterSpacing: "0.07em",
+            textTransform: "uppercase", color: "var(--ck-text-muted)",
+          }}>
+            Component
+          </span>
           <button
             onClick={resetProps}
             style={{
               display: "flex", alignItems: "center", gap: "4px",
               fontSize: "11px", color: "var(--ck-text-muted)",
               background: "none", border: "none", cursor: "pointer",
-              padding: "2px 6px", borderRadius: "4px",
+              padding: "3px 7px", borderRadius: "5px",
+              fontFamily: "inherit",
             }}
           >
-            <RefreshCcw size={11} /> Reset
+            <RefreshCcw size={10} />
+            Reset
           </button>
         </div>
 
-        <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "14px", overflowY: "auto" }}>
-          {/* Component picker */}
-          <select
-            value={selectedIdx}
-            onChange={(e) => setSelectedIdx(Number(e.target.value))}
-            style={{
-              width: "100%", padding: "8px 12px",
-              background: "var(--ck-bg)", color: "var(--ck-text)",
-              border: "1px solid var(--ck-border)", borderRadius: "8px",
-              fontSize: "14px", cursor: "pointer", outline: "none",
-            }}
-          >
+        <div style={{ padding: "14px 16px", overflowY: "auto", display: "flex", flexDirection: "column", gap: "16px" }}>
+          {/* Component pill grid */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
             {COMPONENT_CONFIGS.map((c, i) => (
-              <option key={c.name} value={i}>{c.name}</option>
+              <button
+                key={c.name}
+                onClick={() => setSelectedIdx(i)}
+                style={{
+                  padding: "4px 11px",
+                  borderRadius: "6px",
+                  border: `1px solid ${i === selectedIdx ? "var(--ck-primary)" : "var(--ck-border)"}`,
+                  background: i === selectedIdx ? "var(--ck-primary)" : "transparent",
+                  color: i === selectedIdx ? "#fff" : "var(--ck-text-muted)",
+                  fontSize: "12px",
+                  fontWeight: i === selectedIdx ? 600 : 400,
+                  cursor: "pointer",
+                  transition: "all 0.15s",
+                  fontFamily: "inherit",
+                }}
+              >
+                {c.name}
+              </button>
             ))}
-          </select>
+          </div>
+
+          {/* Divider */}
+          <div style={{ height: "1px", background: "var(--ck-border)", margin: "0 -2px" }} />
+
+          {/* Props section header */}
+          <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--ck-text-muted)" }}>
+            Props
+          </span>
 
           {/* Prop controls */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {Object.entries(config.props).map(([key, def]) => (
               <PropControl
                 key={key}
@@ -1102,45 +1076,77 @@ function PropEditor() {
       </div>
 
       {/* ── Right: preview + code ── */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         {/* Preview panel */}
-        <div style={panelStyle}>
-          <div style={panelHeaderStyle}>
-            <span style={sectionLabelStyle}>Preview</span>
+        <div style={{
+          background: "var(--ck-surface)",
+          border: "1px solid var(--ck-border)",
+          borderRadius: "16px",
+          overflow: "hidden",
+          flex: 1,
+        }}>
+          <div style={{
+            padding: "11px 16px",
+            borderBottom: "1px solid var(--ck-border)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
+            <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--ck-text-muted)" }}>
+              Preview
+            </span>
             <Badge variant="info" size="sm">{config.name}</Badge>
           </div>
-          <div style={{
-            padding: "32px 24px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "120px",
-          }}>
+          <div
+            className="dot-grid-pattern"
+            style={{
+              padding: "40px 28px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "140px",
+            }}
+          >
             <ErrorBoundary resetKey={JSON.stringify(currentProps)}>
               {config.render(currentProps, extra)}
             </ErrorBoundary>
           </div>
         </div>
 
-        {/* Code snippet panel */}
-        <div style={panelStyle}>
-          <div style={panelHeaderStyle}>
-            <span style={sectionLabelStyle}>Code</span>
+        {/* Code panel */}
+        <div style={{
+          background: "var(--ck-surface)",
+          border: "1px solid var(--ck-border)",
+          borderRadius: "16px",
+          overflow: "hidden",
+        }}>
+          <div style={{
+            padding: "11px 16px",
+            borderBottom: "1px solid var(--ck-border)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
+            <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--ck-text-muted)" }}>
+              Code
+            </span>
             <button
               onClick={() => copy(code)}
               style={{
-                display: "flex", alignItems: "center", gap: "4px",
+                display: "flex", alignItems: "center", gap: "5px",
                 fontSize: "11px",
                 color: copied ? "var(--ck-primary)" : "var(--ck-text-muted)",
                 background: "none", border: "none", cursor: "pointer",
-                padding: "2px 8px", borderRadius: "4px",
+                padding: "3px 7px", borderRadius: "5px",
+                fontFamily: "inherit",
+                transition: "color 0.15s",
               }}
             >
               {copied ? <Check size={12} /> : <Copy size={12} />}
               {copied ? "Copied!" : "Copy"}
             </button>
           </div>
-          <Highlight theme={themes.vsDark} code={code} language="jsx">
+          <Highlight theme={themes.nightOwl} code={code} language="jsx">
             {({ style, tokens, getLineProps, getTokenProps }) => (
               <pre style={{
                 ...style,
@@ -1148,8 +1154,9 @@ function PropEditor() {
                 padding: "16px",
                 borderRadius: 0,
                 fontSize: "12px",
-                lineHeight: 1.65,
+                lineHeight: 1.7,
                 overflowX: "auto",
+                border: "none",
               }}>
                 {tokens.map((line, i) => (
                   <div key={i} {...getLineProps({ line })}>
@@ -1171,24 +1178,6 @@ function PropEditor() {
 // CodeSandbox (Mode 2)
 // ═══════════════════════════════════════════════════════════════════════
 
-const SANDBOX_SCOPE_KEYS = [
-  "React", "useState", "useEffect", "useRef", "useCallback",
-  "Button", "Input", "Card", "CardHeader", "CardBody", "CardFooter",
-  "Badge", "Avatar", "AvatarGroup", "Toggle", "Alert", "Divider",
-  "Skeleton", "SkeletonCard", "Tooltip", "Select", "Tabs", "Accordion",
-  "Textarea", "Slider", "Progress", "Spinner", "Modal",
-];
-
-function buildScope() {
-  return {
-    React, useState, useEffect, useRef, useCallback,
-    Button, Input, Card, CardHeader, CardBody, CardFooter,
-    Badge, Avatar, AvatarGroup, Toggle, Alert, Divider,
-    Skeleton, SkeletonCard, Tooltip, Select, Tabs, Accordion,
-    Textarea, Slider, Progress, Spinner, Modal,
-  };
-}
-
 function CodeSandbox() {
   const presetNames = Object.keys(SANDBOX_PRESETS);
   const [selectedComp, setSelectedComp] = useState(presetNames[0]);
@@ -1204,7 +1193,6 @@ function CodeSandbox() {
   const resetCountRef = useRef(0);
   const [resetKey, setResetKey] = useState(0);
 
-  // Lazy-load Babel once
   useEffect(() => {
     setBabelLoading(true);
     import("@babel/standalone")
@@ -1227,7 +1215,6 @@ function CodeSandbox() {
         presets: ["react"],
         filename: "demo.jsx",
       }).code;
-
       const scope = buildScope();
       // eslint-disable-next-line no-new-func
       const factory = new Function(
@@ -1249,11 +1236,11 @@ function CodeSandbox() {
     }
   }, []);
 
-  // Debounced execution when code / babel-ready changes
+  // Auto-run on code change (debounced)
   useEffect(() => {
     if (!babelReady) return;
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => executeCode(code), 500);
+    debounceRef.current = setTimeout(() => executeCode(code), 600);
     return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
   }, [code, babelReady, executeCode]);
 
@@ -1263,35 +1250,46 @@ function CodeSandbox() {
     }
   };
 
-  const handleCompChange = (name: string) => {
+  const handlePresetChange = (name: string) => {
     setSelectedComp(name);
     setCode(SANDBOX_PRESETS[name]);
   };
 
   const lineCount = code.split("\n").length;
 
-  const editorSelectStyle: React.CSSProperties = {
-    padding: "7px 12px",
-    background: "var(--ck-bg)",
-    color: "var(--ck-text)",
-    border: "1px solid var(--ck-border)",
-    borderRadius: "8px",
-    fontSize: "13px",
-    cursor: "pointer",
-    outline: "none",
-    flex: 1,
-  };
+  const NIGHT_OWL_BG = "#011627";
+  const NIGHT_OWL_TEXT = "#d6deeb";
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}
+         className="max-md:!grid-cols-1">
       {/* ── Left: editor ── */}
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         {/* Toolbar */}
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+        <div style={{
+          display: "flex",
+          gap: "8px",
+          alignItems: "center",
+          background: "var(--ck-surface)",
+          border: "1px solid var(--ck-border)",
+          borderRadius: "12px",
+          padding: "8px 12px",
+        }}>
           <select
             value={selectedComp}
-            onChange={(e) => handleCompChange(e.target.value)}
-            style={editorSelectStyle}
+            onChange={(e) => handlePresetChange(e.target.value)}
+            style={{
+              flex: 1,
+              padding: "5px 8px",
+              background: "var(--ck-bg)",
+              color: "var(--ck-text)",
+              border: "1px solid var(--ck-border)",
+              borderRadius: "7px",
+              fontSize: "13px",
+              cursor: "pointer",
+              outline: "none",
+              fontFamily: "inherit",
+            }}
           >
             {presetNames.map((name) => (
               <option key={name} value={name}>{name}</option>
@@ -1302,50 +1300,69 @@ function CodeSandbox() {
             title="Reset to preset"
             style={{
               display: "flex", alignItems: "center", gap: "4px",
-              padding: "7px 12px",
-              background: "var(--ck-surface)", color: "var(--ck-text-muted)",
-              border: "1px solid var(--ck-border)", borderRadius: "8px",
+              padding: "5px 10px",
+              background: "var(--ck-bg)", color: "var(--ck-text-muted)",
+              border: "1px solid var(--ck-border)", borderRadius: "7px",
               fontSize: "12px", cursor: "pointer", whiteSpace: "nowrap",
+              fontFamily: "inherit",
             }}
           >
-            <RefreshCcw size={12} /> Reset
+            <RefreshCcw size={11} />
+          </button>
+          <button
+            onClick={() => babelReady && executeCode(code)}
+            disabled={!babelReady}
+            style={{
+              display: "flex", alignItems: "center", gap: "5px",
+              padding: "5px 13px",
+              background: babelReady ? "var(--ck-primary)" : "var(--ck-border)",
+              color: babelReady ? "#fff" : "var(--ck-text-muted)",
+              border: "none", borderRadius: "7px",
+              fontSize: "12px", fontWeight: 600, cursor: babelReady ? "pointer" : "default",
+              whiteSpace: "nowrap",
+              fontFamily: "inherit",
+              transition: "background 0.15s",
+            }}
+          >
+            <Play size={11} />
+            Run
           </button>
         </div>
 
         {/* Editor box */}
         <div style={{
-          background: "#1e1e2e",
-          border: "1px solid var(--ck-border)",
-          borderRadius: "12px",
+          background: NIGHT_OWL_BG,
+          border: "1px solid rgba(255,255,255,0.07)",
+          borderRadius: "14px",
           overflow: "hidden",
+          flex: 1,
         }}>
-          {/* Fake window chrome */}
+          {/* macOS window chrome */}
           <div style={{
-            padding: "8px 14px",
+            padding: "9px 14px",
             borderBottom: "1px solid rgba(255,255,255,0.06)",
             display: "flex", alignItems: "center", gap: "6px",
+            background: "rgba(0,0,0,0.2)",
           }}>
             <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57", display: "inline-block" }} />
             <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#febc2e", display: "inline-block" }} />
             <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28c840", display: "inline-block" }} />
-            <span style={{ marginLeft: 8, fontSize: "11px", color: "rgba(205,214,244,0.4)", fontFamily: "monospace" }}>
+            <span style={{ marginLeft: 8, fontSize: "11px", color: "rgba(214,222,235,0.35)", fontFamily: "var(--font-mono), monospace" }}>
               demo.jsx
             </span>
           </div>
 
           {/* Line numbers + textarea */}
-          <div style={{ display: "flex", maxHeight: "420px", overflow: "hidden" }}>
-            {/* Line numbers */}
+          <div style={{ display: "flex", maxHeight: "480px", overflow: "hidden" }}>
             <div
               ref={lineNumRef}
               aria-hidden="true"
               style={{
-                padding: "14px 10px 14px 12px",
-                background: "transparent",
-                color: "rgba(205,214,244,0.25)",
+                padding: "14px 10px 14px 14px",
+                color: "rgba(99,119,119,0.6)",
                 fontSize: "13px",
                 lineHeight: "1.6",
-                fontFamily: "monospace",
+                fontFamily: "var(--font-mono), monospace",
                 overflowY: "hidden",
                 userSelect: "none",
                 textAlign: "right",
@@ -1359,7 +1376,6 @@ function CodeSandbox() {
               ))}
             </div>
 
-            {/* Textarea */}
             <textarea
               ref={textareaRef}
               value={code}
@@ -1370,27 +1386,27 @@ function CodeSandbox() {
               autoCorrect="off"
               style={{
                 flex: 1,
-                padding: "14px 14px 14px 4px",
+                padding: "14px 16px 14px 4px",
                 background: "transparent",
-                color: "#cdd6f4",
+                color: NIGHT_OWL_TEXT,
                 border: "none",
                 outline: "none",
-                fontFamily: "monospace",
+                fontFamily: "var(--font-mono), monospace",
                 fontSize: "13px",
                 lineHeight: "1.6",
                 resize: "none",
-                height: "420px",
+                height: "480px",
                 overflowY: "auto",
                 tabSize: 2,
-                caretColor: "#cdd6f4",
+                caretColor: NIGHT_OWL_TEXT,
                 boxSizing: "border-box",
               }}
             />
           </div>
         </div>
 
-        <p style={{ fontSize: "11px", color: "var(--ck-text-muted)", margin: 0 }}>
-          Define <code style={{ fontSize: "11px", fontFamily: "monospace" }}>function Demo()</code> returning JSX.
+        <p style={{ fontSize: "11px", color: "var(--ck-text-muted)", margin: 0, lineHeight: 1.5 }}>
+          Define <code style={{ fontFamily: "var(--font-mono), monospace", background: "var(--ck-surface)", padding: "1px 5px", borderRadius: "4px", border: "1px solid var(--ck-border)" }}>function Demo()</code> returning JSX.
           All @cookest/ui components and React hooks are in scope.
         </p>
       </div>
@@ -1400,18 +1416,20 @@ function CodeSandbox() {
         <div style={{
           background: "var(--ck-surface)",
           border: "1px solid var(--ck-border)",
-          borderRadius: "16px",
+          borderRadius: "14px",
           overflow: "hidden",
           flex: 1,
+          display: "flex",
+          flexDirection: "column",
         }}>
           <div style={{
-            padding: "10px 16px",
+            padding: "11px 16px",
             borderBottom: "1px solid var(--ck-border)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
           }}>
-            <span style={{ fontSize: "10px", fontWeight: 700, color: "var(--ck-text-muted)", textTransform: "uppercase", letterSpacing: "0.07em" }}>
+            <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "var(--ck-text-muted)" }}>
               Live Preview
             </span>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -1420,20 +1438,23 @@ function CodeSandbox() {
             </div>
           </div>
 
-          <div style={{ padding: "24px", minHeight: "220px" }}>
+          <div
+            className="dot-grid-pattern"
+            style={{ padding: "32px 24px", minHeight: "260px", flex: 1 }}
+          >
             {babelLoading ? (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", padding: "40px 0" }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", padding: "50px 0" }}>
                 <Spinner size="lg" />
-                <span style={{ fontSize: "13px", color: "var(--ck-text-muted)" }}>Loading Babel…</span>
+                <span style={{ fontSize: "13px", color: "var(--ck-text-muted)" }}>Loading Babel\u2026</span>
               </div>
             ) : error ? (
               <div style={{
-                padding: "12px 14px",
-                background: "rgba(239,68,68,0.08)",
-                border: "1px solid rgba(239,68,68,0.3)",
-                borderRadius: "8px",
-                color: "#ef4444",
-                fontFamily: "monospace",
+                padding: "14px 16px",
+                background: "rgba(239,68,68,0.07)",
+                border: "1px solid rgba(239,68,68,0.2)",
+                borderRadius: "10px",
+                color: "#f87171",
+                fontFamily: "var(--font-mono), monospace",
                 fontSize: "12px",
                 lineHeight: 1.6,
                 whiteSpace: "pre-wrap",
@@ -1447,8 +1468,8 @@ function CodeSandbox() {
                 <DemoComp />
               </ErrorBoundary>
             ) : (
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "120px" }}>
-                <span style={{ fontSize: "13px", color: "var(--ck-text-muted)" }}>Waiting for code…</span>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "140px" }}>
+                <span style={{ fontSize: "13px", color: "var(--ck-text-muted)" }}>Waiting for code\u2026</span>
               </div>
             )}
           </div>
@@ -1459,152 +1480,109 @@ function CodeSandbox() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// StoriesView (Mode 3)
-// ═══════════════════════════════════════════════════════════════════════
-
-function StoriesView() {
-  const [selectedIdx, setSelectedIdx] = useState(0);
-  const compStories = ALL_STORIES[selectedIdx];
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      {/* Component tab row */}
-      <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-        {ALL_STORIES.map((cs, i) => (
-          <button
-            key={cs.name}
-            onClick={() => setSelectedIdx(i)}
-            style={{
-              padding: "6px 14px",
-              borderRadius: "8px",
-              border: `1px solid ${i === selectedIdx ? "var(--ck-primary)" : "var(--ck-border)"}`,
-              fontSize: "13px",
-              fontWeight: 500,
-              cursor: "pointer",
-              transition: "all 0.15s",
-              background: i === selectedIdx ? "var(--ck-primary)" : "var(--ck-surface)",
-              color: i === selectedIdx ? "white" : "var(--ck-text)",
-            }}
-          >
-            {cs.name}
-          </button>
-        ))}
-      </div>
-
-      {/* Story cards */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-        gap: "14px",
-      }}>
-        {compStories.stories.map((story) => (
-          <div
-            key={story.label}
-            style={{
-              background: "var(--ck-surface)",
-              border: "1px solid var(--ck-border)",
-              borderRadius: "16px",
-              overflow: "hidden",
-            }}
-          >
-            <div style={{
-              padding: "12px 16px",
-              borderBottom: "1px solid var(--ck-border)",
-            }}>
-              <div style={{ fontWeight: 600, fontSize: "14px", color: "var(--ck-heading)", marginBottom: "2px" }}>
-                {story.label}
-              </div>
-              <div style={{ fontSize: "12px", color: "var(--ck-text-muted)", lineHeight: 1.4 }}>
-                {story.description}
-              </div>
-            </div>
-            <div style={{
-              padding: "20px 16px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-              <ErrorBoundary>
-                {story.render()}
-              </ErrorBoundary>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════
 // PlaygroundPage (default export)
 // ═══════════════════════════════════════════════════════════════════════
 
 const MODES: { id: PlaygroundMode; label: string; icon: ReactNode }[] = [
-  { id: "props",   label: "Prop Editor",   icon: <Settings2 size={14} /> },
-  { id: "sandbox", label: "Code Sandbox",  icon: <Code2 size={14} /> },
-  { id: "stories", label: "Stories",       icon: <Layers size={14} /> },
+  { id: "props",   label: "Prop Editor",  icon: <Settings2 size={14} /> },
+  { id: "sandbox", label: "Code Sandbox", icon: <Code2 size={14} /> },
 ];
 
 export default function PlaygroundPage() {
   const [mode, setMode] = useState<PlaygroundMode>("props");
 
   return (
-    <div style={{ padding: "32px 24px", maxWidth: "1200px", margin: "0 auto" }}>
-      {/* Header */}
-      <div style={{ marginBottom: "28px" }}>
-        <h1 style={{
-          fontSize: "30px",
-          fontWeight: 800,
-          color: "var(--ck-heading)",
-          margin: "0 0 8px",
-          letterSpacing: "-0.02em",
-        }}>
-          🧪 Component Playground
-        </h1>
-        <p style={{ color: "var(--ck-text-muted)", fontSize: "15px", margin: 0 }}>
-          Explore, customize, and test components interactively
-        </p>
-      </div>
+    <>
+      <Grain />
 
-      {/* Mode tabs */}
+      {/* Full-page dot-grid canvas */}
       <div style={{
-        display: "inline-flex",
-        gap: "3px",
-        background: "var(--ck-surface)",
-        border: "1px solid var(--ck-border)",
-        borderRadius: "12px",
-        padding: "4px",
-        marginBottom: "24px",
+        minHeight: "100vh",
+        padding: "40px 28px 64px",
       }}>
-        {MODES.map((m) => (
-          <button
-            key={m.id}
-            onClick={() => setMode(m.id)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              padding: "7px 16px",
-              borderRadius: "8px",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "13px",
-              fontWeight: 500,
-              transition: "background 0.15s, color 0.15s",
-              background: mode === m.id ? "var(--ck-primary)" : "transparent",
-              color: mode === m.id ? "white" : "var(--ck-text-muted)",
-            }}
-          >
-            {m.icon}
-            {m.label}
-          </button>
-        ))}
-      </div>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
 
-      {/* Mode content */}
-      {mode === "props"   && <PropEditor />}
-      {mode === "sandbox" && <CodeSandbox />}
-      {mode === "stories" && <StoriesView />}
-    </div>
+          {/* ── Header ── */}
+          <div style={{ marginBottom: "36px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
+              <div style={{
+                width: "36px", height: "36px",
+                borderRadius: "10px",
+                background: "linear-gradient(135deg, var(--ck-primary), #8db06e)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "18px",
+                flexShrink: 0,
+              }}>
+                🧪
+              </div>
+              <h1 style={{
+                fontSize: "28px",
+                fontWeight: 800,
+                letterSpacing: "-0.025em",
+                margin: 0,
+                color: "var(--ck-text)",
+              }}>
+                Component Playground
+              </h1>
+            </div>
+            <p style={{
+              color: "var(--ck-text-muted)",
+              fontSize: "15px",
+              margin: "0 0 0 46px",
+              lineHeight: 1.5,
+            }}>
+              Explore, customize, and test @cookest/ui components interactively.
+            </p>
+          </div>
+
+          {/* ── Mode tab switcher ── */}
+          <div style={{ marginBottom: "28px" }}>
+            <div style={{
+              display: "inline-flex",
+              gap: "3px",
+              background: "var(--ck-surface)",
+              border: "1px solid var(--ck-border)",
+              borderRadius: "12px",
+              padding: "4px",
+            }}>
+              {MODES.map((m) => {
+                const isActive = mode === m.id;
+                return (
+                  <button
+                    key={m.id}
+                    onClick={() => setMode(m.id)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "7px",
+                      padding: "8px 18px",
+                      borderRadius: "8px",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: "13px",
+                      fontWeight: isActive ? 600 : 400,
+                      fontFamily: "inherit",
+                      transition: "all 0.18s",
+                      background: isActive ? "var(--ck-bg)" : "transparent",
+                      color: isActive ? "var(--ck-text)" : "var(--ck-text-muted)",
+                      boxShadow: isActive ? "0 1px 4px rgba(0,0,0,0.12), inset 0 0 0 1px var(--ck-border)" : "none",
+                    }}
+                  >
+                    <span style={{ color: isActive ? "var(--ck-primary)" : "inherit", display: "flex" }}>
+                      {m.icon}
+                    </span>
+                    {m.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ── Content ── */}
+          {mode === "props"   && <PropEditor />}
+          {mode === "sandbox" && <CodeSandbox />}
+        </div>
+      </div>
+    </>
   );
 }

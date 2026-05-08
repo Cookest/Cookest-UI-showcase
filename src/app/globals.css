@@ -14,9 +14,9 @@
   --color-muted: var(--ck-text-muted);
   --color-heading: var(--ck-heading);
   --color-card: var(--ck-bg-card);
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
 body {
