@@ -85,6 +85,21 @@ const componentRelations: Record<string, RelatedComponent[]> = {
     { name: "Button", href: "/components/button", description: "Submit textarea content with a button" },
     { name: "Toggle", href: "/components/toggle", description: "Pair with toggles in settings forms" },
   ],
+  slider: [
+    { name: "Input", href: "/components/input", description: "Alternative for precise numeric entry" },
+    { name: "Card", href: "/components/card", description: "Embed sliders in settings cards" },
+    { name: "Badge", href: "/components/badge", description: "Display the live slider value as a badge" },
+  ],
+  progress: [
+    { name: "Skeleton", href: "/components/skeleton", description: "Alternative full-area loading placeholder" },
+    { name: "Button", href: "/components/button", description: "Trigger or cancel progress actions" },
+    { name: "Badge", href: "/components/badge", description: "Show completion status alongside progress" },
+  ],
+  spinner: [
+    { name: "Skeleton", href: "/components/skeleton", description: "Full-area loading placeholder alternative" },
+    { name: "Button", href: "/components/button", description: "Embed spinners inside button loading states" },
+    { name: "Progress", href: "/components/progress", description: "Use when completion percentage is known" },
+  ],
 };
 
 export function RelatedComponents({ component }: { component: string }) {

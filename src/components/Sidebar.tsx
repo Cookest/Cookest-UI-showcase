@@ -40,6 +40,9 @@ import {
   LayoutList,
   ChevronsUpDown,
   AlignLeft,
+  SlidersHorizontal,
+  BarChart2,
+  RefreshCw,
 } from "lucide-react";
 
 const components = [
@@ -58,6 +61,9 @@ const components = [
   { name: "Tabs", href: "/components/tabs", icon: LayoutList },
   { name: "Accordion", href: "/components/accordion", icon: ChevronsUpDown },
   { name: "Textarea", href: "/components/textarea", icon: AlignLeft },
+  { name: "Slider", href: "/components/slider", icon: SlidersHorizontal },
+  { name: "Progress", href: "/components/progress", icon: BarChart2 },
+  { name: "Spinner", href: "/components/spinner", icon: RefreshCw },
 ];
 
 const examples = [

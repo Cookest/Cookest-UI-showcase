@@ -7,7 +7,7 @@ import {
   RectangleHorizontal, ToggleLeft, Type, CreditCard, AlertTriangle,
   CircleUser, Circle, SeparatorHorizontal, MessageSquare, Loader2,
   ChefHat, Lock, Settings, BarChart3, CalendarDays, Sparkles,
-  LayoutList, ChevronsUpDown, AlignLeft,
+  LayoutList, ChevronsUpDown, AlignLeft, SlidersHorizontal, BarChart2, RefreshCw,
 } from "lucide-react";
 
 interface SearchItem {
@@ -36,6 +36,9 @@ const searchItems: SearchItem[] = [
   { name: "Tabs", path: "/components/tabs", category: "Component", icon: <LayoutList size={16} />, keywords: ["tab", "panel", "navigation", "switch", "section", "underline", "pills", "boxed"] },
   { name: "Accordion", path: "/components/accordion", category: "Component", icon: <ChevronsUpDown size={16} />, keywords: ["accordion", "collapse", "expand", "faq", "disclosure", "panel"] },
   { name: "Textarea", path: "/components/textarea", category: "Component", icon: <AlignLeft size={16} />, keywords: ["textarea", "multiline", "text", "input", "form", "autoResize", "count"] },
+  { name: "Slider", path: "/components/slider", category: "Component", icon: <SlidersHorizontal size={16} />, keywords: ["slider", "range", "input", "volume", "brightness", "marks", "track"] },
+  { name: "Progress", path: "/components/progress", category: "Component", icon: <BarChart2 size={16} />, keywords: ["progress", "bar", "loading", "indeterminate", "striped", "upload", "completion"] },
+  { name: "Spinner", path: "/components/spinner", category: "Component", icon: <RefreshCw size={16} />, keywords: ["spinner", "loading", "loader", "spin", "indicator", "busy", "async"] },
   { name: "Recipe Card", path: "/examples/recipe-card", category: "Example", icon: <ChefHat size={16} />, keywords: ["food", "cooking", "meal", "dish"] },
   { name: "Login Form", path: "/examples/login-form", category: "Example", icon: <Lock size={16} />, keywords: ["auth", "signin", "signup", "password"] },
   { name: "Settings Panel", path: "/examples/settings-panel", category: "Example", icon: <Settings size={16} />, keywords: ["preferences", "config", "profile", "account"] },
