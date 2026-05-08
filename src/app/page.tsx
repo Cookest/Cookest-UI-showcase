@@ -25,6 +25,7 @@ import {
   FloatingElement,
 } from "@/components/AnimateIn";
 import { PackageManagerTabs } from "@/components/PackageManagerTabs";
+import { BezierDivider } from "@/components/BezierDivider";
 import {
   ArrowRight,
   Utensils,
@@ -316,6 +317,8 @@ export default function Home() {
         </FloatingElement>
       </section>
 
+      <BezierDivider opacity={0.8} speed={1.2} className="-mb-4" />
+
       {/* ──────────────────────────────────────────────
           SECTION 2 — LIVE COMPONENT SHOWCASE
           ────────────────────────────────────────────── */}
@@ -481,6 +484,8 @@ export default function Home() {
           </div>
         </AnimateIn>
       </section>
+
+      <BezierDivider flip opacity={0.6} speed={1.5} className="-mb-4" />
 
       {/* ──────────────────────────────────────────────
           SECTION 3 — COMPONENT GRID
@@ -785,6 +790,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <BezierDivider opacity={0.5} height={56} speed={2} className="-mb-4" />
 
       {/* ──────────────────────────────────────────────
           SECTION 5 — EXAMPLES

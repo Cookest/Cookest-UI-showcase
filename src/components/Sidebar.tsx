@@ -43,6 +43,7 @@ import {
   SlidersHorizontal,
   BarChart2,
   RefreshCw,
+  FlaskConical,
 } from "lucide-react";
 
 const components = [
@@ -174,6 +175,7 @@ export function Sidebar() {
           <div className="mb-1">
             <NavItem href="/" label="Overview" icon={Home} active={pathname === "/"} />
             <NavItem href="/getting-started" label="Getting Started" icon={BookOpen} active={pathname === "/getting-started"} />
+            <NavItem href="/playground" label="Playground" icon={FlaskConical} active={pathname === "/playground"} />
           </div>
 
           <SectionHeader
