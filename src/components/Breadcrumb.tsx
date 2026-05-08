@@ -31,6 +31,9 @@ const labelMap: Record<string, string> = {
   "product-page": "Product Page",
   "social-feed": "Social Feed",
   "onboarding-wizard": "Onboarding Wizard",
+  tabs: "Tabs",
+  accordion: "Accordion",
+  textarea: "Textarea",
 };
 
 export function Breadcrumb() {

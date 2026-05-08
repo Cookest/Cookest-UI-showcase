@@ -70,6 +70,21 @@ const componentRelations: Record<string, RelatedComponent[]> = {
     { name: "Input", href: "/components/input", description: "Divide form sections" },
     { name: "Badge", href: "/components/badge", description: "Inline badges with dividers" },
   ],
+  tabs: [
+    { name: "Accordion", href: "/components/accordion", description: "Alternative expand/collapse navigation" },
+    { name: "Card", href: "/components/card", description: "Wrap tab content in cards" },
+    { name: "Badge", href: "/components/badge", description: "Show counts on tab labels" },
+  ],
+  accordion: [
+    { name: "Tabs", href: "/components/tabs", description: "Alternative tabbed navigation pattern" },
+    { name: "Card", href: "/components/card", description: "Nest accordions inside cards" },
+    { name: "Divider", href: "/components/divider", description: "Separate accordion groups" },
+  ],
+  textarea: [
+    { name: "Input", href: "/components/input", description: "Single-line sibling for text fields" },
+    { name: "Button", href: "/components/button", description: "Submit textarea content with a button" },
+    { name: "Toggle", href: "/components/toggle", description: "Pair with toggles in settings forms" },
+  ],
 };
 
 export function RelatedComponents({ component }: { component: string }) {

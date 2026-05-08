@@ -37,6 +37,9 @@ import {
   ShoppingBag,
   MessageCircle,
   Wand2,
+  LayoutList,
+  ChevronsUpDown,
+  AlignLeft,
 } from "lucide-react";
 
 const components = [
@@ -52,6 +55,9 @@ const components = [
   { name: "Skeleton", href: "/components/skeleton", icon: Loader },
   { name: "Alert", href: "/components/alert", icon: AlertTriangle },
   { name: "Divider", href: "/components/divider", icon: SeparatorHorizontal },
+  { name: "Tabs", href: "/components/tabs", icon: LayoutList },
+  { name: "Accordion", href: "/components/accordion", icon: ChevronsUpDown },
+  { name: "Textarea", href: "/components/textarea", icon: AlignLeft },
 ];
 
 const examples = [

@@ -7,6 +7,7 @@ import {
   RectangleHorizontal, ToggleLeft, Type, CreditCard, AlertTriangle,
   CircleUser, Circle, SeparatorHorizontal, MessageSquare, Loader2,
   ChefHat, Lock, Settings, BarChart3, CalendarDays, Sparkles,
+  LayoutList, ChevronsUpDown, AlignLeft,
 } from "lucide-react";
 
 interface SearchItem {
@@ -32,6 +33,9 @@ const searchItems: SearchItem[] = [
   { name: "Tooltip", path: "/components/tooltip", category: "Component", icon: <MessageSquare size={16} />, keywords: ["hint", "info", "popover", "help", "hover"] },
   { name: "Skeleton", path: "/components/skeleton", category: "Component", icon: <Loader2 size={16} />, keywords: ["loading", "placeholder", "shimmer", "ghost"] },
   { name: "Divider", path: "/components/divider", category: "Component", icon: <SeparatorHorizontal size={16} />, keywords: ["separator", "line", "hr", "rule"] },
+  { name: "Tabs", path: "/components/tabs", category: "Component", icon: <LayoutList size={16} />, keywords: ["tab", "panel", "navigation", "switch", "section", "underline", "pills", "boxed"] },
+  { name: "Accordion", path: "/components/accordion", category: "Component", icon: <ChevronsUpDown size={16} />, keywords: ["accordion", "collapse", "expand", "faq", "disclosure", "panel"] },
+  { name: "Textarea", path: "/components/textarea", category: "Component", icon: <AlignLeft size={16} />, keywords: ["textarea", "multiline", "text", "input", "form", "autoResize", "count"] },
   { name: "Recipe Card", path: "/examples/recipe-card", category: "Example", icon: <ChefHat size={16} />, keywords: ["food", "cooking", "meal", "dish"] },
   { name: "Login Form", path: "/examples/login-form", category: "Example", icon: <Lock size={16} />, keywords: ["auth", "signin", "signup", "password"] },
   { name: "Settings Panel", path: "/examples/settings-panel", category: "Example", icon: <Settings size={16} />, keywords: ["preferences", "config", "profile", "account"] },
