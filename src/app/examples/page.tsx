@@ -21,6 +21,9 @@ import {
   ShoppingCart,
   TerminalSquare,
   UtensilsCrossed,
+  Layers,
+  BookOpen,
+  Activity,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
@@ -136,6 +139,30 @@ const examples = [
     href: "/examples/kds",
     icon: UtensilsCrossed,
     tags: ["Badge", "Button", "Divider"],
+  },
+  {
+    title: "Glassmorphism Planner",
+    description:
+      "7-day meal planner with frosted glass cards floating over a rich blurred gradient backdrop. Pure visual wow.",
+    href: "/examples/glassmorphism",
+    icon: Layers,
+    tags: ["Skeleton", "Button", "Badge"],
+  },
+  {
+    title: "Recipe Story",
+    description:
+      "TikTok/Instagram-style step-by-step recipe viewer with snap scrolling, animated content, and nav dots.",
+    href: "/examples/recipe-story",
+    icon: BookOpen,
+    tags: ["Badge", "Button", "framer-motion"],
+  },
+  {
+    title: "Nutrition Dashboard",
+    description:
+      "Data-rich cockpit view with animated SVG macro rings, micronutrient bars, meal log, and a nutrition score.",
+    href: "/examples/nutrition-dashboard",
+    icon: Activity,
+    tags: ["Progress", "Card", "Badge", "Skeleton", "Divider"],
   },
 ];
 

@@ -53,6 +53,9 @@ import {
   UtensilsCrossed,
   LayoutGrid,
   BookText,
+  Layers,
+  BookOpen,
+  Activity,
 } from "lucide-react";
 
 const components = [
@@ -94,6 +97,9 @@ const examples = [
   { name: "Kitchen Display", href: "/examples/kds", icon: UtensilsCrossed },
   { name: "Bento Kitchen", href: "/examples/bento-kitchen", icon: LayoutGrid },
   { name: "Editorial", href: "/examples/editorial", icon: BookText },
+  { name: "Glassmorphism", href: "/examples/glassmorphism", icon: Layers },
+  { name: "Recipe Story", href: "/examples/recipe-story", icon: BookOpen },
+  { name: "Nutrition Dashboard", href: "/examples/nutrition-dashboard", icon: Activity },
 ];
 
 export function Sidebar({ uiVersion }: { uiVersion?: string }) {

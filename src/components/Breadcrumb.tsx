@@ -41,6 +41,9 @@ const labelMap: Record<string, string> = {
   kds: "Kitchen Display",
   "bento-kitchen": "Bento Kitchen",
   editorial: "Editorial",
+  glassmorphism: "Glassmorphism",
+  "recipe-story": "Recipe Story",
+  "nutrition-dashboard": "Nutrition Dashboard",
 };
 
 export function Breadcrumb() {
