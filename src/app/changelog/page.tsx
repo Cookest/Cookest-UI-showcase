@@ -39,6 +39,18 @@ const tagColors = {
 
 const changelog: ChangelogEntry[] = [
   {
+    version: "0.1.3",
+    date: "May 2026",
+    tag: "patch",
+    changes: [
+      { type: "fix", title: "Alert Light Mode Contrast", description: "Removed opacity modifiers from Alert body text in light mode — all four variants now render at full opacity for legibility." },
+      { type: "fix", title: "Badge Color Depth", description: "Bumped badge text from -800 to -900 shade across success, warning, error, and info variants for better contrast on light backgrounds." },
+      { type: "style", title: "Backdrop Blur Upgrade", description: "Sidebar now uses backdrop-filter: blur with semi-transparent surface — glassy, modern feel consistent with alerts." },
+      { type: "feat", title: "7 Creative Examples", description: "Added Terminal CLI, Kitchen Display, Editorial, Recipe Story, Nutrition Dashboard, Kinetic Menu, and Filmstrip to the examples gallery." },
+      { type: "style", title: "Grain Texture Background", description: "Subtle SVG noise grain added to page body for depth without visual noise." },
+    ],
+  },
+  {
     version: "1.0.0",
     date: "May 2026",
     tag: "major",
