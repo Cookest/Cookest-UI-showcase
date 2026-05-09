@@ -27,7 +27,7 @@ export function Playground({ title, description, children, code, language = "tsx
 
   return (
     <div
-      className="rounded-2xl border transition-shadow duration-300 hover:shadow-lg"
+      className="rounded-2xl border transition-shadow duration-300 hover:shadow-lg overflow-hidden"
       style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
     >
       {/* Header */}
