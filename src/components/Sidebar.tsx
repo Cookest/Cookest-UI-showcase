@@ -55,6 +55,10 @@ import {
   BookText,
   Layers,
   Activity,
+  Clapperboard,
+  ScrollText,
+  Sparkle,
+  Stars,
 } from "lucide-react";
 
 const components = [
@@ -99,6 +103,10 @@ const examples = [
   { name: "Glassmorphism", href: "/examples/glassmorphism", icon: Layers },
   { name: "Recipe Story", href: "/examples/recipe-story", icon: BookOpen },
   { name: "Nutrition Dashboard", href: "/examples/nutrition-dashboard", icon: Activity },
+  { name: "Kinetic Menu", href: "/examples/kinetic-menu", icon: Sparkle },
+  { name: "Aurora Kitchen", href: "/examples/aurora-kitchen", icon: Stars },
+  { name: "Filmstrip", href: "/examples/filmstrip", icon: Clapperboard },
+  { name: "Scroll Narrative", href: "/examples/scroll-narrative", icon: ScrollText },
 ];
 
 export function Sidebar({ uiVersion }: { uiVersion?: string }) {

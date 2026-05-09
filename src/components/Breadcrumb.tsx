@@ -44,6 +44,10 @@ const labelMap: Record<string, string> = {
   glassmorphism: "Glassmorphism",
   "recipe-story": "Recipe Story",
   "nutrition-dashboard": "Nutrition Dashboard",
+  "kinetic-menu": "Kinetic Menu",
+  "aurora-kitchen": "Aurora Kitchen",
+  filmstrip: "Filmstrip",
+  "scroll-narrative": "Scroll Narrative",
 };
 
 export function Breadcrumb() {
