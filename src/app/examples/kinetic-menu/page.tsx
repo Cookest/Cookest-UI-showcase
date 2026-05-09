@@ -1,5 +1,6 @@
 "use client";
 
+import { ExampleCliHint } from "@/components/Playground";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -172,11 +173,16 @@ export default function KineticMenuPage() {
             color: "rgba(255,255,255,0.25)",
             textTransform: "uppercase",
             textDecoration: "none",
-            marginBottom: "4rem",
+            marginBottom: "2rem",
           }}
         >
           ← Examples
         </Link>
+
+        {/* CLI hint */}
+        <div style={{ marginBottom: "2rem" }}>
+          <ExampleCliHint components={["Button"]} />
+        </div>
 
         {/* Header */}
         <motion.div

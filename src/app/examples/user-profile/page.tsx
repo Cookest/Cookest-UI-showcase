@@ -12,6 +12,7 @@ import {
   Divider,
 } from "@cookest/ui";
 import { Heart, Clock, BookOpen, Users, ChefHat } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 const recipes = [
@@ -153,6 +154,7 @@ export default function UserProfilePage() {
   return (
     <div>
       <Breadcrumb />
+      <ExampleCliHint components={["Avatar", "Badge", "Tabs", "Skeleton", "Progress", "Card", "Button", "Divider"]} />
       <div className="max-w-4xl mx-auto py-8 px-4 md:px-0">
         <div className="flex flex-col gap-8">
           {/* Profile header */}

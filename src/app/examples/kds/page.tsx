@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Badge, Button, Divider } from "@cookest/ui";
 import { Clock, Plus, CheckCheck, ChevronRight } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -445,6 +446,7 @@ export default function KDSPage() {
   return (
     <div>
       <Breadcrumb />
+      <ExampleCliHint components={["Badge", "Button", "Card", "Divider"]} />
 
       {/* Page header */}
       <div className="flex items-start justify-between mb-6 gap-4">

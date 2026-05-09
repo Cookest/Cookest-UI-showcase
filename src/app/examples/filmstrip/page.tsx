@@ -1,5 +1,6 @@
 "use client";
 
+import { ExampleCliHint } from "@/components/Playground";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
@@ -253,6 +254,11 @@ export default function FilmstripPage() {
       {/* Scroll progress bar */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: "2px", background: "rgba(255,255,255,0.06)", zIndex: 50 }}>
         <motion.div style={{ height: "100%", background: "var(--ck-primary, #16a34a)", width: progressWidth }} />
+      </div>
+
+      {/* CLI hint — fixed bottom bar */}
+      <div style={{ position: "fixed", bottom: "1.5rem", left: "50%", transform: "translateX(-50%)", zIndex: 50 }}>
+        <ExampleCliHint components={["Badge", "Button"]} />
       </div>
 
       {/* Back link */}

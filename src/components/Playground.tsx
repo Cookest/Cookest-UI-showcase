@@ -213,6 +213,73 @@ export function PropsTable({ props }: PropsTableProps) {
   );
 }
 
+// Map display component names to CLI component names (deduplicated)
+const CLI_NAME_MAP: Record<string, string> = {
+  card: "card", cardheader: "card", cardbody: "card", cardfooter: "card",
+  tab: "tabs",
+  avatargroup: "avatar",
+  checkbox: "checkbox",
+};
+
+function toCliName(name: string): string {
+  const key = name.toLowerCase();
+  return CLI_NAME_MAP[key] ?? key;
+}
+
+export function ExampleCliHint({ components }: { components: string[] }) {
+  const cliNames = [...new Set(components.map(toCliName))];
+  const cmd = `cookest-ui add ${cliNames.join(" ")}`;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(cmd);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div
+      className="mb-6 rounded-xl p-4"
+      style={{ background: "var(--ck-surface)", border: "1px solid var(--ck-border)" }}
+    >
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <span className="text-xs font-medium" style={{ color: "var(--ck-text-muted)" }}>
+          Components used:
+        </span>
+        <div className="flex flex-wrap gap-1.5">
+          {cliNames.map((name) => (
+            <span
+              key={name}
+              className="px-2 py-0.5 rounded-md text-xs font-medium"
+              style={{
+                background: "rgba(122,154,101,0.12)",
+                color: "var(--ck-primary)",
+                fontFamily: "var(--font-mono, monospace)",
+              }}
+            >
+              {name}
+            </span>
+          ))}
+        </div>
+        <div className="flex-1" />
+        <button
+          onClick={handleCopy}
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs cursor-pointer border-0 transition-all"
+          style={{
+            background: "var(--ck-bg)",
+            border: "1px solid var(--ck-border)",
+            color: copied ? "var(--ck-success)" : "var(--ck-text-muted)",
+          }}
+          aria-label={copied ? "Copied" : "Copy install command"}
+        >
+          {copied ? <Check size={11} /> : <Copy size={11} />}
+          {copied ? "Copied!" : `$ ${cmd}`}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function PageHeader({
   title,
   description,
@@ -220,6 +287,16 @@ export function PageHeader({
   title: string;
   description: string;
 }) {
+  const cliName = title.toLowerCase().replace(/\s+/g, '-');
+  const cmd = `cookest-ui add ${cliName}`;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(cmd);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="mb-10">
       <h1
@@ -228,9 +305,31 @@ export function PageHeader({
       >
         {title}
       </h1>
-      <p className="text-base" style={{ color: "var(--ck-text-muted)" }}>
+      <p className="text-base mb-4" style={{ color: "var(--ck-text-muted)" }}>
         {description}
       </p>
+      {/* CLI install command */}
+      <div
+        className="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl font-mono text-sm"
+        style={{
+          background: "var(--ck-surface)",
+          border: "1px solid var(--ck-border)",
+        }}
+      >
+        <span style={{ color: "var(--ck-text-muted)", fontSize: "11px" }}>$</span>
+        <span style={{ color: "var(--ck-heading)" }}>{cmd}</span>
+        <button
+          onClick={handleCopy}
+          className="ml-1 p-1 rounded-md cursor-pointer border-0 transition-all"
+          style={{
+            background: "transparent",
+            color: copied ? "var(--ck-success)" : "var(--ck-text-muted)",
+          }}
+          aria-label={copied ? "Copied" : "Copy command"}
+        >
+          {copied ? <Check size={13} /> : <Copy size={13} />}
+        </button>
+      </div>
     </div>
   );
 }

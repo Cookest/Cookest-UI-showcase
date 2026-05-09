@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import {
   Badge,
@@ -7,6 +8,8 @@ import {
 } from "@cookest/ui";
 import {
   ArrowRight,
+  Copy,
+  Check,
   Utensils,
   ChefHat,
   Settings,
@@ -183,6 +186,35 @@ const examples = [
   },
 ];
 
+function CardCliHint({ tags }: { tags: string[] }) {
+  const [copied, setCopied] = useState(false);
+  const names = tags.map((t) => t.toLowerCase()).join(" ");
+  const cmd = `cookest-ui add ${names}`;
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(cmd);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="w-full flex items-center gap-2 mt-3 px-3 py-2 rounded-lg font-mono text-xs cursor-pointer border-0 transition-colors text-left"
+      style={{
+        background: "var(--ck-bg)",
+        border: "1px solid var(--ck-border)",
+        color: copied ? "var(--ck-success)" : "var(--ck-text-muted)",
+      }}
+      aria-label="Copy install command"
+    >
+      {copied ? <Check size={10} className="shrink-0" /> : <Copy size={10} className="shrink-0" />}
+      <span className="truncate">{copied ? "Copied!" : `$ ${cmd}`}</span>
+    </button>
+  );
+}
+
 function ExamplePreview({ example }: { example: (typeof examples)[number] }) {
   const Icon = example.icon;
 
@@ -227,6 +259,7 @@ function ExamplePreview({ example }: { example: (typeof examples)[number] }) {
               </Badge>
             ))}
           </div>
+          <CardCliHint tags={example.tags} />
         </div>
       </div>
     </Link>

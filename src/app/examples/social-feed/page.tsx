@@ -18,6 +18,7 @@ import {
   Tooltip,
   Select,
 } from "@cookest/ui";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
 import {
@@ -220,6 +221,7 @@ export default function SocialFeedPage() {
   return (
     <div className="max-w-5xl">
       <Breadcrumb />
+      <ExampleCliHint components={["Card", "Avatar", "Badge", "Input", "Tooltip", "Alert", "Button", "Divider", "Select", "Skeleton", "Toggle"]} />
 
       {showAlert && (
         <div className="mb-6">

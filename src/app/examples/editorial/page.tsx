@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button, Input, Card, CardBody, Badge, Avatar, Divider } from "@cookest/ui";
 import { Clock } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 const relatedArticles = [
@@ -50,6 +51,7 @@ export default function EditorialPage() {
   return (
     <div className="flex flex-col pb-16" style={{ maxWidth: "62rem", margin: "0 auto" }}>
       <Breadcrumb />
+      <ExampleCliHint components={["Avatar", "Badge", "Button", "Card", "Divider", "Input"]} />
 
       {/* ══════════════════════════════════════
           Section 1 — Masthead

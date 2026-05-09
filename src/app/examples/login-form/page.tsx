@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "@cookest/ui";
 import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 type Tab = "login" | "signup";
@@ -103,6 +104,7 @@ export default function LoginFormPage() {
   return (
     <div>
       <Breadcrumb />
+      <ExampleCliHint components={["Input", "Button", "Toggle", "Card", "Alert", "Divider", "Tooltip"]} />
       <div
         className="flex items-center justify-center py-12 px-4 min-h-screen"
       >

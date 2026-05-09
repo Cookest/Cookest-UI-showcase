@@ -18,6 +18,7 @@ import {
   Tooltip,
   Select,
 } from "@cookest/ui";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { AnimateIn } from "@/components/AnimateIn";
 import {
@@ -136,6 +137,7 @@ export default function OnboardingWizardPage() {
   return (
     <div className="max-w-2xl mx-auto">
       <Breadcrumb />
+      <ExampleCliHint components={["Card", "Input", "Toggle", "Badge", "Button", "Alert", "Select", "Avatar", "Progress", "Skeleton", "Tooltip"]} />
 
       <AnimateIn>
         <div className="mb-8 text-center">

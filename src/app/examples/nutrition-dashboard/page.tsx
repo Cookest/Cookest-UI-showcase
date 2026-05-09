@@ -11,6 +11,7 @@ import {
   Skeleton,
 } from "@cookest/ui";
 import { Check, X, Activity, Flame } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 // ── SVG Ring ──────────────────────────────────────────────────────────────────
@@ -209,6 +210,7 @@ export default function NutritionDashboardPage() {
     <div className="min-h-screen p-6 md:p-10" style={{ background: "var(--ck-bg)" }}>
       <div className="max-w-6xl mx-auto flex flex-col gap-8">
         <Breadcrumb />
+      <ExampleCliHint components={["Badge", "Card", "Divider", "Progress", "Skeleton"]} />
 
         {/* Header */}
         <div>

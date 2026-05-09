@@ -18,6 +18,7 @@ import {
   Tooltip,
   Select,
 } from "@cookest/ui";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
 import {
@@ -131,6 +132,7 @@ export default function ProductPage() {
   return (
     <div className="max-w-5xl">
       <Breadcrumb />
+      <ExampleCliHint components={["Card", "Badge", "Button", "Tooltip", "Avatar", "Divider", "Input", "Select", "Skeleton", "Tabs", "Alert", "Toggle"]} />
 
       {addedToCart && (
         <div className="mb-6">

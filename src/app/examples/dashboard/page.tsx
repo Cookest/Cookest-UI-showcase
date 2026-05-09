@@ -23,6 +23,7 @@ import {
   Calendar,
   ChefHat,
 } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 const statCards = [
@@ -85,6 +86,7 @@ export default function DashboardPage() {
     <div className="min-h-screen p-6 md:p-10" style={{ background: "var(--ck-bg)" }}>
       <div className="max-w-7xl mx-auto flex flex-col gap-8">
         <Breadcrumb />
+      <ExampleCliHint components={["Card", "Badge", "Avatar", "Skeleton", "Toggle", "Alert", "Tooltip"]} />
 
         {/* Dismissible Alert */}
         {alertVisible && (

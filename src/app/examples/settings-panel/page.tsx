@@ -18,6 +18,7 @@ import {
   Tooltip,
 } from "@cookest/ui";
 import { Camera, Plus, Trash2, AlertTriangle, Save, X } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 const languageOptions = [
@@ -124,6 +125,7 @@ export default function SettingsPanelPage() {
   return (
     <div className="flex flex-col gap-8 pb-28">
       <Breadcrumb />
+      <ExampleCliHint components={["Input", "Toggle", "Select", "Modal", "Avatar", "Alert", "Button", "Card", "Divider", "Tooltip"]} />
 
       {/* Page Header */}
       <div className="flex flex-col gap-2">

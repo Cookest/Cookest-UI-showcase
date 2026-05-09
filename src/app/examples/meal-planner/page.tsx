@@ -28,6 +28,7 @@ import {
   Droplets,
   Clock,
 } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 // --- Data Types ---
@@ -123,6 +124,7 @@ export default function MealPlannerPage() {
   return (
     <div>
       <Breadcrumb />
+      <ExampleCliHint components={["Card", "Modal", "Select", "Badge", "Skeleton", "Alert", "Toggle", "Divider"]} />
 
       {/* Header */}
       <div className="flex items-center justify-between mb-6">

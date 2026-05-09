@@ -26,6 +26,7 @@ import {
   Printer,
   ChefHat,
 } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 const ingredients = [
@@ -126,6 +127,7 @@ export default function RecipeCardPage() {
   return (
     <div className="flex flex-col gap-8 pb-28">
       <Breadcrumb />
+      <ExampleCliHint components={["Button", "Card", "Badge", "Avatar", "Toggle", "Alert", "Divider", "Tooltip"]} />
 
       {/* Success Alert */}
       {addedToPlan && (

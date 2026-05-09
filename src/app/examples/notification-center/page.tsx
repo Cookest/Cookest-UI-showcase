@@ -12,6 +12,7 @@ import {
   Divider,
 } from "@cookest/ui";
 import { Bell, Check } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 interface Notification {
@@ -188,6 +189,7 @@ export default function NotificationCenterPage() {
   return (
     <div>
       <Breadcrumb />
+      <ExampleCliHint components={["Card", "Badge", "Avatar", "Tabs", "Divider", "Button"]} />
       <div className="max-w-4xl mx-auto py-8 px-4 md:px-0">
         <Card>
           <CardHeader>

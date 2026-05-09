@@ -15,6 +15,7 @@ import {
   Progress,
 } from "@cookest/ui";
 import { Check, CreditCard, MapPin, Package, User } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 function Checkbox({
@@ -121,6 +122,7 @@ export default function CheckoutPage() {
   return (
     <div>
       <Breadcrumb />
+      <ExampleCliHint components={["Button", "Input", "Select", "Card", "Badge", "Divider", "Toggle", "Progress"]} />
       <div className="max-w-4xl mx-auto py-8 px-4 md:px-0">
         <h1
           style={{

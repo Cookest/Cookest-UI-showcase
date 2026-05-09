@@ -12,6 +12,7 @@ import {
   Toggle,
 } from "@cookest/ui";
 import { Check, X } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 const plans = [
@@ -83,6 +84,7 @@ export default function PricingPage() {
   return (
     <div>
       <Breadcrumb />
+      <ExampleCliHint components={["Card", "Badge", "Button", "Divider", "Toggle"]} />
       <div className="max-w-4xl mx-auto py-8 px-4 md:px-0">
         {/* Page Header */}
         <div className="flex flex-col items-center gap-3 mb-10 text-center">

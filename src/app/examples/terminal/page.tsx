@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import { Badge, Divider } from "@cookest/ui";
 import { Terminal, ChevronRight, Star } from "lucide-react";
+import { ExampleCliHint } from "@/components/Playground";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -298,6 +299,7 @@ export default function TerminalPage() {
   return (
     <div>
       <Breadcrumb />
+      <ExampleCliHint components={["Badge", "Divider", "Input"]} />
 
       {/* Page header */}
       <div className="mb-8 flex items-start gap-4">
