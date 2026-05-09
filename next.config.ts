@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 import { readFileSync } from "fs";
-import { join } from "path";
+import { join, resolve } from "path";
 
 let uiVersion = "0.1.2";
 try {
@@ -10,7 +10,7 @@ try {
 
 const nextConfig: NextConfig = {
   transpilePackages: ["@cookest/ui"],
-  turbopack: {},
+  outputFileTracingRoot: resolve(__dirname, "../"),
   env: { NEXT_PUBLIC_UI_VERSION: uiVersion },
 };
 
