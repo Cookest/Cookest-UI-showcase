@@ -9,6 +9,7 @@ const labelMap: Record<string, string> = {
   examples: "Examples",
   tokens: "Design Tokens",
   "getting-started": "Getting Started",
+  cli: "CLI",
   button: "Button",
   input: "Input",
   card: "Card",

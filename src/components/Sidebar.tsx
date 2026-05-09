@@ -198,6 +198,7 @@ export function Sidebar({ uiVersion }: { uiVersion?: string }) {
           <div className="mb-1">
             <NavItem href="/" label="Overview" icon={Home} active={pathname === "/"} />
             <NavItem href="/getting-started" label="Getting Started" icon={BookOpen} active={pathname === "/getting-started"} />
+            <NavItem href="/cli" label="CLI" icon={TerminalSquare} active={pathname === "/cli"} />
             <NavItem href="/playground" label="Playground" icon={FlaskConical} active={pathname === "/playground"} />
           </div>
 
