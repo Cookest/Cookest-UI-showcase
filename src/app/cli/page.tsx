@@ -343,6 +343,11 @@ export default function CLIPage() {
               flag: "--all",
               description: "Compare your local component files against the registry source. Useful when upgrading.",
             },
+            {
+              cmd: "cookest-ui completion [shell]",
+              flag: "bash · zsh · fish",
+              description: "Print a shell completion script. Pipe it into your shell config to get tab completion for all commands and component names.",
+            },
           ].map(({ cmd, flag, description }) => (
             <Card key={cmd} variant="outlined" padding="md">
               <CardBody>
@@ -371,6 +376,72 @@ export default function CLIPage() {
               </CardBody>
             </Card>
           ))}
+        </div>
+      </section>
+
+      {/* Autocomplete setup */}
+      <section className="mt-10 mb-12">
+        <h2 className="text-xl font-semibold mb-2" style={{ color: "var(--ck-heading)" }}>
+          Shell Autocomplete
+        </h2>
+        <p className="text-sm mb-6" style={{ color: "var(--ck-text-muted)" }}>
+          Install globally once, then register completion for your shell.
+          Gives you tab completion for all commands and component names.
+        </p>
+
+        <div className="flex flex-col gap-4">
+          {/* Install globally */}
+          <TerminalWindow title="install globally" command="bun install -g @cookest/ui-cli">
+            <div>{dim("$ ")}{white("bun install -g @cookest/ui-cli")}</div>
+            <div className="mt-1">{green("+ @cookest/ui-cli@0.1.2")}</div>
+          </TerminalWindow>
+
+          {/* Per-shell setup */}
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              {
+                shell: "zsh",
+                rc: "~/.zshrc",
+                cmd: 'eval "$(cookest-ui completion zsh)"',
+              },
+              {
+                shell: "bash",
+                rc: "~/.bashrc",
+                cmd: 'eval "$(cookest-ui completion bash)"',
+              },
+              {
+                shell: "fish",
+                rc: "Fish config",
+                cmd: "cookest-ui completion fish | source",
+              },
+            ].map(({ shell, rc, cmd }) => (
+              <div
+                key={shell}
+                className="rounded-xl p-4 font-mono text-xs"
+                style={{
+                  background: "#0d1117",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                }}
+              >
+                <div className="mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>
+                  {shell} — add to {rc}
+                </div>
+                <div style={{ color: "#e3b341" }}>{cmd}</div>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className="rounded-xl px-4 py-3 text-sm"
+            style={{
+              background: "rgba(122,154,101,0.07)",
+              border: "1px solid rgba(122,154,101,0.2)",
+              color: "var(--ck-text-muted)",
+            }}
+          >
+            After setup: <InlineCode>cookest-ui add &lt;TAB&gt;</InlineCode> shows all component names.{" "}
+            <InlineCode>cookest-ui &lt;TAB&gt;</InlineCode> shows all commands.
+          </div>
         </div>
       </section>
 
