@@ -246,6 +246,92 @@ export function RecipeCard() {
         </div>
       </section>
 
+      <Divider label="Platform Parity" />
+
+      {/* Parity Matrix */}
+      <section className="mt-10 mb-12">
+        <h2 className="text-2xl font-semibold mb-3" style={{ color: "var(--ck-heading)" }}>
+          Cross-Platform Support
+        </h2>
+        <p className="text-sm mb-6" style={{ color: "var(--ck-text-muted)" }}>
+          Cookest UI aims for 100% parity between our React and Flutter libraries.
+          Below is the current status of component availability across platforms.
+        </p>
+
+        <div
+          className="rounded-2xl border overflow-hidden"
+          style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
+        >
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left border-collapse">
+              <thead>
+                <tr style={{ background: "rgba(122,154,101,0.05)", borderBottom: "1px solid var(--ck-border)" }}>
+                  <th className="px-4 py-3 font-semibold" style={{ color: "var(--ck-heading)" }}>Component</th>
+                  <th className="px-4 py-3 font-semibold text-center" style={{ color: "var(--ck-heading)" }}>React (@cookest/ui)</th>
+                  <th className="px-4 py-3 font-semibold text-center" style={{ color: "var(--ck-heading)" }}>Flutter (cookest_ui)</th>
+                </tr>
+              </thead>
+              <tbody style={{ color: "var(--ck-text)" }}>
+                {[
+                  { name: "Button", react: true, flutter: true },
+                  { name: "Card", react: true, flutter: true },
+                  { name: "Input", react: true, flutter: true },
+                  { name: "Badge", react: true, flutter: true },
+                  { name: "Alert", react: true, flutter: true },
+                  { name: "Checkbox", react: true, flutter: true, isNew: true },
+                  { name: "Label", react: true, flutter: true, isNew: true },
+                  { name: "Separator", react: true, flutter: true, isNew: true },
+                  { name: "Alert Dialog", react: true, flutter: true, isNew: true },
+                  { name: "Drawer", react: true, flutter: true, isNew: true },
+                  { name: "Radio Group", react: true, flutter: true, isNew: true },
+                  { name: "Switch", react: true, flutter: true, isNew: true },
+                  { name: "Breadcrumb", react: true, flutter: true, isNew: true },
+                  { name: "Progress", react: true, flutter: true },
+                  { name: "Skeleton", react: true, flutter: true },
+                  { name: "Slider", react: true, flutter: true },
+                  { name: "Tabs", react: true, flutter: true },
+                  { name: "Tooltip", react: true, flutter: true },
+                  { name: "Modal", react: true, flutter: true },
+                  { name: "Chart", react: true, flutter: false },
+                  { name: "Carousel", react: true, flutter: false },
+                  { name: "Calendar", react: true, flutter: false },
+                  { name: "Command", react: true, flutter: false },
+                  { name: "Sheet", react: true, flutter: false },
+                  { name: "Table", react: true, flutter: false },
+                ].map((row) => (
+                  <tr key={row.name} className="border-b last:border-0" style={{ borderColor: "var(--ck-border)" }}>
+                    <td className="px-4 py-2.5 font-medium">
+                      {row.name}
+                      {row.isNew && (
+                        <span
+                          className="ml-2 text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+                          style={{ background: "rgba(122,154,101,0.1)", color: "var(--ck-primary)" }}
+                        >
+                          New
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-4 py-2.5 text-center">
+                      {row.react ? <Check size={16} className="mx-auto" style={{ color: "var(--ck-primary)" }} /> : "—"}
+                    </td>
+                    <td className="px-4 py-2.5 text-center">
+                      {row.flutter ? (
+                        <Check size={16} className="mx-auto" style={{ color: "var(--ck-primary)" }} />
+                      ) : (
+                        <span className="text-xs" style={{ color: "var(--ck-text-muted)" }}>In Progress</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p className="mt-4 text-xs italic" style={{ color: "var(--ck-text-muted)" }}>
+          * We are currently porting 15+ more components to Flutter. Check back daily for updates.
+        </p>
+      </section>
+
       <Divider label="What's Next" />
 
       {/* Next steps */}

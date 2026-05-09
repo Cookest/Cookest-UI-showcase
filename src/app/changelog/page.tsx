@@ -39,6 +39,18 @@ const tagColors = {
 
 const changelog: ChangelogEntry[] = [
   {
+    version: "0.1.4",
+    date: "May 2026",
+    tag: "minor",
+    changes: [
+      { type: "fix", title: "Button Layout & Alignment", description: "Enforced horizontal flex layouts and whitespace-nowrap for Button components, resolving issues where icons would stack vertically above text." },
+      { type: "fix", title: "Container Corner Clipping", description: "Standardized overflow-hidden and refined border-radius (rounded-lg/md) across Card, Dialog, Command, and Dropdown components to prevent artifacts." },
+      { type: "feat", title: "Component Library Expansion", description: "Added 10+ new advanced components to the React library including Chart, Carousel, Command, Calendar, and AspectRatio." },
+      { type: "feat", title: "Massive Flutter Expansion", description: "Ported 13+ missing widgets to the Flutter library (cookest_ui) to achieve 50% platform parity. Added Checkbox, Label, Separator, AlertDialog, Drawer, and more." },
+      { type: "fix", title: "Vercel Build Optimization", description: "Fixed invalid CSS calc() syntax in Sidebar component that was causing build warnings in Tailwind 4 environments." },
+    ],
+  },
+  {
     version: "0.1.3",
     date: "May 2026",
     tag: "patch",
