@@ -176,7 +176,7 @@ export default function Home() {
                   className="inline-block w-2 h-2 rounded-full"
                   style={{ background: "var(--ck-primary)" }}
                 />
-                19 components · 2 platforms · 1 design system
+                50 components · 2 platforms · 1 design system
                 <ArrowRight size={12} />
               </Link>
             </AnimateIn>
@@ -740,6 +740,62 @@ export default function Home() {
               </div>
             </PreviewCard>
           </StaggerItem>
+        
+          {/* NEW COMPONENTS */}
+          {[
+            "AlertDialog",
+            "AspectRatio",
+            "Breadcrumb",
+            "Calendar",
+            "Carousel",
+            "Chart",
+            "Collapsible",
+            "Command",
+            "ContextMenu",
+            "Dialog",
+            "Drawer",
+            "DropdownMenu",
+            "Form",
+            "HoverCard",
+            "InputOTP",
+            "Label",
+            "Menubar",
+            "NavigationMenu",
+            "Pagination",
+            "Popover",
+            "RadioGroup",
+            "Resizable",
+            "ScrollArea",
+            "Sheet",
+            "Sonner",
+            "Switch",
+            "Table",
+            "ToggleGroup"
+          ].map((name) => (
+            <StaggerItem key={name}>
+              <PreviewCard title={name} href={"/components/" + name.toLowerCase()}>
+                <div className="flex items-center justify-center p-4">
+                  <div className="text-xs text-[var(--ck-text-muted)] italic">Coming soon</div>
+                </div>
+              </PreviewCard>
+            </StaggerItem>
+          ))}
+
+        
+          {[
+            "Separator",
+            "Sidebar",
+            "Toast",
+          ].map((name) => (
+            <StaggerItem key={name}>
+              <PreviewCard title={name} href={"/components/" + name.toLowerCase()}>
+                <div className="flex items-center justify-center p-4">
+                  <div className="text-xs text-[var(--ck-text-muted)] italic">Coming soon</div>
+                </div>
+              </PreviewCard>
+            </StaggerItem>
+          ))}
+
         </StaggerContainer>
       </section>
 
