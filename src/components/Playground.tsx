@@ -96,7 +96,7 @@ export function Playground({ title, description, children, code, language = "tsx
       {/* Preview */}
       {!showCode && (
         <div
-          className={`p-8 flex flex-wrap items-center justify-center gap-4 transition-all duration-300 ${
+          className={`p-8 flex flex-wrap items-center justify-center gap-4 transition-all duration-300 rounded-b-2xl ${
             expanded ? "min-h-[300px]" : "min-h-[140px]"
           }`}
           style={{
