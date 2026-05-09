@@ -39,15 +39,11 @@ const labelMap: Record<string, string> = {
   textarea: "Textarea",
   terminal: "Terminal CLI",
   kds: "Kitchen Display",
-  "bento-kitchen": "Bento Kitchen",
   editorial: "Editorial",
-  glassmorphism: "Glassmorphism",
   "recipe-story": "Recipe Story",
   "nutrition-dashboard": "Nutrition Dashboard",
   "kinetic-menu": "Kinetic Menu",
-  "aurora-kitchen": "Aurora Kitchen",
   filmstrip: "Filmstrip",
-  "scroll-narrative": "Scroll Narrative",
 };
 
 export function Breadcrumb() {

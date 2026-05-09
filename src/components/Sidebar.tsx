@@ -51,14 +51,10 @@ import {
   ShoppingCart,
   TerminalSquare,
   UtensilsCrossed,
-  LayoutGrid,
   BookText,
-  Layers,
   Activity,
   Clapperboard,
-  ScrollText,
   Sparkle,
-  Stars,
 } from "lucide-react";
 
 const components = [
@@ -98,15 +94,11 @@ const examples = [
   { name: "Order Checkout", href: "/examples/checkout", icon: ShoppingCart },
   { name: "Terminal CLI", href: "/examples/terminal", icon: TerminalSquare },
   { name: "Kitchen Display", href: "/examples/kds", icon: UtensilsCrossed },
-  { name: "Bento Kitchen", href: "/examples/bento-kitchen", icon: LayoutGrid },
   { name: "Editorial", href: "/examples/editorial", icon: BookText },
-  { name: "Glassmorphism", href: "/examples/glassmorphism", icon: Layers },
   { name: "Recipe Story", href: "/examples/recipe-story", icon: BookOpen },
   { name: "Nutrition Dashboard", href: "/examples/nutrition-dashboard", icon: Activity },
   { name: "Kinetic Menu", href: "/examples/kinetic-menu", icon: Sparkle },
-  { name: "Aurora Kitchen", href: "/examples/aurora-kitchen", icon: Stars },
   { name: "Filmstrip", href: "/examples/filmstrip", icon: Clapperboard },
-  { name: "Scroll Narrative", href: "/examples/scroll-narrative", icon: ScrollText },
 ];
 
 export function Sidebar({ uiVersion }: { uiVersion?: string }) {
@@ -161,10 +153,10 @@ export function Sidebar({ uiVersion }: { uiVersion?: string }) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen w-[280px] border-r flex flex-col z-50 transition-transform duration-300 ease-out ${
+        className={`fixed top-0 left-0 h-screen w-[280px] border-r flex flex-col z-50 transition-transform duration-300 ease-out backdrop-blur-xl ${
           mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
-        style={{ borderColor: "var(--ck-border)", background: "var(--ck-surface)" }}
+        style={{ borderColor: "var(--ck-border)", background: "color-mix(in srgb, var(--ck-surface) 90%, transparent)" }}
         role="navigation"
         aria-label="Main navigation"
       >
@@ -182,7 +174,7 @@ export function Sidebar({ uiVersion }: { uiVersion?: string }) {
                 Cookest UI
               </div>
               <div className="text-[10px] font-medium" style={{ color: "var(--ck-text-muted)" }}>
-                v{uiVersion ?? "0.1.2"} · Design System
+                v{uiVersion ?? "0.1.3"} · Design System
               </div>
             </div>
           </Link>

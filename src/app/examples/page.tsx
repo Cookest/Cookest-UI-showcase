@@ -21,13 +21,10 @@ import {
   ShoppingCart,
   TerminalSquare,
   UtensilsCrossed,
-  Layers,
   BookOpen,
   Activity,
   Sparkle,
-  Stars,
   Clapperboard,
-  ScrollText,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
@@ -145,12 +142,12 @@ const examples = [
     tags: ["Badge", "Button", "Divider"],
   },
   {
-    title: "Glassmorphism Planner",
+    title: "Editorial",
     description:
-      "7-day meal planner with frosted glass cards floating over a rich blurred gradient backdrop. Pure visual wow.",
-    href: "/examples/glassmorphism",
-    icon: Layers,
-    tags: ["Skeleton", "Button", "Badge"],
+      "Bon Appétit-style magazine layout with hero image, pullquotes, recipe sidebar, and author bylines.",
+    href: "/examples/editorial",
+    icon: BookOpen,
+    tags: ["Card", "Badge", "Avatar", "Divider"],
   },
   {
     title: "Recipe Story",
@@ -177,28 +174,12 @@ const examples = [
     tags: ["Button", "framer-motion", "variable fonts"],
   },
   {
-    title: "Aurora Kitchen",
-    description:
-      "Ultra-dark luxury canvas with a living CSS-animated aurora. A single hero dish floats on a glass card with gold borders.",
-    href: "/examples/aurora-kitchen",
-    icon: Stars,
-    tags: ["Badge", "Button", "Divider", "Skeleton"],
-  },
-  {
     title: "Filmstrip",
     description:
       "Vertical scroll converts to a horizontal cinematic pan through 7 street food cities. A traveling camera dolly built with framer-motion.",
     href: "/examples/filmstrip",
     icon: Clapperboard,
     tags: ["Badge", "framer-motion", "useScroll"],
-  },
-  {
-    title: "Scroll Narrative",
-    description:
-      "A ramen bowl assembles itself layer-by-layer as you scroll. Sticky illustration, right-side narrative, animated SVG ingredients.",
-    href: "/examples/scroll-narrative",
-    icon: ScrollText,
-    tags: ["Badge", "Progress", "Divider", "framer-motion"],
   },
 ];
 
